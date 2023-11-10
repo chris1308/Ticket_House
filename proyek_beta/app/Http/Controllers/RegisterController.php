@@ -32,7 +32,7 @@ class RegisterController extends Controller
             $rules['email'] = [
                 'required',
                 'string',
-                'email',
+                'email:dns',
                 'max:255',
                 Rule::unique('pembelis'), // Example unique email validation rule
             ];
@@ -47,7 +47,7 @@ class RegisterController extends Controller
             $rules['email'] = [
                 'required',
                 'string',
-                'email',
+                'email:dns',
                 'max:255',
                 Rule::unique('penjuals'), // Example unique email validation rule
             ];

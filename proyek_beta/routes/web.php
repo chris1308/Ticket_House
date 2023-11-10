@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\UserController;
+use App\Models\Tiket;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () { //tampilan saat user belum login
+//     $tikets = Tiket::take(5)->get();
+//     return view('home',[
+//         "title" => "Home",
+//         "tikets"=>$tikets,
+//     ]);
+// });
+
+Route::get('/home', function () { //tampilan saat user sudah login
+    $tikets = Tiket::take(4)->get();
     return view('home',[
         "title" => "Home",
+        "tikets"=>$tikets,
+    ]);
+});
+Route::get('/dashboard', function () { //tampilan saat seller yang login
+    return view('sellerDashboard',[
+        "title" => "Seller Dashboard",
     ]);
 });
 Route::get('/about', function () {
@@ -27,4 +43,9 @@ Route::get('/about', function () {
 });
 Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
-Route::get('/login', [UserController::class,'login']);
+
+//only if user hasn't logged in, he/she can access the login page
+Route::get('/login', [LoginController::class,'login']);
+Route::post('/login', [LoginController::class,'attemptLogin']);
+
+Route::get('/logout', [LoginController::class,'logout']); //sementara untuk logout

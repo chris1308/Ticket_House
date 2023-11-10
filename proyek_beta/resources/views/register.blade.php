@@ -6,28 +6,28 @@
         <h3 class="my-2 ">Register</h3>
         <form action="/register" method="post" class="mt-3 pb-3" >
             @csrf
-            <input value="{{ old('email') }}" id="email" class=" form-control @error('email') is-invalid @enderror" type="email" name="email" size="50" placeholder="email" id="">
+            <input required value="{{ old('email') }}" id="email" class=" form-control @error('email') is-invalid @enderror" type="email" name="email" size="50" placeholder="email" id="">
             @error('email')
             <div class="invalid-feedback">
               {{ $message }}
             </div>
             @enderror
             <br/>
-            <input value="{{ old('username') }}" type="text" class=" form-control @error('username') is-invalid @enderror" name="username" size="50" placeholder="username" id="">
+            <input required value="{{ old('username') }}" type="text" class=" form-control @error('username') is-invalid @enderror" name="username" size="50" placeholder="username" id="">
             @error('username')
             <div class="invalid-feedback">
               {{ $message }}
             </div>
             @enderror
             <br/>
-            <input type="text" value="{{ old('name') }}" class=" form-control @error('name') is-invalid @enderror" name="name" size="50" placeholder="name" id="">
+            <input required type="text" value="{{ old('name') }}" class=" form-control @error('name') is-invalid @enderror" name="name" size="50" placeholder="name" id="">
             @error('name')
             <div class="invalid-feedback">
               {{ $message }}
             </div>
             @enderror
             <br/>
-            <input value="{{ old('no_telp') }}" type="text" class=" form-control @error('no_telp') is-invalid @enderror" name="no_telp" size="50" placeholder="phone" id="">
+            <input required value="{{ old('no_telp') }}" type="text" class=" form-control @error('no_telp') is-invalid @enderror" name="no_telp" size="50" placeholder="phone" id="">
             @error('no_telp')
             <div class="invalid-feedback">
               {{ $message }}
@@ -61,14 +61,14 @@
             </div>
             @enderror
            <br/>
-            <input value="{{ old('password') }}" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" size="50" placeholder="password" id="">
+            <input required value="{{ old('password') }}" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" size="50" placeholder="password" id="">
             @error('password')
             <div class="invalid-feedback">
               {{ $message }}
             </div>
             @enderror
             <br/>
-            <input value="{{ old('password_confirmation') }}" type="password" class=" form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" size="50" placeholder="confirm password" id="">
+            <input required value="{{ old('password_confirmation') }}" type="password" class=" form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" size="50" placeholder="confirm password" id="">
             @error('password_confirmation')
             <div class="invalid-feedback">
               {{ $message }}

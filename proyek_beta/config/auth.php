@@ -35,10 +35,18 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+    'guards' => [ //web is the default guard
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
+        'seller' => [
+            'driver' => 'session', // or 'token' if you are using token-based authentication
+            'provider' => 'penjuals', // the Eloquent model representing sellers
+        ],
+        'buyer' => [
+            'driver' => 'session', // or 'token' if you are using token-based authentication
+            'provider' => 'pembelis', // the Eloquent model representing sellers
         ],
     ],
 
@@ -62,7 +70,15 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Penjual::class,
+        ],
+        'pembelis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pembeli::class,
+        ],
+        'penjuals' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Penjual::class,
         ],
 
         // 'users' => [

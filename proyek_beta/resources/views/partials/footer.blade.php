@@ -1,4 +1,4 @@
-<div class="Footer mt-5 py-3 ps-4 container-fluid d-flex justify-content-between" style="background-color: #F1F8FF; position: relative; bottom:0">
+<div class="Footer position-relative bottom-0 py-3 ps-4 container-fluid d-flex justify-content-between" style="background-color: #F1F8FF; ">
     <div class="Kiri " >
         <span class="fw-bold" style="font-size: 21px">🎟️Ticket House</span>
         <p style="font-size: 14px">Ticket House adalah website yang memfasilitasi orang yang <br>ingin melakukan jual beli tiket. Tersedia berbagai pilihan tiket <br>tempat wisata dan seminar. Tersedia pula promo-promo <br>menarik yang tidak boleh dilewatkan.</p>

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div class="Login d-flex justify-content-center">
+<div class="Login d-flex justify-content-center" style="padding-top: 100px;">
     <div class="mt-4 p-3" style="">
         {{-- tampilkan flash message setelah berhasil register --}}
         @if (session()->has('success'))        
@@ -9,16 +9,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+        @if (session()->has('loginError'))        
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('loginError') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
         <h2>Hello!</h2>
         <h3>Please fill your username or email to <br/> login</h3>
         
-        <form action="" class="mt-3">
-            <input type="text"  size="59" name="" id="" class="" placeholder="username or email">
+        <form action="/login" method="post" class="mt-3">
+            @csrf
+            <input value="{{ old("login") }}" required type="text"  size="59" name="login" id="login" class="form-control @error("login")
+                is-invalid
+            @enderror" placeholder="username or email">
+            @error("login")                
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
             <br/>
-            <input class="mt-2" type="password" size="59" name="" id="" placeholder="password">
+            {{-- required memastikan input field ga boleh kosong --}}
+            <input  required class="form-control" type="password" size="59" name="password" id="password" placeholder="password">
             <br/><br/>
-            <button class="btn btn-success" style="width: 465px;">Login</button>
+            <button class="btn btn-success" style="width: 485px;">Login</button>
             <br/><br/>
   
         </form>

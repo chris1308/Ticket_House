@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-class Penjual extends Authenticatable
+
+class Tiket extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $guarded = [];
 }
