@@ -16,16 +16,16 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-// Route::get('/', function () { //tampilan saat user belum login
-//     $tikets = Tiket::take(5)->get();
-//     return view('home',[
-//         "title" => "Home",
-//         "tikets"=>$tikets,
-//     ]);
-// });
-
-Route::get('/home', function () { //tampilan saat user sudah login
+Route::get('/', function () { 
     $tikets = Tiket::take(4)->get();
+    return view('home',[
+        "title" => "Home",
+        "tikets"=>$tikets,
+    ]);
+});
+
+Route::get('/home', function () { 
+    $tikets = Tiket::take(4)->get(); //fetch first 4 tickets
     return view('home',[
         "title" => "Home",
         "tikets"=>$tikets,
