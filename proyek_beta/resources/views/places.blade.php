@@ -1,6 +1,5 @@
-
-@extends('layouts.main');
-@section('content');
+@extends('layouts.main')
+@section('content')
 
 <div class="Places container" style="padding-top:60px; ">
     <h1>Places</h1><br>

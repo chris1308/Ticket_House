@@ -14,22 +14,23 @@
         <ul class="navbar-nav  ">
         @if (session()->has('user')) 
           <li class="nav-item mx-3">
-            <a class="nav-link active"  href="#">History</a>
+            <a class="nav-link"  href="#">History</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link active"  href="#">Wishlist</a>
+            <a class="nav-link"  href="#">Wishlist</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link active"  href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
+            <a class="nav-link"  href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="/seminar">Seminar</a>
+            <!-- {{-- untuk mendapatkan path route yang sedang dikunjungi lalu dibuat active--}} -->
+            <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" href="/seminar">Seminar</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="/places">Places</a>
+            <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" href="/places">Places</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="/about">About Us</a>
+            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">About Us</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="#" ><i class="fa-regular fa-bell fa-xl"></i></a>
@@ -50,13 +51,13 @@
           </li>
           @else          
             <li class="nav-item mx-2">
-              <a class="nav-link active" aria-current="page" href="/seminar">Seminar</a>
+              <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" aria-current="page" href="/seminar">Seminar</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/places">Places</a>
+              <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" href="/places">Places</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="/about">About Us</a>
+              <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">About Us</a>
             </li>
             <li class="nav-item mx-2">
               <a class="btn btn-success" href="/login" >Login</a>

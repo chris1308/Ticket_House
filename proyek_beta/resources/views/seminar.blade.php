@@ -1,6 +1,5 @@
-
-@extends('layouts.main');
-@section('content');
+@extends('layouts.main')
+@section('content')
 
 <div class="Seminar container" style="padding-top:60px; ">
     <h1>Seminar</h1><br>
