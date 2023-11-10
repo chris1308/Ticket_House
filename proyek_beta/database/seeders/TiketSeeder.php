@@ -33,5 +33,27 @@ class TiketSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+        //Add places ticket
+        for ($i = 1; $i <=4; $i++) {//make 4 places tickets
+            DB::table('tikets')->insert([
+                'id_tiket' => 'TIK00'.$i+5,
+                'id_penjual' => 'PJ001',
+                'nama' => 'Tiket Place '.$i,
+                'harga' => 100000,
+                'quantity' => 1,
+                'kota' => 'Surabaya',
+                'alamat_lokasi' => 'Jl. Merdeka '.$i,
+                'gambar' => json_encode(['place1.jpg']), //convert array to JSOn string
+                'jumlah_view' => 0,
+                'status' => 1,
+                'deskripsi' => 'ini adalah deskripsi tiket ke '.$i,
+                'kategori' => 'place',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+
     }
 }

@@ -23,10 +23,10 @@
             <a class="nav-link active"  href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="#">Seminar</a>
+            <a class="nav-link" href="/seminar">Seminar</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="#">Places</a>
+            <a class="nav-link" href="/places">Places</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="/about">About Us</a>
@@ -50,10 +50,10 @@
           </li>
           @else          
             <li class="nav-item mx-2">
-              <a class="nav-link active" aria-current="page" href="#">Seminar</a>
+              <a class="nav-link active" aria-current="page" href="/seminar">Seminar</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#">Places</a>
+              <a class="nav-link" href="/places">Places</a>
             </li>
             <li class="nav-item mx-2">
               <a class="nav-link" href="/about">About Us</a>

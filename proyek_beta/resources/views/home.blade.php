@@ -2,7 +2,7 @@
 @section('content')
     <div class="Home container" style="height: 1500px; padding-top:100px; ">
         @if (session()->has('user'))
-            <h1>Hello, {{ session('user')->name; }}</h1><br>
+            <h1>Hello, {{ session('user')->name }}</h1><br>
         @else
             <h1>Hello, Guest</h1><br>
         @endif 
