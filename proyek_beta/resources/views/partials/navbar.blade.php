@@ -14,23 +14,25 @@
         <ul class="navbar-nav">
         @if (session()->has('user')) 
           <li class="nav-item mx-3">
-            <a class="nav-link"  href="#">History</a>
+            <a class="nav-link" style="opacity: {{ request()->is('history') ? '100%' : '50%' }}" href="#">History</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link"  href="#">Wishlist</a>
+            <a class="nav-link" style="opacity: {{ request()->is('wishlist') ? '100%' : '50%' }}" href="#">Wishlist</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link"  href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
+            <a class="nav-link" style="opacity: {{ request()->is('nearme') ? '100%' : '50%' }}" href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
           </li>
           <li class="nav-item mx-3">
             <!-- {{-- untuk mendapatkan path route yang sedang dikunjungi lalu dibuat active--}} -->
-            <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" href="/seminar">Seminar</a>
+            <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" style="opacity: {{ request()->is('seminar') ? '100%' : '50%' }}" href="/seminar">Seminar</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" href="/places">Places</a>
+            <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" style="opacity: {{ request()->is('places') ? '100%' : '50%' }}" href="/places">Places</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">About Us</a>
+            <!-- {{-- Mengatur style agar menu page yang aktif bisa dibedakan dari menu page lain  --}} -->
+            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" 
+            style="opacity: {{ request()->is('about') ? '100%' : '50%' }}" href="/about">About Us</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="#" ><i class="fa-regular fa-bell fa-xl"></i></a>
@@ -51,13 +53,13 @@
           </li>
           @else          
             <li class="nav-item mx-2">
-              <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" aria-current="page" href="/seminar">Seminar</a>
+              <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" aria-current="page" style="opacity: {{ request()->is('seminar') ? '100%' : '50%' }}" href="/seminar">Seminar</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" href="/places">Places</a>
+              <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" style="opacity: {{ request()->is('places') ? '100%' : '50%' }}" href="/places">Places</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">About Us</a>
+              <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" style="opacity: {{ request()->is('about') ? '100%' : '50%' }}" href="/about">About Us</a>
             </li>
             <li class="nav-item mx-2">
               <a class="btn btn-success" href="/login" >Login</a>
