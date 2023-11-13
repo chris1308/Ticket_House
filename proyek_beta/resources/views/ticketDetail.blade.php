@@ -7,16 +7,18 @@
         <div class="kiri">
             <a href="/home" class="text-decoration-none" style="font-size: 18px">< Back</a><br><br>
             <div class="">
-                <div class="BagianSatu d-flex">
-                    <div class="kiri">
+                <div class="BagianSatu " style="display:flex;justify-content: space-between">
+                    <div class="kiri" >
                         <h2>{{ $ticket->nama }}</h2>
                         <p>oleh <span style="font-size: 20px" class="fw-bold">{{ $seller->name }}</span></p>
                         <p><i class="fa-solid fa-location-dot fa-lg"></i>&nbsp; {{ $ticket->alamat_lokasi }}, {{ $ticket->kota }}</p>
 
                     </div>
-                    <div class="kanan pt-2" style="margin-left: 400px">
+                    <div class="kanan pt-2" >
                         <a href="#" class="btn btn-danger me-2">Laporkan Penjual</a>
-                        <a style="color: black" href="#"><i class="fa-solid fa-share-nodes fa-2xl"></i></a>
+                        <span id="shareButton" class="shareButton">
+                            <i class="fa-solid fa-share-nodes fa-2xl"></i>
+                        </span>
                     </div>
                 </div>
                 <div class="BagianDua">
@@ -41,4 +43,5 @@
             </div>   
         </div>
     </div>
+<script src="{{ asset('js/share.js') }}"></script>
 @endsection
