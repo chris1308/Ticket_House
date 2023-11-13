@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tiket;
+use App\Models\Penjual;
 use Illuminate\Http\Request;
 
 
@@ -23,5 +24,10 @@ class TiketController extends Controller
         return view('places')->with(['places' => $places, 'title' => 'Places']);
     }
 
-
+    public function show($id){
+        // Logic to fetch item details from the database using $id
+        $ticket = Tiket::where('id_tiket',$id)->first(); 
+        $seller = Penjual::where('id_penjual',$ticket->id_penjual)->first();
+        return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller]);
+    }
 }

@@ -29,8 +29,12 @@ class TiketSeeder extends Seeder
                 'status' => 1,
                 'deskripsi' => 'ini adalah deskripsi tiket ke '.$i,
                 'kategori' => 'seminar',
+                'start_date' => "2023/01/01",
+                'start_time' => "12:30",
+                'end_time' => "15:30",
                 'created_at' => now(),
                 'updated_at' => now(),
+
             ]);
         }
 
@@ -49,6 +53,9 @@ class TiketSeeder extends Seeder
                 'status' => 1,
                 'deskripsi' => 'ini adalah deskripsi tiket ke '.$i,
                 'kategori' => 'place',
+                'start_date' => "2023/02/01",
+                'start_time' => "14:30",
+                'end_time' => "17:30",
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

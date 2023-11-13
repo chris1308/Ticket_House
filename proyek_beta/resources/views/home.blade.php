@@ -36,7 +36,8 @@
             </div>
             <div class="Items d-flex justify-content-between mt-2" style="flex-wrap: wrap">
                 @foreach($tikets as $tiket)
-                    <div class="mb-3 me-2" style=" ">    
+                {{-- item.detail sesuai dengan name yang diberikan ke route di web.php --}}
+                    <div onclick="redirectToDetail('{{ route('ticket.detail', ['id' => $tiket->id_tiket]) }}')" class=" mb-3 me-2" style=" ">    
                         <div class="Gambar mb-2" style="width: 250px; height:270px;">                    
                             <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($tiket->gambar)[0] }}" alt="">          
                         </div>      
@@ -54,7 +55,7 @@
             </div>
             <div class="Items d-flex justify-content-between mt-2" style="flex-wrap: wrap">
                 @foreach($tikets as $tiket)
-                    <div class="mb-3 me-2" style=" ">    
+                    <div onclick="redirectToDetail('{{ route('ticket.detail', ['id' => $tiket->id_tiket]) }}')" class="mb-3 me-2" style=" ">    
                         <div class="Gambar mb-2" style="width: 250px; height:270px;">                    
                             <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($tiket->gambar)[0] }}" alt="">          
                         </div>      
@@ -66,4 +67,13 @@
             </div>
         </div>
     </div>
+    <script>
+        // Function to redirect to the detail page 
+        function redirectToDetail(detailUrl) {
+            //we need this because we use div onclick that doesnt have href attribute
+            //if we use an <a></a> instead, we dont need this
+            // Update the window location to the detail page URL
+            window.location.href = detailUrl;
+        }
+    </script>
 @endsection

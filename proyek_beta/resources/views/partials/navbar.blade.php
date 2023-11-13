@@ -1,4 +1,4 @@
-<div style="" class="fixed-top navbar d-flex justify-content-between bg-light container-fluid pt-3 shadow p-3 mb-4 navbar-expand-lg">
+<div style="" class="fixed-top Navbar d-flex justify-content-between bg-light container-fluid pt-3 shadow p-3 mb-4 navbar-expand-lg">
     <div class="WebLogo">
         <span class="fw-bold" style="font-size:23px; cursor:pointer;"><a href="/home" class="nav-link">🎟️Ticket House</a></span>
     </div>
@@ -13,29 +13,29 @@
         {{-- navbar nav supaya tidak ada bullet point --}}
         <ul class="navbar-nav">
         @if (session()->has('user')) 
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <a class="nav-link"  href="#">History</a>
           </li>
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <a class="nav-link"  href="#">Wishlist</a>
           </li>
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <a class="nav-link"  href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
           </li>
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <!-- {{-- untuk mendapatkan path route yang sedang dikunjungi lalu dibuat active--}} -->
             <a class="nav-link {{ request()->is('seminar') ? 'active' : '' }}" href="/seminar">Seminar</a>
           </li>
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <a class="nav-link {{ request()->is('places') ? 'active' : '' }}" href="/places">Places</a>
           </li>
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">About Us</a>
           </li>
-          <li class="nav-item mx-1">
+          <li class="nav-item mx-3">
             <a class="nav-link" href="#" ><i class="fa-regular fa-bell fa-xl"></i></a>
           </li>
-          <li class="nav-item dropdown me-3">
+          <li class="nav-item dropdown mx-3">
             {{-- if we add class dropdown-toggle, there will be a dropdown arrow displayed next to user profile --}}
             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-regular fa-user fa-xl"></i>

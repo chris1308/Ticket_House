@@ -56,3 +56,6 @@ Route::get('/logout', [LoginController::class,'logout']); //sementara untuk logo
 Route::get('/seminar', [TiketController::class,'getSeminar']);
 //Places
 Route::get('/places', [TiketController::class,'getPlaces']);
+//Detail Ticket. Name supaya bisa diakses lewat route(name)
+Route::get('/ticket/{id}', [TiketController::class, 'show'])->name('ticket.detail');
+
