@@ -31,7 +31,7 @@ Route::get('/home', function () {
         "title" => "Home",
         "tikets"=>$tikets,
     ]);
-});
+})->name("home");
 Route::get('/dashboard', function () { //tampilan saat seller yang login
     return view('sellerDashboard',[
         "title" => "Seller Dashboard",
@@ -63,4 +63,8 @@ Route::get('/seminar', [TiketController::class,'getSeminar']);
 Route::get('/places', [TiketController::class,'getPlaces']);
 //Detail Ticket. Name supaya bisa diakses lewat route(name)
 Route::get('/ticket/{id}', [TiketController::class, 'show'])->name('ticket.detail');
+
+//Search
+Route::get('/search', [TiketController::class,'search']);
+
 
