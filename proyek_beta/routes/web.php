@@ -37,6 +37,11 @@ Route::get('/dashboard', function () { //tampilan saat seller yang login
         "title" => "Seller Dashboard",
     ]);
 });
+Route::get('/adminDashboard', function() {
+    return view('adminDashboard',[
+        "title" => "Admin Dashboard",
+    ]);
+});
 Route::get('/about', function () {
     return view('about',[
         "title" => "About Us",
