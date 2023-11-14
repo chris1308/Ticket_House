@@ -9,11 +9,11 @@
         {{-- navbar nav supaya tidak ada bullet point --}}
         <ul class="navbar-nav  ">
             <li class="nav-item mx-2">
-              <p class="navbar-brand">Admin</p>
+            <a href="#" class=" fw-bold nav-link">ADMIN</a>
             </li>
             <li class="nav-item mx-2">
-                <a class="btn btn-danger" href="/logout" >Logout</a>
-              </li>
+                <img src="{{ asset('images/admin/profile-admin.png') }}" alt="Profile Admin" class="admin-image">
+            </li>
         </ul>
     </div>
 </div>
