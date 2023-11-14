@@ -30,4 +30,17 @@ class TiketController extends Controller
         $seller = Penjual::where('id_penjual',$ticket->id_penjual)->first();
         return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller]);
     }
+
+    public function search(Request $request){
+        $keyword = $request->input('keyword');
+
+        if(!$keyword){
+            return redirect()->route("home");
+        }
+
+        $tiket = Tiket::where('nama','LIKE', '%'.$keyword.'%')->get();
+
+        return view('searchResult')->with(['result' => $tiket, 'title' => 'Search result']);
+    }
+
 }

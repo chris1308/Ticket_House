@@ -3,8 +3,8 @@
         <span class="fw-bold" style="font-size:23px; cursor:pointer;"><a href="/home" class="nav-link">🎟️Ticket House</a></span>
     </div>
     <div class="SearchBar " >
-        <form class="d-flex">
-            <input class="form-control me-1" size="25"  type="search" placeholder="Cari acara atau lokasi" aria-label="Search">
+        <form class="d-flex" method="GET" action="/search">
+            <input class="form-control me-1" size="25" name="keyword" type="search" placeholder="Cari acara atau lokasi" value="{{ request()->input('keyword') }}" aria-label="Search">
             <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
     </div>
