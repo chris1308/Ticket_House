@@ -6,6 +6,13 @@
         @else
             <h1>Hello, Guest</h1><br>
         @endif 
+        {{-- displayed message after add to wishlist --}}
+        @if(session('message')) 
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif        
         {{-- Jumbotron --}}
         <div id="carouselExample" style="height: 400px" class="bg-primary carousel slide">
             <div class="carousel-inner" style="height: 400px">

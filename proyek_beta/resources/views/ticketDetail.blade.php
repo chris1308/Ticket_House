@@ -3,7 +3,6 @@
 @section('content')
     {{-- @dd($seller); --}}
     <div class="container d-flex justify-content-between" style="height: 850px; padding-top:130px;">
-        {{-- <p>{{ $ticket->id_tiket }}</p> --}}
         <div class="kiri">
             <a href="/home" class="text-decoration-none" style="font-size: 18px">< Back</a><br><br>
             <div class="">
@@ -14,8 +13,16 @@
                         <p><i class="fa-solid fa-location-dot fa-lg"></i>&nbsp; {{ $ticket->alamat_lokasi }}, {{ $ticket->kota }}</p>
 
                     </div>
-                    <div class="kanan pt-2" >
-                        <a href="#" class="btn btn-danger me-2">Laporkan Penjual</a>
+                    <div class="kanan pt-2 d-flex" >
+                        <span>
+                            <form action="{{ route('add.wishlist', ['id' => $id]) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-primary me-2" type="submit">Add to Wishlist</button>
+                            </form>
+                        </span>
+                        <span>
+                            <a href="#" class="btn btn-danger me-2">Laporkan Penjual</a>
+                        </span>
                         <span id="shareButton" class="shareButton">
                             <i class="fa-solid fa-share-nodes fa-2xl"></i>
                         </span>

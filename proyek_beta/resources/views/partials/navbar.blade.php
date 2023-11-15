@@ -17,7 +17,7 @@
             <a class="nav-link" style="opacity: {{ request()->is('history') ? '100%' : '50%' }}" href="#">History</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" style="opacity: {{ request()->is('wishlist') ? '100%' : '50%' }}" href="#">Wishlist</a>
+            <a class="nav-link" style="opacity: {{ request()->is('wishlist') ? '100%' : '50%' }}" href="/wishlist">Wishlist</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" style="opacity: {{ request()->is('nearme') ? '100%' : '50%' }}" href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>

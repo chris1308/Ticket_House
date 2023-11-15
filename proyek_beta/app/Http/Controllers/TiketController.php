@@ -28,7 +28,7 @@ class TiketController extends Controller
         // Logic to fetch item details from the database using $id
         $ticket = Tiket::where('id_tiket',$id)->first(); 
         $seller = Penjual::where('id_penjual',$ticket->id_penjual)->first();
-        return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller]);
+        return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller, "id"=>$id]);
     }
 
     public function search(Request $request){
@@ -42,5 +42,6 @@ class TiketController extends Controller
 
         return view('searchResult')->with(['result' => $tiket, 'title' => 'Search result']);
     }
+
 
 }

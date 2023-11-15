@@ -5,6 +5,7 @@ use App\Models\Tiket;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::get('/about', function () {
         "title" => "About Us",
     ]);
 });
+
 Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
 
@@ -54,7 +56,8 @@ Route::post('/register', [RegisterController::class,'store']);
 Route::get('/login', [LoginController::class,'login']);
 Route::post('/login', [LoginController::class,'attemptLogin']);
 
-Route::get('/logout', [LoginController::class,'logout']); //sementara untuk logout
+Route::get('/logout', [LoginController::class,'logout']); 
+
 
 
 //Seminar
@@ -67,4 +70,7 @@ Route::get('/ticket/{id}', [TiketController::class, 'show'])->name('ticket.detai
 //Search
 Route::get('/search', [TiketController::class,'search']);
 
+//Wishlist
+Route::get('/wishlist', [WishlistController::class,'index']);
+Route::post('/wishlist/{id}',[WishlistController::class, 'addToWishlist'])->name('add.wishlist');
 

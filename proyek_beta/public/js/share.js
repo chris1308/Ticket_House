@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(() => {
                     console.log('URL copied to clipboard:', pageUrl);
 
-                    // Optionally, you can provide feedback to the user
+                    //feedback for user
                     alert('URL copied to clipboard!');
                 })
                 .catch((error) => {
