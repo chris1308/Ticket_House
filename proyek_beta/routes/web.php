@@ -73,4 +73,5 @@ Route::get('/search', [TiketController::class,'search']);
 //Wishlist
 Route::get('/wishlist', [WishlistController::class,'index']);
 Route::post('/wishlist/{id}',[WishlistController::class, 'addToWishlist'])->name('add.wishlist');
-
+Route::put("/wishlist", [WishlistController::class, 'removeAllFromWishlist']);
+Route::put("/wishlist/{id}",[WishlistController::class,'removeFromWishlist'])->name('remove.wishlist');
