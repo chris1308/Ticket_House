@@ -12,7 +12,7 @@
 <body>
 {{-- navbar dijadikan komponen terpisah di file partials/navbar. Cara panggil komponen pake @include(namafolder.namafile) --}}
     @include('partials.adminNavbar')
-    <!-- @include('partials.adminSidebar') -->
+    @include('partials.adminSidebar')
     <div class="container-fluid" style="">
         @yield('content')
     </div>
