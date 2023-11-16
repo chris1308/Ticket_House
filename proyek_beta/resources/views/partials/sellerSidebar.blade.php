@@ -1,47 +1,40 @@
-<div style="width: 300px; height: 100%; background-color: #F1F8FF; margin-top: 70px;" class="sidebar position-fixed">
-    <ul class="list-unstyled">
-        <li class="py-2 active">
-            <a href="/adminDashboard" class="text-decoration-none text-dark fw-bold" ><img src="{{ asset('images/admin/home.png') }}" style="width: 30px; height: 30px; margin-left: 10px;" alt="Home"> Home</a>
+<!-- sellerSidebar.blade.php -->
+<div style="width: 300px; height: 100%; margin-top: 70px; background-color: #F1F8FF;" class="sidebar position-fixed">
+    <div class="text-center py-3">
+        <img src="{{ asset('images/user/profile.png') }}" style="width: 50px; height: 50px;" alt="Profile Icon">
+        <p class="mb-0 mt-2" style="font-weight: bold;">
+            @if (session()->has('user'))
+                {{ session('user')->name }}
+            @endif 
+        </p>
+        <a href="#" class="text-decoration-none">Edit Profile</a>
+        <p class="mt-3 mb-0" style="background-color: #BBDAFF; padding: 5px; border-radius: 5px;">Premium</p>
+    </div>
+
+    <ul class="list-unstyled mt-4">
+        <li class="py-2" style="margin-bottom: 10px;">
+            <a href="/dashboard" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/home.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="home"> Home</a>
         </li>
-        <li class="py-2">
-            <p class="text-center" style="background-color: #FD9191; padding: 10px; font-weight: bold;">Masters</p>
-            <ul class="list-unstyled">
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="penjual">  Penjual</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Pembeli"> Pembeli</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/ticket.png') }}" style="width: width: 20px; height: 20px; margin-left: 10px;" alt="Tiket"> Tiket</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/danger.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Activity"> Aktivitas</a>
-                </li>
-                <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/discount.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Promo"> Promo</a>
-                </li>
-            </ul>
+        <li class="py-2" style="margin-bottom: 10px;">
+            <a href="#" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="add-ticket"> Tambah Tiket</a>
         </li>
-        <li class="py-2">
-            <p class="text-center" style="background-color: #FD9191; padding: 10px; font-weight: bold;">Laporan</p>
-            <ul class="list-unstyled">
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Penjual"> Penjual</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark align" style="font-weight: bold;"><img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Pembeli"> Pembeli</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Tiket"> Tiket</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/time.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Kunjungan"> Kunjungan</a>
-                </li>
-                <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/receipt.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Transaksi"> Transaksi</a>
-                </li>
+        <li class="py-2" style="margin-bottom: 10px;">
+            <a href="#" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/view-ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="view-ticket"> Lihat Semua Tiket</a>
+        </li>
+        <li class="py-2" style="margin-bottom: 10px;">
+            <div class="text-decoration-none text-dark fw-bold" style="cursor: pointer;" onclick="toggleLaporan()"><img src="{{ asset('images/user/report.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="report"> Laporan</div>
+            <ul id="laporanSubMenu" class="list-unstyled ml-3" style="display: none; margin-left: 20px;">
+                <li style="margin-top: 10px; margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan Penjualan</a></li>
+                <li style="margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan Cash Flow</a></li>
+                <li style="margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan View Ticket</a></li>
             </ul>
         </li>
     </ul>
+
+    <script>
+        function toggleLaporan() {
+            var laporanSubMenu = document.getElementById('laporanSubMenu');
+            laporanSubMenu.style.display = (laporanSubMenu.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
 </div>
