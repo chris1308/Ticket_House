@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime) dan belum bisa upload gambar. --}} -->
 <div class="d-flex justify-content-center">
     <div class="my-3 p-3" style="">
         <h3 class="my-2 ">Tambah Tiket</h3>
@@ -27,7 +28,7 @@
            <br/>
 
            Deskripsi
-           <textarea required type="text" value="{{ old('deskripsi') }}" class=" form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" size="50" placeholder="deskripsi" id=""></textarea>
+           <textarea required type="text" class=" form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" size="50" placeholder="deskripsi" id="">{{ old('deskripsi') }}</textarea>
             @error('deskripsi')
             <div class="invalid-feedback">
               {{ $message }}
@@ -55,7 +56,7 @@
 
             Kota
             <select value="{{ old('kota') }}" style="width: 450px" class="form-control" name="kota" id="kota">
-                <option value="Mandung">Bandung</option>
+                <option value="Bandung">Bandung</option>
                 <option value="Denpasar">Denpasar</option>
                 <option value="Jakarta">Jakarta</option>
                 <option value="Malang">Malang</option>

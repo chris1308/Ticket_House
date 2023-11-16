@@ -126,8 +126,10 @@ class TiketController extends Controller
             'status'=>1,
             'deskripsi'=> $request->input('deskripsi'),
             'kategori'=> $request->input('kategori'),
+            'start_date' => "2023/01/01",
+            'start_time' => "12:30",
+            'end_time' => "15:30",
 
-         
         ]);
         return redirect('/dashboard');
         // return view('searchResult')->with(['result' => $tiket, 'title' => 'Search result']);

@@ -1,3 +1,30 @@
+<?php
+    function formatUang($inputan){
+        $hasil = "";
+        $ctr = 0; 
+        for ($i=strlen($inputan)-1; $i >= 0; $i--) {
+          if($ctr < 3){
+            $hasil.= substr($inputan, $i, 1);
+            $ctr = $ctr+1;
+          }
+      
+          if($ctr == 3){
+            if($i != 0){
+              $hasil.=".";
+            }
+            $ctr = 0;
+          }
+        }
+      
+        $hasilFlip = "";
+        for ($i=strlen($hasil)-1; $i >=0 ; $i--) { 
+          $hasilFlip.=substr($hasil, $i, 1);
+        }
+      
+        return $hasilFlip;
+    }
+?>
+
 @extends('layouts.main')
 @section('content')
     <div class="Home container" style="height: 1500px; padding-top:100px; ">
@@ -49,7 +76,7 @@
                             <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($tiket->gambar)[0] }}" alt="">          
                         </div>      
                         <h5>{{ $tiket->nama }}</h5>
-                        <p>From IDR {{ $tiket->harga }}</p>
+                        <p>From IDR {{ formatUang($tiket->harga) }}</p>
      
                     </div>
                 @endforeach
@@ -67,7 +94,7 @@
                             <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($tiket->gambar)[0] }}" alt="">          
                         </div>      
                         <h5>{{ $tiket->nama }}</h5>
-                        <p>From IDR {{ $tiket->harga }}</p>
+                        <p>From IDR {{ formatUang($tiket->harga) }}</p>
      
                     </div>
                 @endforeach
