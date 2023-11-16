@@ -15,13 +15,13 @@
             @foreach ($tempTickets as $ticket)
                 @if ($ticket->status == 1)               
                     <tr class="" style="border-bottom:1px solid black; text-align:center;">
-                        <td style="padding: 20px"><img style="width: 100px; object-fit:cover;" src="/images/{{ json_decode($ticket->gambar)[0] }}" alt=""></td>
+                        <td style="padding: 20px"><a href="/ticket/{{ $ticket->id_tiket }}"><img style="width: 100px; object-fit:cover;" src="/images/{{ json_decode($ticket->gambar)[0] }}" alt=""></a> </td>
                         <td  style="padding: 10px; ">{{ $ticket->nama }}</td>
                         <td style=" padding:10px 70px; ">Rp. {{ $ticket->harga }}</td>
                         <td style="padding:10px 60px">1</td>
                         <td style=" padding:10px 60px;">{{ $ticket->quantity }}</td>
                         <td style=" padding:10px 60px; ">
-                            <div class="d-flex justify-content-between">
+                            <div class="">
                                 {{-- need to use form so we can send a PUT request --}}
                                 {{-- collect() being used here to get first array element that matched given condition  --}}
                                 <form action="{{ route('remove.wishlist',['id'=>collect($wishlistItems)->where('id_tiket',$ticket->id_tiket)->where('status',1)->first()->id_wishlist  ]) }}" method="post">
@@ -29,7 +29,7 @@
                                     @method('put')
                                     <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-trash fa-sm"></i></button>
                                 </form>
-                                <a href="" class="btn btn-secondary"><i class="fa-solid fa-cart-shopping fa-sm"></i></a>
+         
                             </div>
                             
                         </td>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,6 @@ Route::post('/login', [LoginController::class,'attemptLogin']);
 
 Route::get('/logout', [LoginController::class,'logout']); 
 
-
-
 //Seminar
 Route::get('/seminar', [TiketController::class,'getSeminar']);
 //Places
@@ -88,3 +87,5 @@ Route::get('/nearme', [TiketController::class,'nearMe'])->name("nearMe");
 //Penjual
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
+//Report
+Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');

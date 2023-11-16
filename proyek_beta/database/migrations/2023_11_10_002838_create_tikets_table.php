@@ -24,7 +24,7 @@ return new class extends Migration
             $table->char('status')->default(1); //1 means ticket active and not deleted
             $table->longText('deskripsi');
             $table->string('kategori');
-            $table->date('start_date'); 
+            $table->date('start_date')->nullable(); 
             $table->time('start_time')->format('H:i'); //format as Hour:minutes
             $table->time('end_time')->format('H:i');
             $table->timestamps();

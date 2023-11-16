@@ -15,7 +15,7 @@ class TiketSeeder extends Seeder
     public function run(): void
     {
         Tiket::truncate();
-        for ($i = 1; $i <=5; $i++) {//make 5 tickets
+        for ($i = 1; $i <=5; $i++) {//make 5 seminar tickets
             DB::table('tikets')->insert([
                 'id_tiket' => 'TIK00'.$i,
                 'id_penjual' => 'PJ001',
@@ -52,8 +52,7 @@ class TiketSeeder extends Seeder
                 'jumlah_view' => 0,
                 'status' => 1,
                 'deskripsi' => 'ini adalah deskripsi tiket ke '.$i,
-                'kategori' => 'place',
-                'start_date' => "2023/02/01",
+                'kategori' => 'place',                
                 'start_time' => "14:30",
                 'end_time' => "17:30",
                 'created_at' => now(),

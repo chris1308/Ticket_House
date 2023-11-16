@@ -2,7 +2,29 @@
 @extends('layouts.main')
 @section('content')
     {{-- @dd($seller); --}}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Report this ticket</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="myModalForm" action="{{ route('submit.report',['id'=>$ticket->id_penjual]) }}" method="post">
+                @csrf
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea name="reportText" class="form-control" id="message-text"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" >Submit Report</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="container d-flex justify-content-between" style="height: 850px; padding-top:130px;">
+
         <div class="kiri">
             <a href="/home" class="text-decoration-none" style="font-size: 18px">< Back</a><br><br>
             <div class="">
@@ -15,13 +37,16 @@
                     </div>
                     <div class="kanan pt-2 d-flex" >
                         <span>
+                            <a href="#" class="btn btn-warning me-2"><i class="fa-solid fa-calendar fa-lg"></i>&nbsp;Set Reminder</a>
+                        </span>
+                        <span>
                             <form action="{{ route('add.wishlist', ['id' => $id]) }}" method="POST">
                                 @csrf
                                 <button class="btn btn-primary me-2" type="submit">Add to Wishlist</button>
                             </form>
                         </span>
-                        <span>
-                            <a href="#" class="btn btn-danger me-2">Laporkan Penjual</a>
+                        <span>                            
+                            <button type="button" id="myBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger me-2">Report</button>
                         </span>
                         <span id="shareButton" class="shareButton">
                             <i class="fa-solid fa-share-nodes fa-2xl"></i>
@@ -32,7 +57,11 @@
                     <div class="gambarMap" style="margin-left:25px ;width: 775px; height:200px">
                         <img class="w-100 h-100" src="/images/graybackground.png" alt="">
                     </div><br>
-                    <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;{{date('D-M-Y',strtotime($ticket->start_date) )  }} {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>
+                    @if ($ticket->start_date != null)
+                        <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;{{date('D-M-Y',strtotime($ticket->start_date) )  }} {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>                        
+                    @else
+                        <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;Jam Operasional : {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>  
+                    @endif
                     <form action="" style="margin-left: 25px">
                         <input type="text" name="" id="" size="50" placeholder="Dari IDR {{ $ticket->harga }}" disabled>
                         <button class=" ms-2 btn btn-success">Beli Tiket</button>
@@ -49,6 +78,7 @@
                 <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($ticket->gambar)[0] }}" alt="">          
             </div>   
         </div>
+        {{-- modal --}}
     </div>
-<script src="{{ asset('js/share.js') }}"></script>
+    <script src="{{ asset('js/share.js') }}"></script>
 @endsection

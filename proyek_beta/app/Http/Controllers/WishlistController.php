@@ -24,8 +24,12 @@ class WishlistController extends Controller
     }
 
     public function addToWishlist($id){
-        // Check if the item is already in the wishlist
         $user = session('user');
+        //if user hasnt logged in, redirect to login page
+        if (!$user) {
+            return redirect('/login');
+        }
+        // Check if the item is already in the wishlist
         //get wishlists to be checked
         $tempWishlists = Wishlist::where('id_pembeli', $user->id_pembeli)->get();
         foreach ($tempWishlists as $temp){
