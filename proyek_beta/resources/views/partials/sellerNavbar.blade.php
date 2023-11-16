@@ -7,7 +7,7 @@
     {{-- navbarexpandlg supaya menu bisa nyamping dan ngga kebawah --}}
     <div class="Menu navbar-expand-lg">
         {{-- navbar nav supaya tidak ada bullet point --}}
-        <ul class="navbar-nav  ">
+        <ul class="navbar-nav">
             <li class="nav-item mx-2">
               <a class="nav-link active" href="#">
                 @if (session()->has('user'))
