@@ -20,7 +20,7 @@
             <a class="nav-link" style="opacity: {{ request()->is('wishlist') ? '100%' : '50%' }}" href="/wishlist">Wishlist</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" style="opacity: {{ request()->is('nearme') ? '100%' : '50%' }}" href="#"><i class="fa-solid fa-location-dot"></i> Near Me</a>
+            <a class="nav-link" style="opacity: {{ request()->is('nearme') ? '100%' : '50%' }}" href="#" onclick="nearMe()"><i class="fa-solid fa-location-dot"></i> Near Me</a>
           </li>
           <li class="nav-item mx-3">
             <!-- {{-- untuk mendapatkan path route yang sedang dikunjungi lalu dibuat active--}} -->
@@ -68,3 +68,67 @@
         </ul>
     </div>
 </div>
+
+
+<script>
+    let storeLatitude = 0;
+    let storeLongitude = 0;
+
+    function nearMe(){
+      // Check if the browser supports Geolocation
+      if (navigator.geolocation) {
+          // Get the current position
+          navigator.geolocation.getCurrentPosition(
+              function(position) {
+                  // Extract latitude and longitude from the position object
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+
+                  //menyisipkan posisi longitude dan latitude user saat ini ke params url
+                  const urlParams = new URLSearchParams(window.location.search);
+                  // console.log(urlParams.toString().includes("lat"));
+
+                  //pengecekan supaya latitude dan longitude hanya ditambahkan jika belum ada di url
+                  if(!urlParams.toString().includes("lat") || !urlParams.toString().includes("long")){ 
+                      urlParams.set('lat', latitude);
+                      urlParams.set('long', longitude);
+
+                      let url = "{{ route('nearMe', ':parameter') }}";
+                      url = url.replace(':parameter', urlParams);
+                      window.location.href = url;
+
+                      console.log("/nearMe/"+urlParams.toString());
+                  }
+                  // console.log(urlParams.toString().includes("lat"));
+
+                  
+                  
+                  // Nilai longitude dan latitude
+                  console.log('Latitude: ' + latitude);
+                  console.log('Longitude: ' + longitude);
+              },
+              function(error) {
+                  // Handle errors
+                  switch (error.code) {
+                      case error.PERMISSION_DENIED:
+                          console.error('User denied the request for Geolocation.');
+                          break;
+                      case error.POSITION_UNAVAILABLE:
+                          console.error('Location information is unavailable.');
+                          break;
+                      case error.TIMEOUT:
+                          console.error('The request to get user location timed out.');
+                          break;
+                      case error.UNKNOWN_ERROR:
+                          console.error('An unknown error occurred.');
+                          break;
+                  }
+              }
+          );
+      } else {
+          console.error('Geolocation is not supported by this browser.');
+      }
+
+    }
+    
+</script>

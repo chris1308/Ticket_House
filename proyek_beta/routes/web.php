@@ -33,6 +33,7 @@ Route::get('/home', function () {
         "tikets"=>$tikets,
     ]);
 })->name("home");
+
 Route::get('/dashboard', function () { //tampilan saat seller yang login
     return view('sellerDashboard',[
         "title" => "Seller Dashboard",
@@ -73,5 +74,17 @@ Route::get('/search', [TiketController::class,'search']);
 //Wishlist
 Route::get('/wishlist', [WishlistController::class,'index']);
 Route::post('/wishlist/{id}',[WishlistController::class, 'addToWishlist'])->name('add.wishlist');
+
 Route::put("/wishlist", [WishlistController::class, 'removeAllFromWishlist']);
 Route::put("/wishlist/{id}",[WishlistController::class,'removeFromWishlist'])->name('remove.wishlist');
+
+//masih coba-coba
+// Route::get('/nearme', function(){
+//     return view('nearme', ["title"=>"Near Me"]);
+// })->name("nearMe");
+Route::get('/nearme', [TiketController::class,'nearMe'])->name("nearMe");
+
+
+//Penjual
+Route::get('/add', [TiketController::class,'showAdd']);
+Route::post('/add', [TiketController::class,'saveAdd']);

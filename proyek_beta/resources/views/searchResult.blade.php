@@ -2,7 +2,7 @@
 @section('content')
 {{-- if there is no height property defined, the footer will be broken when search result  not found --}}
 <div class="SearchResult container" style="padding-top:100px; height:500px;">
-    <h1>Search Result for "{{request()->input('keyword')}}"</h1><br>
+    <h1>Search Result(s) for "{{request()->input('keyword')}}"</h1><br>
     <div class="row pb-5">
         <!-- {{-- show text if no tiket is found as result of search --}} -->
         @if(count($result) == 0)
