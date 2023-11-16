@@ -1,3 +1,30 @@
+<?php
+    function formatUang($inputan){
+        $hasil = "";
+        $ctr = 0; 
+        for ($i=strlen($inputan)-1; $i >= 0; $i--) {
+          if($ctr < 3){
+            $hasil.= substr($inputan, $i, 1);
+            $ctr = $ctr+1;
+          }
+      
+          if($ctr == 3){
+            if($i != 0){
+              $hasil.=".";
+            }
+            $ctr = 0;
+          }
+        }
+      
+        $hasilFlip = "";
+        for ($i=strlen($hasil)-1; $i >=0 ; $i--) { 
+          $hasilFlip.=substr($hasil, $i, 1);
+        }
+      
+        return $hasilFlip;
+    }
+?>
+
 @extends('layouts.main')
 @section('content')
 
@@ -10,7 +37,7 @@
                     <img class="img rounded-3 w-100 h-100" src="images/{{json_decode($seminar->gambar)[0]}}" alt="{{$seminar->nama}}" style="object-fit: cover;">
                 </div>
                 <div class="fw-bold">{{ $seminar->nama }}</div>
-                <div>From IDR {{substr_replace($seminar->harga, 'K', strlen($seminar->harga)-3)}}</div>
+                <div>From IDR {{formatUang($seminar->harga)}}</div>
             </div>    
         @endforeach
     </div>

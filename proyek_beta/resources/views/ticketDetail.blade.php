@@ -1,3 +1,29 @@
+<?php
+    function formatUang($inputan){
+        $hasil = "";
+        $ctr = 0; 
+        for ($i=strlen($inputan)-1; $i >= 0; $i--) {
+          if($ctr < 3){
+            $hasil.= substr($inputan, $i, 1);
+            $ctr = $ctr+1;
+          }
+      
+          if($ctr == 3){
+            if($i != 0){
+              $hasil.=".";
+            }
+            $ctr = 0;
+          }
+        }
+      
+        $hasilFlip = "";
+        for ($i=strlen($hasil)-1; $i >=0 ; $i--) { 
+          $hasilFlip.=substr($hasil, $i, 1);
+        }
+      
+        return $hasilFlip;
+    }
+?>
 
 @extends('layouts.main')
 @section('content')
@@ -63,7 +89,7 @@
                         <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;Jam Operasional : {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>  
                     @endif
                     <form action="" style="margin-left: 25px">
-                        <input type="text" name="" id="" size="50" placeholder="Dari IDR {{ $ticket->harga }}" disabled>
+                        <input type="text" name="" id="" size="50" placeholder="Dari IDR {{ formatUang($ticket->harga) }}" disabled>
                         <button class=" ms-2 btn btn-success">Beli Tiket</button>
                     </form>
                 </div><br>
