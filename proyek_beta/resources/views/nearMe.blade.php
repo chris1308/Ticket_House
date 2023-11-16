@@ -1,10 +1,50 @@
+<?php
+    function formatUang($inputan){
+        $hasil = "";
+        $ctr = 0; 
+        for ($i=strlen($inputan)-1; $i >= 0; $i--) {
+          if($ctr < 3){
+            $hasil.= substr($inputan, $i, 1);
+            $ctr = $ctr+1;
+          }
+      
+          if($ctr == 3){
+            if($i != 0){
+              $hasil.=".";
+            }
+            $ctr = 0;
+          }
+        }
+      
+        $hasilFlip = "";
+        for ($i=strlen($hasil)-1; $i >=0 ; $i--) { 
+          $hasilFlip.=substr($hasil, $i, 1);
+        }
+      
+        return $hasilFlip;
+    }
+?>
+
 @extends('layouts.main')
 @section('content')
 
 <div class="Places container" style="padding-top:100px; ">
     <h1>Near Me</h1><br>
     <div class="row pb-5">
-    
+         <!-- {{-- show text if no tiket is found near user --}} -->
+         @if(count($result) == 0)
+            <h2 class="text-center text-danger">Belum ada tiket disekitar anda</h2>
+        @endif
+
+        @foreach($result as $res)
+            <div onclick="redirectToDetail('{{ route('ticket.detail', ['id' => $res->id_tiket]) }}')" class="col-sm-6 col-md-4 col-lg-3 rounded-3 p-3 mb-3" style="height: 250px;">
+                <div class="gbr" style="height: 85%;">
+                    <img class="img rounded-3 w-100 h-100" src="images/{{json_decode($res->gambar)[0]}}" alt="{{$res->nama}}" style="object-fit: cover;">
+                </div>
+                <div class="fw-bold">{{ $res->nama }}</div>
+                <div>From IDR {{formatUang($res->harga)}}</div>
+            </div>    
+        @endforeach
     </div>
 </div>
 <script>
@@ -39,10 +79,8 @@
                     
                     window.location.search = urlParams;
                 }
-                console.log(urlParams.toString().includes("lat"));
+                // console.log(urlParams.toString().includes("lat"));
 
-                
-                
                 // Nilai longitude dan latitude
                 console.log('Latitude: ' + latitude);
                 console.log('Longitude: ' + longitude);

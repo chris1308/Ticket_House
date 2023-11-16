@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('kota');
             $table->string('alamat_lokasi');
+            $table->string('lokasi_lat');
+            $table->string('lokasi_long');
             $table->json('gambar');
             $table->integer('jumlah_view');
             $table->char('status')->default(1); //1 means ticket active and not deleted

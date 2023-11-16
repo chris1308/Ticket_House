@@ -24,6 +24,8 @@ class TiketSeeder extends Seeder
                 'quantity' => 1,
                 'kota' => 'Surabaya',
                 'alamat_lokasi' => 'Jl. Merdeka '.$i,
+                'lokasi_lat' => '-7.25558',
+                'lokasi_long' => '112.75046',
                 'gambar' => json_encode(['seminar1.jpg']), //convert array to JSOn string
                 'jumlah_view' => 0,
                 'status' => 1,
@@ -48,6 +50,8 @@ class TiketSeeder extends Seeder
                 'quantity' => 1,
                 'kota' => 'Surabaya',
                 'alamat_lokasi' => 'Jl. Merdeka '.$i,
+                'lokasi_lat' => '-7.25558',
+                'lokasi_long' => '112.75046',
                 'gambar' => json_encode(['place1.jpg']), //convert array to JSOn string
                 'jumlah_view' => 0,
                 'status' => 1,
