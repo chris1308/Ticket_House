@@ -11,6 +11,7 @@
 <body>
     {{-- navbar dijadikan komponen terpisah di file partials/navbar. Cara panggil komponen pake @include(namafolder.namafile) --}}
     @include('partials.sellerNavbar')
+    @include('partials.sellerSidebar')
     <div class="container-fluid" style="">
         @yield('content')
     </div>
