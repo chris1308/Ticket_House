@@ -80,8 +80,8 @@
                     </div>
                 </div>
                 <div class="BagianDua">
-                    <div class="gambarMap" style="margin-left:25px ;width: 775px; height:200px">
-                        <img class="w-100 h-100" src="/images/graybackground.png" alt="">
+                    <div class="gambarMap" id="gambarMap" style="margin-left:25px ;width: 775px; height:200px">
+                        <!-- <img class="w-100 h-100" src="/images/graybackground.png" alt=""> -->
                     </div><br>
                     @if ($ticket->start_date != null)
                         <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;{{date('D-M-Y',strtotime($ticket->start_date) )  }} {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>                        
@@ -107,4 +107,59 @@
         {{-- modal --}}
     </div>
     <script src="{{ asset('js/share.js') }}"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script>
+
+        //function untuk load map HERE
+        function loadHereMaps() {
+            let script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://js.api.here.com/v3/3.1/mapsjs-core.js';
+            document.body.appendChild(script);
+
+            script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://js.api.here.com/v3/3.1/mapsjs-service.js';
+            document.body.appendChild(script);
+
+            script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://js.api.here.com/v3/3.1/mapsjs-mapevents.js';
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                let latitude = <?php echo json_encode($ticket->lokasi_lat); ?>;
+                let longitude = <?php echo json_encode($ticket->lokasi_long); ?>;
+                let platform = new H.service.Platform({
+                    apikey: '1DvppUVi__lz1FhPrVsRjXlo92_CDUDCBgPkikH4xd4'
+                });
+
+                let defaultLayers = platform.createDefaultLayers();
+
+                let map = new H.Map(
+                document.getElementById('gambarMap'),
+                defaultLayers.vector.normal.map,
+                    {
+                        center: { lat: latitude, lng: longitude },
+                        zoom: 14,
+                        pixelRatio: window.devicePixelRatio || 1
+                    }
+                );
+
+                let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+                const marker = new H.map.Marker({ lat: latitude, lng: longitude });
+                map.addObject(marker);
+
+                marker.addEventListener('tap', function (evt) {
+                    alert('Marker clicked!'); // You can replace this with your custom logic
+                });
+            };
+        }
+
+        window.onload = loadHereMaps;
+
+    </script>
 @endsection
