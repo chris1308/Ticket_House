@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::get('/home', function () {
 Route::get('/dashboard', function () { //tampilan saat seller yang login
     return view('sellerDashboard',[
         "title" => "Seller Dashboard",
+    ]);
+});
+Route::get('/sellerProfile', function() {
+    return view('sellerProfile',[
+        "title" => "Seller Profile",
     ]);
 });
 Route::get('/adminDashboard', function() {
@@ -89,3 +95,7 @@ Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');
+
+//COBA COBA UPLOAD IMAGE EDIT PROFIL PENJUAL
+//Masih gagal, harus ubah-ubah auth web
+//Route::post('/upload/image', [ImageController::class, 'upload'])->name('upload.image');

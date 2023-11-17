@@ -7,7 +7,7 @@
                 {{ session('user')->name }}
             @endif 
         </p>
-        <a href="#" class="text-decoration-none">Edit Profile</a>
+        <a href="/sellerProfile" class="text-decoration-none">Edit Profile</a>
         <p class="mt-3 mb-0" style="background-color: #BBDAFF; padding: 5px; border-radius: 5px;">Premium</p>
     </div>
 
