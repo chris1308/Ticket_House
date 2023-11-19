@@ -5,11 +5,77 @@ namespace App\Http\Controllers;
 use App\Models\Tiket;
 use App\Models\Penjual;
 use Illuminate\Http\Request;
-
+use Google\Client;
+use Google\Service\Calendar;
+use Google\Service\Calendar\Event;
 
 class TiketController extends Controller
 {
-    //
+
+    public function setReminderToCalendar(Request $request, $id){
+        $getTiket = Tiket::where('id_tiket',$id)->first();
+        $summary = $getTiket->nama;
+        $description = $getTiket->deskripsi;
+        $startDate = $getTiket->start_date;
+        $startTime = $getTiket->start_time;
+        $endTime = $getTiket->end_time;
+        session(['summary'=>$summary]);
+        session(['description'=>$description]);
+        session(['startDate'=>$startDate]);
+        session(['startTime'=>$startTime]);
+        session(['endTime'=>$endTime]);
+        // Initialize the Google API client
+        $client = new Client();
+        $client->setAuthConfig(app_path('client_secret.json')); //client secret json tak pake punyaku
+        $client->setAccessType('offline');
+        $client->setRedirectUri(url('/auth/google/callback')); //harus sesuai dengan yang ada di google calendar api 
+        // If the access token is not set or expired, redirect to Google's OAuth consent screen
+        $client->setScopes([
+            'https://www.googleapis.com/auth/calendar',
+            // perlu di set scope spy ga error smh
+        ]);
+        
+            if (!$client->isAccessTokenExpired()) {
+                // Use the access token to create an event in Google Calendar
+            } else {
+                // Redirect to Google's OAuth consent screen
+                return redirect($client->createAuthUrl());
+            }
+    }
+       
+    public function handleCallback(Request $request){
+        // Handle the callback after the user grants access
+        $client = new Client();
+        $client->setAuthConfig(app_path('client_secret.json'));
+        $client->setAccessType('offline');
+        $client->setRedirectUri(url('/auth/google/callback'));
+
+        $code = $request->get('code');
+
+        // Exchange authorization code for access token
+        $accessToken = $client->fetchAccessTokenWithAuthCode($code);
+
+        $service = new Calendar($client);
+
+        $event = new Event([
+            'summary' =>  session('summary'),
+            'description' => session('description'),
+            'start' => [
+                'dateTime' => session('startDate').'T'.session('startTime'),
+                'timeZone' => 'Asia/Jakarta',
+            ],
+            'end' => [
+                'dateTime' => session('startDate').'T'.session('endTime'),
+                'timeZone' => 'Asia/Jakarta',
+            ],
+        ]);
+
+        $calendarId = 'primary'; // Use 'primary' for the user's primary calendar
+
+        $event = $service->events->insert($calendarId, $event);
+         // Redirect ke home page dengan kembalian pesan 
+        return redirect('/home')->with('message', 'Successfully added to Google Calendar!');
+    }
     public function getSeminar(){
         $category = "seminar";
         $tickets = Tiket::where('kategori', $category)->get();

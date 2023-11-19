@@ -63,7 +63,7 @@
                     </div>
                     <div class="kanan pt-2 d-flex" >
                         <span>
-                            <a href="#" class="btn btn-warning me-2"><i class="fa-solid fa-calendar fa-lg"></i>&nbsp;Set Reminder</a>
+                            <a href="{{ route('tickets.reminder',['id' => $id]) }}" class="btn btn-warning me-2"><i class="fa-solid fa-calendar fa-lg"></i>&nbsp;Set Reminder</a>
                         </span>
                         <span>
                             <form action="{{ route('add.wishlist', ['id' => $id]) }}" method="POST">

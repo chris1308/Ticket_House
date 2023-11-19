@@ -17,20 +17,6 @@ class LoginController extends Controller
         ]);
     }
 
-    // public function authenticate(Request $request){
-    //     $credentials = $request->validate([
-    //         'email' => ['required'],   
-    //         'password'=>['required'],
-    //     ]);
-
-    //     //cek data 
-    //     if(Auth::attempt($credentials)){ //Auth::attempt otomatis cek di database credentials email dan password
-    //         $request->session()->regenerate();
-    //         return redirect()->intended('/home');
-    //     }
-
-    //     return back()->with("loginError","Login gagal!");
-    // }
     protected function attemptLogin(Request $request) //method from use ...\AuthenticateUsers
     {
         $loginField = $request->input('login'); //get input with the name 'login'

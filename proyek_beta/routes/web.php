@@ -89,6 +89,9 @@ Route::put("/wishlist/{id}",[WishlistController::class,'removeFromWishlist'])->n
 // })->name("nearMe");
 Route::get('/nearme', [TiketController::class,'nearMe'])->name("nearMe");
 
+Route::get('/set-reminder/{id}', [TiketController::class,'setReminderToCalendar'])->name('tickets.reminder');
+Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
+
 
 //Penjual
 Route::get('/add', [TiketController::class,'showAdd']);
