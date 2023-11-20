@@ -108,8 +108,10 @@ Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 
 
 //Penjual
+//Add Tiket
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
+
 Route::get('/addPromo', [PromoController::class,'showAddPromo']);
 Route::post('/addPromo', [PromoController::class,'store']);
 

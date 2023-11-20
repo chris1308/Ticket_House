@@ -163,6 +163,11 @@ class TiketController extends Controller
 
     public function saveAdd(Request $request){
         // $keyword = $request->input('keyword');
+        if(session('user')['premium_status'] == 1){
+            $limit = 5;
+        }else{
+            $limit = 3;
+        }
         $rules = [
             'namaTiket' => 'required|string|max:255',
             'kategori' => 'required|in:place,seminar',
@@ -171,8 +176,14 @@ class TiketController extends Controller
             'stok'=> 'required|integer',
             'kota'=> 'required',
             'lokasi'=> 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images'   => 'required|array|max:'.$limit.','
         ];
-        $request->validate($rules);
+        
+        $tambahan = [
+            'images.max' => 'You can upload a maximum of '.$limit.' images.', // Customize the error message
+        ];
+        $request->validate($rules, $tambahan);
 
         //generate new ID
         $ctr = Tiket::count()+1; //hitung ada berapa tiket di DB +1
@@ -202,6 +213,33 @@ class TiketController extends Controller
                 break;
             }
         }
+
+        //pengecekan jika lokasi tidak ditemukan dimap beri peringatan
+        if($lat == "" || $long == ""){
+            return redirect()->back()->with('error', 'Lokasi tidak valid!');
+        }
+
+        $gambar = [];
+        //insert multiple image
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imageName = time() . '-' . $image->getClientOriginalName();
+                $imageName = time() . '-' . uniqid() . '.' .$image->getClientOriginalExtension();
+
+                // $image->move(public_path('uploads'), $imageName);
+                $image->move(public_path('images'), $imageName);
+                array_push($gambar, $imageName);
+                
+            }
+
+           
+        }else{
+            return redirect()->back()->with('message', 'No images were selected.');
+        }
+        
+        
         
         Tiket::create([
             'id_tiket' => $tiketID,
@@ -213,7 +251,7 @@ class TiketController extends Controller
             'alamat_lokasi' => $request->input('lokasi'),
             'lokasi_lat' => $lat,
             'lokasi_long' => $long,
-            'gambar'=>json_encode(['seminar1.jpg']),
+            'gambar'=>json_encode($gambar),
             'jumlah_view'=>0,
             'status'=>1,
             'deskripsi'=> $request->input('deskripsi'),
@@ -223,8 +261,8 @@ class TiketController extends Controller
             'end_time' => "15:30",
 
         ]);
-        //sementara redirect ke dashbord setelah add
-        return redirect('/dashboard')->with('message','Successfully added new ticket!');
+        //redirect setelah berhasil add dengan pesan
+        return redirect()->back()->with('message','Successfully added new ticket!');
     }
 
 }

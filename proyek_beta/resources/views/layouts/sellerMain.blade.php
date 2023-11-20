@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     {{-- untuk impor font awesome icons --}}
     <link rel="stylesheet" href="{{ asset('font/font/css/all.min.css') }}">
+    <style>
+        td{
+            padding-top: 5px; 
+            padding-bottom: 5px; 
+        }
+    </style>
     <title>{{ $title }}</title>
 </head>
 <body>
