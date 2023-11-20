@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('kode_promo')->unique();
             $table->integer('nilai_promo');
             $table->char('status')->default(1); //status 1= aktif, 0= deleted
+            $table->string('tipe'); //tipe bisa persen bisa non peren
+            $table->integer('min_purchase');
         });
     }
 

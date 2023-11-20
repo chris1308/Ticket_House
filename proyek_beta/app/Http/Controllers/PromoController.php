@@ -20,7 +20,9 @@ class PromoController extends Controller
             'kodePromo' => [
                 'required','string','max:255',Rule::unique('promos','kode_promo'),
             ],
+            'min-purchase' => 'required|integer',
             'nilaiPromo' => 'required|integer',
+            'tipe'=> 'required|in:persen,non',
         ];
         $request->validate($rules);
         //generate new ID
@@ -31,11 +33,15 @@ class PromoController extends Controller
         $idPenjual = $getPenjual->id_penjual;
         $kode_promo = $request->input('kodePromo');
         $nilai_promo = $request->input('nilaiPromo');
+        $min_purchase = $request->input('min-purchase');
+        $tipe = $request->input('tipe');
         Promo::create([
             'id_kodepromo'=>$promoId,
             'id_penjual'=>$idPenjual,
             'kode_promo'=>$kode_promo,
+            'min_purchase'=>$min_purchase,
             'nilai_promo'=>$nilai_promo,
+            'tipe'=>$tipe,
         ]);
         //sementara redirect ke dashbord setelah add
         return redirect('/dashboard')->with('message','Successfully added new promo code');
