@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PromoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,8 +97,14 @@ Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 //Penjual
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
+Route::get('/addPromo', [PromoController::class,'showAddPromo']);
+Route::post('/addPromo', [PromoController::class,'store']);
+
+
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');
+
+
 
 //COBA COBA UPLOAD IMAGE EDIT PROFIL PENJUAL
 //Masih gagal, harus ubah-ubah auth web

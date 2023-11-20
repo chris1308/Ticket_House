@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.sellerMain')
 @section('content')
 <!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime) dan belum bisa upload gambar. --}} -->
-<div class="d-flex justify-content-center">
-    <div class="my-3 p-3" style=" ">
-        <h3 class="my-2 ">Tambah Tiket</h3>
+<div class="d-flex justify-content-center" style="min-height: 900px">
+    <div class="my-3 pt-5" style=" ">
+        <h3 class="mt-5">Tambah Tiket</h3>
         <form action="/add" method="post" class="mt-3 pb-3" >
             @csrf
             Nama

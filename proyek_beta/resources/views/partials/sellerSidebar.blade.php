@@ -1,6 +1,6 @@
 <!-- sellerSidebar.blade.php -->
-<div style="width: 300px; height: 100%; margin-top: 70px; background-color: #F1F8FF;" class="sidebar position-fixed">
-    <div class="text-center py-3">
+<div style="width: 250px; height: 100%; margin-top: 70px; background-color: #F1F8FF;" class="sidebar position-fixed">
+    <div class="text-center py-3 ">
         <img src="{{ asset('images/user/profile.png') }}" style="width: 50px; height: 50px;" alt="Profile Icon">
         <p class="mb-0 mt-2" style="font-weight: bold;">
             @if (session()->has('user'))
@@ -8,15 +8,17 @@
             @endif 
         </p>
         <a href="/sellerProfile" class="text-decoration-none">Edit Profile</a>
-        <p class="mt-3 mb-0" style="background-color: #BBDAFF; padding: 5px; border-radius: 5px;">Premium</p>
+        <div class="d-flex justify-content-center">
+            <p class="mt-2 mb-0" style="width:80px ;background-color: #BBDAFF; padding: 5px; border-radius: 5px;">Premium</p>
+        </div>
     </div>
 
-    <ul class="list-unstyled mt-4">
+    <ul class="list-unstyled mt-2">
         <li class="py-2" style="margin-bottom: 10px;">
             <a href="/dashboard" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/home.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="home"> Home</a>
         </li>
-        <li class="py-2" style="margin-bottom: 10px;">
-            <a href="#" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="add-ticket"> Tambah Tiket</a>
+        <li class="py-2 view overlay" style="margin-bottom: 10px;">
+            <a href="/add" class=" text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/ticket.png') }}" style="  width: 20px; height: 20px; margin-left: 10px;" alt="add-ticket"> Tambah Tiket</a>
         </li>
         <li class="py-2" style="margin-bottom: 10px;">
             <a href="#" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/view-ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="view-ticket"> Lihat Semua Tiket</a>

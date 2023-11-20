@@ -175,7 +175,7 @@ class TiketController extends Controller
         $request->validate($rules);
 
         //generate new ID
-        $ctr = Tiket::count()+1; //hitung ada berapa pembeli di DB +1
+        $ctr = Tiket::count()+1; //hitung ada berapa tiket di DB +1
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $tiketID = 'TIK'.$numberWithLeadingZeros;
 
@@ -224,7 +224,7 @@ class TiketController extends Controller
 
         ]);
         //sementara redirect ke dashbord setelah add
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('message','Successfully added new ticket!');
     }
 
 }

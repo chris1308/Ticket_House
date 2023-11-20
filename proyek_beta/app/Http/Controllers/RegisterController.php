@@ -34,7 +34,7 @@ class RegisterController extends Controller
                 'string',
                 'email:dns',
                 'max:255',
-                Rule::unique('pembelis'), // Example unique email validation rule
+                Rule::unique('pembelis'), 
             ];
             $rules['username'] = [
                 'required',
