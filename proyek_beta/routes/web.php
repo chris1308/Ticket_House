@@ -9,6 +9,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\LoginAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,18 @@ Route::get('/adminDashboard', function() {
 Route::get('/about', function () {
     return view('about',[
         "title" => "About Us",
+    ]);
+});
+
+//Admin
+Route::get('/adminLogin', [LoginAdminController::class,'login']);
+Route::post('/adminLogin', [LoginAdminController::class,'attemptLogin']);
+
+Route::get('/adminLogout', [LoginAdminController::class,'logout']); 
+
+Route::get('/adminDashboard', function() {
+    return view('adminDashboard',[
+        "title" => "Admin Dashboard",
     ]);
 });
 

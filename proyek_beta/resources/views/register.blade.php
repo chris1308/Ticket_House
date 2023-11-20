@@ -1,8 +1,8 @@
 @extends('layouts.main')
 @section('content')
 <div class="d-flex justify-content-center">
-    <div class="my-3 p-3" style="">
-        <a href="/login"> Back to login</a>
+    <div class="mb-3 p-3" style="margin-top: 80px">
+        <a href="/login">< Back to login</a>
         <h3 class="my-2 ">Register</h3>
         <form action="/register" method="post" class="mt-3 pb-3" >
             @csrf

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.adminMain')
 @section('content')
 <div class="Login d-flex justify-content-center" style="padding-top: 100px;">
     <div class="mt-4 p-3" style="">
@@ -16,13 +16,13 @@
             </div>
         @endif
 
-        <h2 class="mt-4 mb-5">Log In</h2>
+        <h2 class="mt-4 mb-5">Admin Log In</h2>
         
-        <form action="/login" method="post" class="mt-3">
+        <form action="/adminLogin" method="post" class="mt-3">
             @csrf
-            <input value="{{ old("login") }}" required type="text"  size="59" name="login" id="login" class="form-control @error("login")
+            <input value="{{ old("adminLogin") }}" required type="text"  size="59" name="login" id="login" class="form-control @error("login")
                 is-invalid
-            @enderror" placeholder="Username or email" autofocus>
+            @enderror" placeholder="Username" autofocus>
             @error("login")                
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -36,9 +36,6 @@
             <br/><br/>
   
         </form>
-        <div class="d-flex justify-content-end mb-0">
-            <p class="float-right">Don't have an account? <br/><span style="margin-left: 70px"><a class="" href="/register">Register Now</a></span> </p>
-        </div>
     </div>
 </div>
 @endsection

@@ -36,10 +36,10 @@ return [
     */
 
     'guards' => [ //web is the default guard
-        // 'web' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
         'seller' => [
             'driver' => 'session', // or 'token' if you are using token-based authentication
             'provider' => 'penjuals', // the Eloquent model representing sellers
