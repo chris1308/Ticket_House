@@ -1,11 +1,11 @@
 <div style="width: 250px; height: 100%; background-color: #F1F8FF; margin-top: 60px;" class="sidebar position-fixed ">
     <ul class="list-unstyled">
-        <li class="py-1 active">
+        <li class="pt-2 active">
             <a href="/adminDashboard" class="text-decoration-none text-dark fw-bold" ><img src="{{ asset('images/admin/home.png') }}" style="width: 30px; height: 30px; margin-left: 10px;" alt="Home"> Home</a>
         </li>
         <li class="py-1">
-            <p class="text-center" style="background-color: #FD9191; padding: 8px; font-weight: bold;">Masters</p>
-            <ul class="list-unstyled">
+            <p onclick="toggleMaster()" class="ps-3" id="masterMenu" style=" padding: 5px; font-weight: bold;">Masters</p>
+            <ul id="masterSubMenu" class="list-unstyled" style="display: none">
                 <li style="margin-bottom: 8px;">
                     <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="penjual">  Penjual</a>
                 </li>
@@ -23,9 +23,9 @@
                 </li>
             </ul>
         </li>
-        <li class="py-1">
-            <p class="text-center" style="background-color: #FD9191; padding: 8px; font-weight: bold;">Laporan</p>
-            <ul class="list-unstyled">
+        <li class="">
+            <p onclick="toggleLaporan()" id="laporanMenu"  class=" ps-3" style=" padding: 5px; font-weight: bold;">Laporan</p>
+            <ul id="laporanSubMenu" style="display: none" class="list-unstyled">
                 <li style="margin-bottom: 8px;">
                     <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Penjual"> Penjual</a>
                 </li>
@@ -44,4 +44,18 @@
             </ul>
         </li>
     </ul>
+    <script>
+        function toggleLaporan() {
+            var laporanSubMenu = document.getElementById('laporanSubMenu');
+            var laporanMenu = document.getElementById('laporanMenu');
+            laporanMenu.style.backgroundColor = (laporanMenu.style.backgroundColor === 'lightblue') ? "" : 'lightblue';
+            laporanSubMenu.style.display = (laporanSubMenu.style.display === 'none') ? 'block' : 'none';
+        }
+        function toggleMaster() {
+            var masterSubMenu = document.getElementById('masterSubMenu');
+            var masterMenu = document.getElementById('masterMenu');
+            masterMenu.style.backgroundColor = (masterMenu.style.backgroundColor === 'lightblue') ? "" : 'lightblue';
+            masterSubMenu.style.display = (masterSubMenu.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
 </div>

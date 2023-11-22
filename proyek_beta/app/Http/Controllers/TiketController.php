@@ -265,4 +265,18 @@ class TiketController extends Controller
         return redirect()->back()->with('message','Successfully added new ticket!');
     }
 
+    public function showAll(){
+        //get all tickets owned by currently logged in seller
+        $allTickets = Tiket::where('id_penjual', session('user')->id_penjual)->get();
+        $title = "Lihat Semua Tiket";
+        
+        return view('viewAll',compact('title','allTickets'));
+    }
+
+    public function deleteTicket($id){ //accepting id_wishlist as a param
+        // dd($id);
+        //remove individual item from wishlist
+        Tiket::where('id_tiket',$id)->update(["status"=>0]);
+        return redirect()->back()->with('message','Ticket deleted successfully'); //go back to previous page with back()
+    }
 }

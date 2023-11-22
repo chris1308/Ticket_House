@@ -114,8 +114,11 @@ Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
 Route::get('/addPromo', [PromoController::class,'showAddPromo']);
 Route::post('/addPromo', [PromoController::class,'store']);
-Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
 
+Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
+Route::get('/viewall',[TiketController::class,'showAll'])->name('view.all');
+
+Route::put("/deleteTicket/{id}",[TiketController::class,'deleteTicket'])->name('delete.ticket');
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');
 
