@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Pembelian;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PenjualSeeder::class,
             TiketSeeder::class,
             WishlistSeeder::class,
+            PembelianSeeder::class,
         ]);
     }
 }

@@ -24,7 +24,6 @@
         return $hasilFlip;
     }
 ?>
-
 @extends('layouts.main')
 @section('content')
     {{-- @dd($seller); --}}
