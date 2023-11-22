@@ -42,7 +42,7 @@
             @enderror
            <br/>
             <button class="btn btn-success" style="width: 450px;">Tambah</button>
-            <input type="reset" value="Reset">
+            <input class="btn btn-secondary" type="reset" value="Reset">
         </form>
     </div>
 </div>

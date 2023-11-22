@@ -52,6 +52,7 @@ class LoginController extends Controller
             // Authentication successful
             // $request->session()->regenerate();
             session(["user"=>$seller]);
+            
             return redirect()->intended('/dashboard'); //intended untuk dioper ke middleware dulu sebelum redirect
             }
             else if ($buyer && Auth::guard('buyer')->attempt(['username' => $loginField, 'password' => $password])) {

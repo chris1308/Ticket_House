@@ -8,22 +8,30 @@
             @endif 
         </p>
         <a href="/sellerProfile" class="text-decoration-none">Edit Profile</a>
-        <div class="d-flex justify-content-center">
-            <p class="mt-2 mb-0" style="width:80px ;background-color: #BBDAFF; padding: 5px; border-radius: 5px;">Premium</p>
-        </div>
+        @if (session('user')->premium_status == 0)
+            <div class="d-flex justify-content-center mb-1">
+                <p class="mt-1 mb-0" style="width:80px ;background-color: rgb(249, 255, 187); padding: 5px; border-radius: 5px;">Basic</p>
+            </div>
+            <a href="{{ route('upgrade.status',['id'=>session('user')->id_penjual]) }}" style="text-decoration: none" class="">Upgrade membership</a>
+        @else            
+            <div class="d-flex justify-content-center">
+                <p class="mt-2 mb-0" style="cursor:pointer; width:80px ;background-color: #BBDAFF; padding: 5px; border-radius: 5px;">Premium</p>
+            </div>
+        @endif
+
     </div>
 
-    <ul class="list-unstyled mt-2">
-        <li class="py-2" style="margin-bottom: 10px;">
-            <a href="/dashboard" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/home.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="home"> Home</a>
+    <ul class="list-unstyled ">
+        <li class="py-1" style="margin-bottom: 8px;">
+            <a href="/dashboard" class="text-decoration-none text-dark fw-bold"><img class="" src="{{ asset('images/user/home.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="home"> Home</a>
         </li>
-        <li class="py-2 view overlay" style="margin-bottom: 10px;">
+        <li class="py-1 view overlay" style="margin-bottom: 8px;">
             <a href="/add" class=" text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/ticket.png') }}" style="  width: 20px; height: 20px; margin-left: 10px;" alt="add-ticket"> Tambah Tiket</a>
         </li>
-        <li class="py-2" style="margin-bottom: 10px;">
+        <li class="py-1" style="margin-bottom: 8px;">
             <a href="#" class="text-decoration-none text-dark fw-bold"><img src="{{ asset('images/user/view-ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="view-ticket"> Lihat Semua Tiket</a>
         </li>
-        <li class="py-2" style="margin-bottom: 10px;">
+        <li class="py-1" style="margin-bottom: 8px;">
             <div class="text-decoration-none text-dark fw-bold" style="cursor: pointer;" onclick="toggleLaporan()"><img src="{{ asset('images/user/report.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="report"> Laporan</div>
             <ul id="laporanSubMenu" class="list-unstyled ml-3" style="display: none; margin-left: 20px;">
                 <li style="margin-top: 10px; margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan Penjualan</a></li>

@@ -10,6 +10,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\PenjualController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +62,7 @@ Route::get('/about', function () {
 });
 
 //Admin
-Route::get('/adminLogin', [LoginAdminController::class,'login']);
+Route::get('/adminLogin', [LoginAdminController::class,'login'])->name('login.admin');
 Route::post('/adminLogin', [LoginAdminController::class,'attemptLogin']);
 
 Route::get('/adminLogout', [LoginAdminController::class,'logout']); 
@@ -74,7 +76,6 @@ Route::get('/adminDashboard', function() {
 Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
 
-//only if user hasn't logged in, he/she can access the login page
 Route::get('/login', [LoginController::class,'login']);
 Route::post('/login', [LoginController::class,'attemptLogin']);
 
@@ -111,10 +112,9 @@ Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 //Add Tiket
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
-
 Route::get('/addPromo', [PromoController::class,'showAddPromo']);
 Route::post('/addPromo', [PromoController::class,'store']);
-
+Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
 
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');

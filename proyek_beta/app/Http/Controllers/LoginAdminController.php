@@ -21,13 +21,13 @@ class LoginAdminController extends Controller
         $loginField = $request->input('login'); //get input with the name 'login'
         $password = $request->input('password');
 
-        // Check if the login input is an email address
 
         if ($loginField && $password){
             if ($loginField === 'admin' && $password === 'admin') {
                 // Authentication successful
                 // $request->session()->regenerate();
                 // session(["user"=>$seller]);
+                session(["admin"=>"admin"]);
                 return redirect()->intended('/adminDashboard'); //intended untuk dioper ke middleware dulu sebelum redirect
                 }
        

@@ -25,7 +25,7 @@
     @include('partials.adminNavbar')
     @include('partials.adminSidebar')
 
-    <div class="container-fluid" style="">
+    <div class="container-fluid" style="overflow:hidden;">
         @yield('content')
     </div>
     
