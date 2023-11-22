@@ -59,7 +59,7 @@
                             @method('put')
                             <button type="submit" class="btn btn-danger mt-1">Hapus Tiket</button>
                         </form>
-                        <button class="btn btn-primary my-2">Edit Tiket</button>
+                        <a href="/edit/{{$ticket->id_tiket}}"><button class="btn btn-primary my-2">Edit Tiket</button></a>
                     </td>
                 </tr>                    
                 @endif

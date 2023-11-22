@@ -85,27 +85,35 @@ Route::post('/wishlist/{id}',[WishlistController::class, 'addToWishlist'])->name
 Route::put("/wishlist", [WishlistController::class, 'removeAllFromWishlist']);
 Route::put("/wishlist/{id}",[WishlistController::class,'removeFromWishlist'])->name('remove.wishlist');
 
-//masih coba-coba
-// Route::get('/nearme', function(){
-//     return view('nearme', ["title"=>"Near Me"]);
-// })->name("nearMe");
+
+//Near Me
 Route::get('/nearme', [TiketController::class,'nearMe'])->name("nearMe");
 
 Route::get('/set-reminder/{id}', [TiketController::class,'setReminderToCalendar'])->name('tickets.reminder');
 Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 
 
-//Penjual
+// Penjual
+
 //Add Tiket
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
+
+//Add Promo
 Route::get('/addPromo', [PromoController::class,'showAddPromo']);
 Route::post('/addPromo', [PromoController::class,'store']);
 
 Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
+
+//View All Ticket
 Route::get('/viewall',[TiketController::class,'showAll'])->name('view.all');
 
+//Delete Ticket
 Route::put("/deleteTicket/{id}",[TiketController::class,'deleteTicket'])->name('delete.ticket');
+
+//Edit Ticket
+Route::get("/edit/{id}", [TiketController::class,'showEditForm']);
+Route::put("/edit/{id}", [TiketController::class,'updateTiket']);
 
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');

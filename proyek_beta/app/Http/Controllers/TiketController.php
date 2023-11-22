@@ -99,7 +99,6 @@ class TiketController extends Controller
         //add view count 
         Tiket::where('id_tiket',$id)->update(['jumlah_view'=>$ticket->jumlah_view+1]); 
         return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller, "id"=>$id, "promo"=>$sellerPromo]);
-        
     }
 
     public function search(Request $request){
@@ -261,7 +260,7 @@ class TiketController extends Controller
             'status'=>1,
             'deskripsi'=> $request->input('deskripsi'),
             'kategori'=> $request->input('kategori'),
-            'start_date' => "2023/01/01",
+            'start_date' => "2023/11/23",
             'start_time' => "12:30",
             'end_time' => "15:30",
 
@@ -276,6 +275,30 @@ class TiketController extends Controller
         $title = "Lihat Semua Tiket";
         
         return view('viewAll',compact('title','allTickets'));
+    }
+
+    public function showEditForm($id){
+        //get ticket id
+        $checkTicket = Tiket::where('id_tiket', $id)->first();
+        if($checkTicket == null){//prevent seller from editing tickets that not exist
+            return redirect("/viewall")->with('message','Invalid Ticket');
+        }
+        if($checkTicket->id_penjual != session('user')->id_penjual){//prevent seller from editing another seller's ticket
+            return redirect("/viewall")->with('message','Another Seller Ticket');
+        }
+        //Return form edit tiket
+        return view('editTiket',[
+            "title" => "Edit Tiket",
+            "id" => $id,
+            "oldData" => $checkTicket
+        ]);
+    }
+
+    public function updateTiket(Request $request, $id)
+    {
+        // Validate and update the item (not done)
+
+        return redirect('/viewall')->with('message', 'Ticket updated successfully');
     }
 
     public function deleteTicket($id){ //accepting id_wishlist as a param
