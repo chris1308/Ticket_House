@@ -94,6 +94,8 @@ class TiketController extends Controller
         // Logic to fetch item details from the database using $id
         $ticket = Tiket::where('id_tiket',$id)->first(); 
         $seller = Penjual::where('id_penjual',$ticket->id_penjual)->first();
+        //add view count 
+        Tiket::where('id_tiket',$id)->update(['jumlah_view'=>$ticket->jumlah_view+1]); 
         return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller, "id"=>$id]);
     }
 

@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Admin;
+use App\Models\Pembeli;
+use App\Models\Penjual;
+use App\Models\Tiket;
+use App\Models\Pembelian;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-class LoginAdminController extends Controller
+
+class AdminController extends Controller
 {
     use AuthenticatesUsers;
     public function login(){
@@ -49,6 +53,21 @@ class LoginAdminController extends Controller
         $request->session()->regenerateToken();
      
         return redirect('/adminLogin');
+    }
+
+    public function show(){
+        //show dashboard admin
+        $title = "Admin Dashboard";
+        $totalPembeli = Pembeli::all()->count();
+        $totalPenjual = Penjual::all()->count();
+        $totalTiket = Tiket::all()->count();
+        $totalPembelian = Pembelian::all()->count(); //total transaction
+        $allTickets = Tiket::all();
+        $totalView = 0;
+        foreach ($allTickets as $ticket) {
+            $totalView+=$ticket->jumlah_view;
+        }
+        return view('adminDashboard',compact('title','totalPembeli','totalPenjual','totalTiket','totalPembelian','totalView'));
     }
 }
 

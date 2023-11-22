@@ -9,7 +9,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PromoController;
-use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PenjualController;
 
 
@@ -40,19 +40,10 @@ Route::get('/home', function () {
     ]);
 })->name("home");
 
-Route::get('/dashboard', function () { //tampilan saat seller yang login
-    return view('sellerDashboard',[
-        "title" => "Seller Dashboard",
-    ]);
-});
+Route::get('/dashboard', [PenjualController::class,'show']);
 Route::get('/sellerProfile', function() {
     return view('sellerProfile',[
         "title" => "Seller Profile",
-    ]);
-});
-Route::get('/adminDashboard', function() {
-    return view('adminDashboard',[
-        "title" => "Admin Dashboard",
     ]);
 });
 Route::get('/about', function () {
@@ -62,16 +53,12 @@ Route::get('/about', function () {
 });
 
 //Admin
-Route::get('/adminLogin', [LoginAdminController::class,'login'])->name('login.admin');
-Route::post('/adminLogin', [LoginAdminController::class,'attemptLogin']);
+Route::get('/adminLogin', [AdminController::class,'login'])->name('login.admin');
+Route::post('/adminLogin', [AdminController::class,'attemptLogin']);
+Route::get('/adminDashboard',[AdminController::class,'show']);
 
-Route::get('/adminLogout', [LoginAdminController::class,'logout']); 
+Route::get('/adminLogout', [AdminController::class,'logout']); 
 
-Route::get('/adminDashboard', function() {
-    return view('adminDashboard',[
-        "title" => "Admin Dashboard",
-    ]);
-});
 
 Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
@@ -119,6 +106,7 @@ Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.
 Route::get('/viewall',[TiketController::class,'showAll'])->name('view.all');
 
 Route::put("/deleteTicket/{id}",[TiketController::class,'deleteTicket'])->name('delete.ticket');
+
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');
 
