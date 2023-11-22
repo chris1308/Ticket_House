@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tiket;
 use App\Models\Penjual;
+use App\Models\Promo;
 use Illuminate\Http\Request;
 use Google\Client;
 use Google\Service\Calendar;
@@ -94,7 +95,8 @@ class TiketController extends Controller
         // Logic to fetch item details from the database using $id
         $ticket = Tiket::where('id_tiket',$id)->first(); 
         $seller = Penjual::where('id_penjual',$ticket->id_penjual)->first();
-        return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller, "id"=>$id]);
+        $sellerPromo = Promo::where('id_penjual', $ticket->id_penjual)->where('status', 1)->get();
+        return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller, "id"=>$id, "promo"=>$sellerPromo]);
     }
 
     public function search(Request $request){

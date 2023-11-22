@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-    <div class="container d-flex justify-content-between" style="height: 850px; padding-top:130px;">
+    <div class="container d-flex justify-content-between" style="min-height: 850px; padding-top:130px;">
 
         <div class="kiri">
             <a href="/home" class="text-decoration-none" style="font-size: 18px">< Back</a><br><br>
@@ -80,6 +80,39 @@
                     </div>
                 </div>
                 <div class="BagianDua">
+                    <!-- gambar tiket -->
+                    <div id="carouselExampleAutoplaying" class="carousel slide ms-4 mb-4" data-bs-ride="carousel" style="width: 90%; height:400px;">
+                        <div class="carousel-inner" style="width: 775px;">
+                            
+                            @for($i = 0; $i < sizeof(json_decode($ticket->gambar)); $i++)
+                                @if($i == 0)
+                                    <div class="carousel-item active" style="width: 100%; height:400px">
+                                        <img src="/images/{{ json_decode($ticket->gambar)[$i] }}" style="object-fit: cover;" class="d-block w-100" alt="">
+                                    </div>
+                                @else
+                                    <div class="carousel-item" style="width: 100%; height:400px">
+                                        <img src="/images/{{ json_decode($ticket->gambar)[$i] }}" style="object-fit: cover;" class="d-block w-100" alt="">
+                                    </div>
+                                @endif
+                            @endfor
+                            
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                    <!-- <div class="Gambar ms-4 mb-4" style="width: 96%; height:260px;">                    
+                        <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($ticket->gambar)[0] }}" alt="">          
+                    </div>    -->
+
+                    <!-- map preview -->
+                    
                     <div class="gambarMap" id="gambarMap" style="margin-left:25px ;width: 775px; height:200px">
                         <!-- <img class="w-100 h-100" src="/images/graybackground.png" alt=""> -->
                     </div><br>
@@ -96,6 +129,21 @@
                 <div class="BagianTiga">
                     <p style="font-size: 20px; font-weight:bold;">Deskripsi</p>
                     <p>{{ $ticket->deskripsi }}</p>
+                </div>
+                <div class="BagianEmpat">
+                    <p style="font-size: 24px; font-weight:bold;">Promo yang bisa digunakan</p>
+                    @if(count($promo) == 0)
+                        <p class="fw-bold fs-5 text-danger">Maaf belum ada promo yang bisa kamu gunakan dari penjual ini</p>
+                    @endif 
+
+                    @foreach($promo as $p)
+                        @if($p->tipe == "persen")
+                            <p>{{$p->kode_promo}} - Discount {{$p->nilai_promo}}% - <b>Minimum Pembelian Rp{{formatUang($p->min_purchase)}}</b></p>
+                        @else
+                            <p>{{$p->kode_promo}} - Potongan Rp {{formatUang($p->nilai_promo)}} - <b>Minimum Pembelian Rp{{formatUang($p->min_purchase)}}</b></p>
+                        @endif
+                    @endforeach
+                    
                 </div>
             </div>
         </div>
