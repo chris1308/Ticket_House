@@ -57,7 +57,10 @@
                     <div class="kiri" >
                         <h2>{{ $ticket->nama }}</h2>
                         <p>oleh <span style="font-size: 20px" class="fw-bold">{{ $seller->name }}</span></p>
-                        <p><i class="fa-solid fa-location-dot fa-lg"></i>&nbsp; {{ $ticket->alamat_lokasi }}, {{ $ticket->kota }}</p>
+                        <div style="" class="fb-share-button" data-href="{{ url()->current() }}" data-layout="button" data-size="large">
+                            <a target="" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" class="fb-xfbml-parse-ignore">Share</a>
+                        </div>
+                        <p class="mt-2"><i class="fa-solid fa-location-dot fa-lg"></i>&nbsp; {{ $ticket->alamat_lokasi }}, {{ $ticket->kota }}</p>
 
                     </div>
                     <div class="kanan pt-2 d-flex" >
@@ -73,9 +76,7 @@
                         <span>                            
                             <button type="button" id="myBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger me-2">Report</button>
                         </span>
-                        <span id="shareButton" class="shareButton">
-                            <i class="fa-solid fa-share-nodes fa-2xl"></i>
-                        </span>
+
                     </div>
                 </div>
                 <div class="BagianDua">
@@ -105,11 +106,6 @@
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
-
-                    <!-- <div class="Gambar ms-4 mb-4" style="width: 96%; height:260px;">                    
-                        <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($ticket->gambar)[0] }}" alt="">          
-                    </div>    -->
-
                     <!-- map preview -->
                     
                     <div class="gambarMap" id="gambarMap" style="margin-left:25px ;width: 775px; height:200px">
@@ -153,7 +149,6 @@
         </div>
         {{-- modal --}}
     </div>
-    <script src="{{ asset('js/share.js') }}"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>

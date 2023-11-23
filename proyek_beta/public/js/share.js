@@ -1,21 +1,20 @@
-//berfungsi untuk dapatkan current url saat button share ditekan
-document.addEventListener('DOMContentLoaded', function () {
-        const shareButton = document.getElementById('shareButton');
+var popupSize = {
+    width: 780,
+    height: 550
+};
 
-        shareButton.addEventListener('click', function () {
-            // Get the current page URL
-            const pageUrl = window.location.href;
+$(document).on('click', '.social-button', function (e) {
+    var verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
+        horisontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
 
-            // Copy the URL to the clipboard
-            navigator.clipboard.writeText(pageUrl)
-                .then(() => {
-                    console.log('URL copied to clipboard:', pageUrl);
+    var popup = window.open($(this).prop('href'), 'social',
+        'width=' + popupSize.width + ',height=' + popupSize.height +
+        ',left=' + verticalPos + ',top=' + horisontalPos +
+        ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
 
-                    //feedback for user
-                    alert('URL copied to clipboard!');
-                })
-                .catch((error) => {
-                    console.error('Error copying to clipboard:', error);
-                });
-        });
-    });
+    if (popup) {
+        popup.focus();
+        e.preventDefault();
+    }
+
+});

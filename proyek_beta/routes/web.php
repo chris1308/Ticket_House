@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\TiketController;
 use App\Models\Tiket;
+use Jorenvh\Share\Share;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PromoController;
+use App\Http\Controllers\TiketController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\PromoController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PenjualController;
 
 
 /*
@@ -47,9 +48,9 @@ Route::get('/sellerProfile', function() {
     ]);
 });
 Route::get('/about', function () {
-    return view('about',[
-        "title" => "About Us",
-    ]);
+    $title = "About Us";
+
+    return view('about', compact('title'));
 });
 
 //Admin
