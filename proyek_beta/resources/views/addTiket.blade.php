@@ -1,6 +1,6 @@
 @extends('layouts.sellerMain')
 @section('content')
-<!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime) dan belum bisa upload gambar. --}} -->
+<!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime)--}} -->
 <div class="d-flex justify-content-center" style="min-height: 900px">
     <div class="my-3 pt-5" style=" ">
         <h3 class="mt-5">Tambah Tiket</h3>

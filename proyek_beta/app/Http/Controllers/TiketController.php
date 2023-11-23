@@ -297,7 +297,132 @@ class TiketController extends Controller
     public function updateTiket(Request $request, $id)
     {
         // Validate and update the item (not done)
+        if(session('user')['premium_status'] == 1){
+            $limit = 5;
+        }else{
+            $limit = 3;
+        }
+        $rules = [
+            'namaTiket' => 'required|string|max:255',
+            'kategori' => 'required|in:place,seminar',
+            'deskripsi' => 'required|string',
+            'harga'=> 'required|integer',
+            'stok'=> 'required|integer',
+            'kota'=> 'required',
+            'lokasi'=> 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images'   => 'required|array|max:'.$limit.','
+        ];
+        
+        $tambahan = [
+            'images.max' => 'You can upload a maximum of '.$limit.' images.', // Customize the error message
+        ];
+        $request->validate($rules, $tambahan);
 
+
+        // Mencari latitude dan longitude dari api HERE maps
+        $lat = "";//jika alamat tidak ditemukan dimap isi string kosong
+        $long = "";
+        $kota = $request->input('kota');
+        $lokasi = $request->input('lokasi');
+
+        $data = [
+            'q' => $lokasi,
+            'apiKey' => '1DvppUVi__lz1FhPrVsRjXlo92_CDUDCBgPkikH4xd4'
+        ];
+        
+        $json = file_get_contents('https://geocode.search.hereapi.com/v1/geocode?' . http_build_query($data));
+     
+        $result = json_decode($json, true);//encode json jadi array assoc
+
+        //cari posisi latitude dan longitude dari lokasi tiket
+        foreach ($result['items'] as $res) {
+            if($res['address']['city'] == $kota){
+                $lat = $res['position']['lat'];
+                $long = $res['position']['lng'];
+                break;
+            }
+        }
+
+        //pengecekan jika lokasi tidak ditemukan dimap beri peringatan
+        if($lat == "" || $long == ""){
+            return redirect()->back()->with('error', 'Lokasi tidak valid!');
+        }
+
+        $gambar = [];
+        //insert multiple image
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imageName = time() . '-' . $image->getClientOriginalName();
+                $imageName = time() . '-' . uniqid() . '.' .$image->getClientOriginalExtension();
+
+                // $image->move(public_path('uploads'), $imageName);
+                $image->move(public_path('images'), $imageName);
+                array_push($gambar, $imageName);
+                
+            }
+
+           
+        }else{
+            return redirect()->back()->with('message', 'No images were selected.');
+        }
+        
+        //Update data tiket di database
+        // $tiket = Tiket::find($id);
+        $tiket = Tiket::where('id_tiket', $id);
+
+        $tiket->update([
+            'nama' => $request->input('namaTiket'),
+            'harga' => $request->input('harga'),
+            'quantity' => $request->input('stok'),
+            'kota' => $request->input('kota'),
+            'alamat_lokasi' => $request->input('lokasi'),
+            'lokasi_lat' => $lat,
+            'lokasi_long' => $long,
+            'gambar'=>json_encode($gambar),
+            'deskripsi'=> $request->input('deskripsi'),
+            'kategori'=> $request->input('kategori'),
+        ]);
+
+
+        // $tiket = Tiket::find($id);
+ 
+        // $tiket->nama = $request->input('namaTiket');
+        // $tiket->harga = $request->input('harga');
+        // $tiket->quantity = $request->input('stok');
+        // $tiket->kota = $request->input('kota');
+        // $tiket->lokasi = $request->input('lokasi');
+        // $tiket->lokasi_lat = $lat;
+        // $tiket->lokasi_lang = $long;
+        // $tiket->gambar = json_encode($gambar);
+        // $tiket->deskripsi = $request->input('deskripsi');
+        // $tiket->kategori = $request->input('kategori');
+
+        // $tiket->save();
+        // Tiket::create([
+        //     'id_tiket' => $tiketID,
+        //     'id_penjual' => "PJ001",
+        //     'nama' => $request->input('namaTiket'),
+        //     'harga' => $request->input('harga'),
+        //     'quantity' => $request->input('stok'),
+        //     'kota' => $request->input('kota'),
+        //     'alamat_lokasi' => $request->input('lokasi'),
+        //     'lokasi_lat' => $lat,
+        //     'lokasi_long' => $long,
+        //     'gambar'=>json_encode($gambar),
+        //     'jumlah_view'=>0,
+        //     'status'=>1,
+        //     'deskripsi'=> $request->input('deskripsi'),
+        //     'kategori'=> $request->input('kategori'),
+        //     'start_date' => "2023/11/23",
+        //     'start_time' => "12:30",
+        //     'end_time' => "15:30",
+
+        // ]);
+        
+        //redirect setelah berhasil update dengan pesan
         return redirect('/viewall')->with('message', 'Ticket updated successfully');
     }
 
