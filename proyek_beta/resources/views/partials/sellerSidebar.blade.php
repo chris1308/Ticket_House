@@ -1,6 +1,6 @@
-<div id="sidebar" style="width: 250px; height: 100%; margin-top: 50px; background-color: #F1F8FF;" class="sidebar position-fixed">
-    <button style="margin-top: 30px; margin-left: 250px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style="width: 30px; height: 30px" alt="toogle-menu"></button>
-    <div class="text-center py-3 ">
+<div id="sidebar" style="width: 250px; height: 100%; margin-top: 35px; background-color: #F1F8FF;" class="sidebar position-fixed">
+    <button style="margin-top: 40px; margin-left: 250px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style="width: 30px; height: 30px" alt="toogle-menu"></button>
+    <div class="text-center ">
         <img src="{{ asset('images/user/profile.png') }}" style="width: 50px; height: 50px;" alt="Profile Icon">
         <p class="mb-0 mt-2" style="font-weight: bold;">
             @if (session()->has('user'))
@@ -36,7 +36,7 @@
             <ul id="laporanSubMenu" class="list-unstyled ml-3" style="display: none; margin-left: 20px;">
                 <li style="margin-top: 10px; margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan Penjualan</a></li>
                 <li style="margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan Cash Flow</a></li>
-                <li style="margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan View Ticket</a></li>
+                <li style="margin-bottom: 10px;"><a href="{{ route('view.report') }}" class="text-decoration-none text-dark">Laporan View Ticket</a></li>
             </ul>
         </li>
     </ul>

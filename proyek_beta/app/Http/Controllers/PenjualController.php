@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Penjual;
 use App\Models\Pembelian;
 use App\Models\Tiket;
 class PenjualController extends Controller
 {
-    public function upgrade($id){
+    public function upgrade($id){ 
         Penjual::where('id_penjual',$id)->update(["premium_status"=>1]);
         $penjual = Penjual::where('id_penjual',$id)->first();
         //update session so that the membership status on the sidebar will be updated
@@ -38,5 +37,18 @@ class PenjualController extends Controller
             }
         }
         return view('sellerDashboard',compact('title', 'totalView','totalRevenue','ticketSold'));
+    }
+
+    public function viewReport(){
+        //show view report of currently logged in seller
+        $title = "Laporan View Tiket";
+        //get all tickets that belong to this seller
+        $allTickets = Tiket::where('id_penjual',session('user')->id_penjual)->get();
+
+        return view('viewReport',compact('title','allTickets'));
+    }
+
+    //export to pdf
+    public function exportexcel(){
     }
 }
