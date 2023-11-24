@@ -35,7 +35,7 @@
             <div class="text-decoration-none text-dark fw-bold" style="cursor: pointer;" onclick="toggleLaporan()"><img src="{{ asset('images/user/report.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="report"> Laporan</div>
             <ul id="laporanSubMenu" class="list-unstyled ml-3" style="display: none; margin-left: 20px;">
                 <li style="margin-top: 10px; margin-bottom: 10px;"><a href="{{ route('sales.report') }}" class="text-decoration-none text-dark">Laporan Penjualan</a></li>
-                <li style="margin-bottom: 10px;"><a href="#" class="text-decoration-none text-dark">Laporan Cash Flow</a></li>
+                <li style="margin-bottom: 10px;"><a href="{{ route('cashflow.report') }}" class="text-decoration-none text-dark">Laporan Cash Flow</a></li>
                 <li style="margin-bottom: 10px;"><a href="{{ route('view.report') }}" class="text-decoration-none text-dark">Laporan View Ticket</a></li>
             </ul>
         </li>

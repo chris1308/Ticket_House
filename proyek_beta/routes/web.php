@@ -128,6 +128,9 @@ Route::get('/exportexcel/{id}', [PenjualController::class, 'exportexcel'])->name
 //laporan penjualan
 Route::get('/salesreport',[PenjualController::class,'salesReport'])->name('sales.report');
 
+//laporan cashflow
+Route::get('/cashflowreport',[PenjualController::class,'cashflowReport'])->name('cashflow.report');
+
 
 
 //COBA COBA UPLOAD IMAGE EDIT PROFIL PENJUAL

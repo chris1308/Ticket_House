@@ -7,11 +7,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif 
-        <h2 class="fw-bold " style="">Laporan Penjualan</h2>
+        <h2 class="fw-bold " style="">Laporan Cashflow</h2>
         <div class="d-flex flex-row-reverse ExportButton my-3" style="margin-right: 200px">
-            <a  href="{{ route('export.pdf',['id'=>1]) }}" class="btn btn-secondary ms-2">Export to PDF</a>
-            <a href="{{ route('export.excel',['id'=>1]) }}" class="btn btn-secondary">Export to Excel</a>
+            <a  href="{{ route('export.pdf',['id'=>2]) }}" class="btn btn-secondary ms-2">Export to PDF</a>
+            <a href="{{ route('export.excel',['id'=>2]) }}" class="btn btn-secondary">Export to Excel</a>
         </div>
-        @include('salesReportTable')
+        @include('cashflowTable')
     </div>
 @endsection
