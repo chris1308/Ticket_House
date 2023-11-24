@@ -2,7 +2,6 @@
 @section('content')
     <div class="container" style="height: 850px; padding-top:100px;">
         <h1 style="text-align: center;">My Wishlist</h1>
-        <a href="/home">Back to Home</a>
         <table class="mt-3">
             <tr class="" style="text-align:center;border-bottom:1px solid black">
                 <th style="padding: 15px 25px; "></th>

@@ -119,10 +119,16 @@ Route::put("/edit/{id}", [TiketController::class,'updateTiket']);
 //Report
 Route::post('/report/{id}',[ReportController::class,'processReport'])->name('submit.report');
 
-//Laporan penjual
+//Laporan Penjual
+//Laporan View Ticket
 Route::get('/viewreport',[PenjualController::class,'viewReport'])->name('view.report');
-Route::get('/exportpdf', [PenjualController::class, 'exportpdf'])->name('export.pdf');
-Route::get('/exportexcel', [PenjualController::class, 'exportexcel'])->name('export.excel');
+Route::get('/exportpdf/{id}', [PenjualController::class, 'exportpdf'])->name('export.pdf');
+Route::get('/exportexcel/{id}', [PenjualController::class, 'exportexcel'])->name('export.excel');
+
+//laporan penjualan
+Route::get('/salesreport',[PenjualController::class,'salesReport'])->name('sales.report');
+
+
 
 //COBA COBA UPLOAD IMAGE EDIT PROFIL PENJUAL
 //Masih gagal, harus ubah-ubah auth web

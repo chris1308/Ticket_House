@@ -51,7 +51,6 @@
     <div class="container d-flex justify-content-between" style="min-height: 850px; padding-top:130px;">
 
         <div class="kiri">
-            <a href="/home" class="text-decoration-none" style="font-size: 18px">< Back</a><br><br>
             <div class="">
                 <div class="BagianSatu " style="display:flex;justify-content: space-between">
                     <div class="kiri" >
