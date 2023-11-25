@@ -1,5 +1,8 @@
-<div id="sidebar" style="width: 250px; height: 100%; margin-top: 35px; background-color: #F1F8FF;" class="sidebar position-fixed">
-    <button style="margin-top: 40px; margin-left: 250px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style="width: 30px; height: 30px" alt="toogle-menu"></button>
+<div style=" width: 250px; height: 100%; margin-top: 85px; " class="position-fixed">
+    <button style="  margin-left: 10px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style="width: 30px; height: 30px" alt="toogle-menu"></button> 
+</div>
+<div id="sidebar" style="display:none; width: 250px; height: 100%; margin-top: 35px; background-color: #F1F8FF;" class="sidebar position-fixed">
+    <button style="margin-top: 50px; margin-left: 200px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style="width: 30px; height: 30px" alt="toogle-menu"></button>
     <div class="text-center ">
         <img src="{{ asset('images/user/profile.png') }}" style="width: 50px; height: 50px;" alt="Profile Icon">
         <p class="mb-0 mt-2" style="font-weight: bold;">
@@ -44,20 +47,9 @@
     <script>
         function toggleSidebar() {
         var sidebar = document.getElementById('sidebar');
-        var mainContent = document.getElementById('main-content');
-        var toggleImage = document.getElementById('toggleImage');
+        sidebar.style.display = (sidebar.style.display === 'none') ? 'block' : 'none';
 
-        if (sidebar.style.marginLeft === '0px') {
-            sidebar.style.marginLeft = '-250px';
-            mainContent.style.marginLeft = '0';
-            toggleImage.src = "{{ asset('images/admin/right-arrow.png') }}";
         }
-        else {
-            sidebar.style.marginLeft = '0';
-            mainContent.style.marginLeft = '250px';
-            toggleImage.src = "{{ asset('images/admin/left-arrow.png') }}";
-        }
-    }
         function toggleLaporan() {
             var laporanSubMenu = document.getElementById('laporanSubMenu');
             laporanSubMenu.style.display = (laporanSubMenu.style.display === 'none') ? 'block' : 'none';
