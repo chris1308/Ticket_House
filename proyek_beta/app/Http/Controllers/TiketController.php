@@ -181,7 +181,10 @@ class TiketController extends Controller
             'kota'=> 'required',
             'lokasi'=> 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'images'   => 'required|array|max:'.$limit.','
+            'images'   => 'required|array|max:'.$limit.',',
+            'startDate' => 'date|nullable',
+            'startTime' => 'required',
+            'endTime' => 'required'
         ];
         
         $tambahan = [
@@ -260,9 +263,9 @@ class TiketController extends Controller
             'status'=>1,
             'deskripsi'=> $request->input('deskripsi'),
             'kategori'=> $request->input('kategori'),
-            'start_date' => "2023/11/23",
-            'start_time' => "12:30",
-            'end_time' => "15:30",
+            'start_date' => $request->input('startDate'),
+            'start_time' => $request->input('startTime'),
+            'end_time' => $request->input('endTime'),
 
         ]);
         //redirect setelah berhasil add dengan pesan
@@ -311,7 +314,10 @@ class TiketController extends Controller
             'kota'=> 'required',
             'lokasi'=> 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'images'   => 'required|array|max:'.$limit.','
+            'images'   => 'required|array|max:'.$limit.',',
+            'startDate' => 'date|nullable',
+            'startTime' => 'required',
+            'endTime' => 'required'
         ];
         
         $tambahan = [
@@ -384,6 +390,9 @@ class TiketController extends Controller
             'gambar'=>json_encode($gambar),
             'deskripsi'=> $request->input('deskripsi'),
             'kategori'=> $request->input('kategori'),
+            'start_date' => $request->input('startDate'),
+            'start_time' => $request->input('startTime'),
+            'end_time' => $request->input('endTime'),
         ]);
 
 

@@ -1,9 +1,9 @@
 @extends('layouts.sellerMain')
 @section('content')
 <!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime)--}} -->
-<div class="d-flex justify-content-center" style="min-height: 900px">
+<div class="container" style="min-height: 900px; margin-left: 30%;">
     <div class="my-3 pt-5" style=" ">
-        <h3 class="mt-5">Tambah Tiket</h3>
+        <h1 class="mt-5">Tambah Tiket</h1>
         @if(session('message'))
           <div style="width: 500px" class="alert alert-info alert-dismissible fade show" role="alert">
                 {{ session('message') }}
@@ -44,7 +44,7 @@
               <tr>
                 <td>Kategori:</td>
                 <td>
-                  <select value="{{ old('kategori') }}" style="width: 450px" class="form-control" name="kategori" id="kategori">
+                  <select value="{{ old('kategori') }}" style="width: 450px" class="form-control" name="kategori" id="kategori" onchange="dateFillable(this);">
                       <option value="place">Place</option>
                       <option value="seminar">Seminar</option>
                   </select>
@@ -136,11 +136,45 @@
                 </td>
               </tr>
               <tr>
+                <td>Tanggal: <br><b style="color: red;">(Hanya untuk tiket seminar)<b></td>
                 <td>
-                  <input class="btn btn-danger" type="reset" style="width: 100px;" value="Reset">
+                  <input required value="{{ old('startDate') }}" type="date" class=" form-control @error('startDate') is-invalid @enderror" name="startDate" size="50" id="startDate" disabled>
+                  @error('startDate')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                  
                 </td>
+              </tr>
+              <tr>
+                <td>Waktu Mulai: </td>
                 <td>
-                  <button class="btn btn-success" style="width: 100px;">Tambah</button>
+                  <input required value="{{ old('startTime') }}" type="time" class=" form-control @error('startTime') is-invalid @enderror" name="startTime" size="50" id="startTime">
+                  @error('startTime')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                  Untuk tiket tempat wisata bisa diisi jam buka tempat wisata
+                </td>
+              </tr>
+              <tr>
+                <td>Waktu Selesai: </td>
+                <td>
+                  <input required value="{{ old('endTime') }}" type="time" class=" form-control @error('endTime') is-invalid @enderror" name="endTime" size="50" id="endTime">
+                  @error('endTime')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                  Untuk tiket tempat wisata bisa diisi jam tutup tempat wisata
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <button class="btn btn-success" style="width: 100px; float:right;">Tambah</button>
+                  <input class="btn btn-danger me-2" type="reset" style="width: 100px; float: right;" value="Reset">
                 </td>
               </tr>
             </table>
@@ -150,3 +184,15 @@
     </div>
 </div>
 @endsection
+
+<script>
+  function dateFillable(e){
+    let inputDate = document.getElementById('startDate');
+    if(e.value == "seminar"){
+      inputDate.removeAttribute("disabled");
+    }else if(e.value == "place"){
+      inputDate.setAttribute("disabled", true);
+      inputDate.value = "";
+    }
+  }
+</script>
