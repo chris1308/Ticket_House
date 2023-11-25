@@ -12,10 +12,10 @@
             <p onclick="toggleMaster()" class="ps-3" id="masterMenu" style="margin:0; padding: 5px; font-weight: bold;">Masters</p>
             <ul id="masterSubMenu" class="list-unstyled" style="display: none">
                 <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="penjual">  Penjual</a>
+                    <a href="/admin/master/penjual" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="penjual">  Penjual</a>
                 </li>
                 <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Pembeli"> Pembeli</a>
+                    <a href="/admin/master/pembeli" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Pembeli"> Pembeli</a>
                 </li>
                 <li style="margin-bottom: 8px;">
                     <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/ticket.png') }}" style="width: width: 20px; height: 20px; margin-left: 10px;" alt="Tiket"> Tiket</a>

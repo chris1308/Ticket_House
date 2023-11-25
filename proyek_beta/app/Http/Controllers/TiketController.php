@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Google\Client;
+use App\Models\Promo;
 use App\Models\Tiket;
 use App\Models\Penjual;
-use App\Models\Promo;
-use Illuminate\Http\Request;
-use Google\Client;
 use Google\Service\Calendar;
+use Illuminate\Http\Request;
 use Google\Service\Calendar\Event;
 
 class TiketController extends Controller
@@ -299,7 +300,7 @@ class TiketController extends Controller
 
     public function updateTiket(Request $request, $id)
     {
-        // Validate and update the item (not done)
+        // Validate and update the item
         if(session('user')['premium_status'] == 1){
             $limit = 5;
         }else{
@@ -325,6 +326,14 @@ class TiketController extends Controller
         ];
         $request->validate($rules, $tambahan);
 
+        //pengecekan jam selesai harus lebih besar (>) dari jam mulai (not done)
+        // $jamMulai = new Carbon($request->input('startTime'));
+        // $jamSelesai = new Carbon($request->input('endTime'));
+        // $selisih = $jamSelesai->diffInSeconds($jamMulai);
+        // echo("<script>`alert($selisih)`</script>");
+        // if($selisih < 0){
+        //     return redirect()->back()->with('error', 'Jam selesai harus lebih besar dari jam mulai');
+        // }
 
         // Mencari latitude dan longitude dari api HERE maps
         $lat = "";//jika alamat tidak ditemukan dimap isi string kosong
@@ -394,42 +403,6 @@ class TiketController extends Controller
             'start_time' => $request->input('startTime'),
             'end_time' => $request->input('endTime'),
         ]);
-
-
-        // $tiket = Tiket::find($id);
- 
-        // $tiket->nama = $request->input('namaTiket');
-        // $tiket->harga = $request->input('harga');
-        // $tiket->quantity = $request->input('stok');
-        // $tiket->kota = $request->input('kota');
-        // $tiket->lokasi = $request->input('lokasi');
-        // $tiket->lokasi_lat = $lat;
-        // $tiket->lokasi_lang = $long;
-        // $tiket->gambar = json_encode($gambar);
-        // $tiket->deskripsi = $request->input('deskripsi');
-        // $tiket->kategori = $request->input('kategori');
-
-        // $tiket->save();
-        // Tiket::create([
-        //     'id_tiket' => $tiketID,
-        //     'id_penjual' => "PJ001",
-        //     'nama' => $request->input('namaTiket'),
-        //     'harga' => $request->input('harga'),
-        //     'quantity' => $request->input('stok'),
-        //     'kota' => $request->input('kota'),
-        //     'alamat_lokasi' => $request->input('lokasi'),
-        //     'lokasi_lat' => $lat,
-        //     'lokasi_long' => $long,
-        //     'gambar'=>json_encode($gambar),
-        //     'jumlah_view'=>0,
-        //     'status'=>1,
-        //     'deskripsi'=> $request->input('deskripsi'),
-        //     'kategori'=> $request->input('kategori'),
-        //     'start_date' => "2023/11/23",
-        //     'start_time' => "12:30",
-        //     'end_time' => "15:30",
-
-        // ]);
         
         //redirect setelah berhasil update dengan pesan
         return redirect('/viewall')->with('message', 'Ticket updated successfully');

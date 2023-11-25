@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminMasterController;
 use App\Models\Tiket;
 use Jorenvh\Share\Share;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,13 @@ Route::post('/adminLogin', [AdminController::class,'attemptLogin']);
 Route::get('/adminDashboard',[AdminController::class,'show']);
 
 Route::get('/adminLogout', [AdminController::class,'logout']); 
+
+//Admin Master
+Route::prefix('admin')->group(function(){
+    Route::get('/master/penjual', [AdminMasterController::class, 'showMasterPenjual']);
+    Route::get('/master/pembeli', [AdminMasterController::class, 'showMasterPembeli']);
+});
+
 
 
 Route::get('/register', [RegisterController::class,'index']);
