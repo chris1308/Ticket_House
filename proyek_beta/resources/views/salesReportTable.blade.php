@@ -9,7 +9,7 @@
         <tr style="background-color: {{ $index%2==0 ? 'white' : 'lightblue' }};">
             <td class="py-2" style="padding-left:10px">{{ $ticket['id_invoice'] }}</td>
             <td style="padding-left:10px">{{ $ticket['nama'] }}</td>
-            <td style="text-align: center">Rp. {{ $ticket['total'] }}</td>
+            <td style="text-align: center">Rp. {{ formatUang($ticket['total']) }}</td>
             <td style="text-align: center">{{ $ticket['tanggal_pembelian'] }}</td>
         </tr>
     @endforeach

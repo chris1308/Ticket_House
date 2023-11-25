@@ -16,7 +16,7 @@
                     <tr class="" style="border-bottom:1px solid black; text-align:center;">
                         <td style="padding: 20px"><a href="/ticket/{{ $ticket->id_tiket }}"><img style="width: 100px; object-fit:cover;" src="/images/{{ json_decode($ticket->gambar)[0] }}" alt=""></a> </td>
                         <td  style="padding: 10px; ">{{ $ticket->nama }}</td>
-                        <td style=" padding:10px 70px; ">Rp. {{ $ticket->harga }}</td>
+                        <td style=" padding:10px 70px; ">Rp. {{ formatUang($ticket->harga) }}</td>
                         <td style="padding:10px 60px">1</td>
                         <td style=" padding:10px 60px;">{{ $ticket->quantity }}</td>
                         <td style=" padding:10px 60px; ">
