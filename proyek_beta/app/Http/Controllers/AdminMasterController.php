@@ -28,9 +28,9 @@ class AdminMasterController extends Controller
     }
 
     public function showMasterTiket(){
-        // $tiket = Tiket::with(['penjual']);
-        $tiket = Tiket::all();
-        $tiket->load('penjual:name');
+        $tiket = Tiket::with(['penjual'])->get();
+        // $tiket = Tiket::all();
+        // $tiket->load('penjual:name');
         return view('masterTiket',[
             "title" => "Master Tiket",
             "daftarTiket" => $tiket

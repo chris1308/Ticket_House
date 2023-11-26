@@ -34,7 +34,7 @@
                         <td class="text-center">{{$index + 1}}</td>
                         <td>{{$tiket->id_tiket}}</td>
                         <td>{{$tiket->nama}}</td>
-                        <td>{{$tiket->penjual}}</td>
+                        <td>{{$tiket->penjual->name}}</td>
                         <td>{{$tiket->kota}}</td>
                         <td>{{$tiket->alamat_lokasi}}</td>
                         <td>Rp {{formatUang($tiket->harga)}}</td>

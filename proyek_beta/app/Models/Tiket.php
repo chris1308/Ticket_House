@@ -13,6 +13,7 @@ class Tiket extends Model
 
     public function penjual(): BelongsTo
     {
-        return $this->belongsTo(Penjual::class, 'id_penjual', 'id_penjual');// fk di tabel tiket, primary key dari tabel asal tabel penjual
+        // fk di tabel tiket, primary key dari tabel asal tabel penjual
+        return $this->belongsTo(Penjual::class, 'id_penjual', 'id_penjual');
     }
 }
