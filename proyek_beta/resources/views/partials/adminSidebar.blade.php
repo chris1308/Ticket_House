@@ -7,44 +7,84 @@
         <li class="pt-2 active">
             <a href="/adminDashboard" class="text-decoration-none text-dark fw-bold" ><img src="{{ asset('images/admin/home.png') }}" style="width: 30px; height: 30px; margin-left: 10px;" alt="Home"> Home</a>
         </li>
-        <li class="py-1">
+        <li class="pt-1">
             {{-- margin p tag harus di 0 kan spy ga makan tempat. secara default p tag ada margin dan paddingnya --}}
-            <p onclick="toggleMaster()" class="ps-3" id="masterMenu" style="margin:0; padding: 5px; font-weight: bold;">Masters</p>
+            <p onclick="toggleMaster()" class="sidebarMainMenu ps-3" id="masterMenu" style="margin:0; padding: 5px; font-weight: bold;">Masters</p>
             <ul id="masterSubMenu" class="list-unstyled" style="display: none">
-                <li style="margin-bottom: 8px;">
-                    <a href="/admin/master/penjual" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="penjual">  Penjual</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="/admin/master/pembeli" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Pembeli"> Pembeli</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/ticket.png') }}" style="width: width: 20px; height: 20px; margin-left: 10px;" alt="Tiket"> Tiket</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/danger.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Activity"> Aktivitas</a>
+                <li>
+                    <a href="/admin/master/penjual" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="penjual">  Penjual
+                        </div>
+                    </a>
                 </li>
                 <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/discount.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Promo"> Promo</a>
+                    <a href="/admin/master/pembeli" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Pembeli"> Pembeli
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/master/tiket" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/ticket.png') }}" style="width: width: 20px; height: 20px; margin-left: 10px;" alt="Tiket"> Tiket
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">    
+                            <img src="{{ asset('images/admin/danger.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Activity"> Aktivitas
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/discount.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Promo"> Promo
+                        </div>
+                    </a>
                 </li>
             </ul>
         </li>
         <li class="">
-            <p onclick="toggleLaporan()" id="laporanMenu"  class=" ps-3" style="margin:0; padding: 5px; font-weight: bold;">Laporan</p>
+            <p onclick="toggleLaporan()" id="laporanMenu"  class="sidebarMainMenu ps-3" style="margin:0; padding: 5px; font-weight: bold;">Laporan</p>
             <ul id="laporanSubMenu" style="display: none" class="list-unstyled">
-                <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Penjual"> Penjual</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark align" style="font-weight: bold;"><img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Pembeli"> Pembeli</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Tiket"> Tiket</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/time.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Kunjungan"> Kunjungan</a>
+                <li>
+                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Penjual"> Penjual
+                        </div>    
+                    </a>
                 </li>
                 <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;"><img src="{{ asset('images/admin/receipt.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Transaksi"> Transaksi</a>
+                    <a href="#" class="text-decoration-none text-dark align" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Pembeli"> Pembeli
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/ticket.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Tiket"> Tiket
+                        </div>    
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/time.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Kunjungan"> Kunjungan
+                        </div>    
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                        <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
+                            <img src="{{ asset('images/admin/receipt.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Transaksi"> Transaksi
+                        </div>
+                    </a>
                 </li>
             </ul>
         </li>

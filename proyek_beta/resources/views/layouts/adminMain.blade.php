@@ -19,6 +19,16 @@
   margin-top: 100px;    
   margin-left: 100px;
 }
+
+.sidebarMenu:hover{
+  background-color: #FDD991;
+}
+
+.sidebarMainMenu:hover{
+  background-color: #FD9191;
+}
+
+
 </style>
 <body>
 {{-- navbar dijadikan komponen terpisah di file partials/navbar. Cara panggil komponen pake @include(namafolder.namafile) --}}

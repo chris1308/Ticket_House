@@ -3,7 +3,7 @@
 <!-- {{-- layout.adminMain untuk ambil komponen navbar dan sidebar admin --}} -->
     @extends('layouts.adminMain')
     @section('content')
-    <div class="container" style="overflow:hidden; height: 650px; padding-top:80px; padding-left: 230px;">
+    <div class="container" style="min-height: 650px; padding-top:80px; padding-left: 18%;">
         <!-- bagian atas -->
         <div class="row d-flex justify-content-between">
             <div class="col-md-6">
