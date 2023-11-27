@@ -116,9 +116,13 @@ Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
 
+//Promo
 //Add Promo
 Route::get('/addPromo', [PromoController::class,'showAddPromo']);
 Route::post('/addPromo', [PromoController::class,'store']);
+//Apply promo code
+Route::post('/applypromo/{id}',[PembelianController::class,'apply'])->name('apply.promo');
+Route::post('/pay/{id}',[PembelianController::class,'pay'])->name('pay'); //proceed to midtrans
 
 Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
 

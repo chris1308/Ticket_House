@@ -25,6 +25,7 @@ class PembelianSeeder extends Seeder
                 'quantity' => $i,
                 'harga_beli' => 10000,
                 'total' =>$i * 10000,
+                'status'=>'berhasil',
             ]);
         }
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('harga_beli');
             $table->integer('redeemed_point')->nullable();
             $table->integer('total');
+            $table->string('status')->default('gagal');
 
         });
     }
