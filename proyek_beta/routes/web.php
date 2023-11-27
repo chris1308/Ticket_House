@@ -71,6 +71,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/penjual', [AdminMasterController::class, 'showMasterPenjual']);
     Route::get('/master/pembeli', [AdminMasterController::class, 'showMasterPembeli']);
     Route::get('/master/tiket', [AdminMasterController::class, 'showMasterTiket']);
+    Route::get('/master/promo', [AdminMasterController::class, 'showMasterPromo']);
+    Route::get('/master/aktivitas', [AdminMasterController::class, 'showMasterAktivitas']);
 });
 
 

@@ -33,14 +33,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                    <a href="/admin/master/aktivitas" class="text-decoration-none text-dark" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">    
                             <img src="{{ asset('images/admin/danger.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Activity"> Aktivitas
                         </div>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                    <a href="/admin/master/promo" class="text-decoration-none text-dark" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
                             <img src="{{ asset('images/admin/discount.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Promo"> Promo
                         </div>
