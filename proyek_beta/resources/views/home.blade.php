@@ -39,10 +39,10 @@
         <div class="Popular my-4">
             <div class="Header d-flex justify-content-between">
                 <h3>Popular Now</h3>
-                <button style="padding:10px; border-radius:10%; background-color:lightgreen; border:0;"><a href="" style="text-decoration: none; color:black">View More</a></button>
+                {{-- <button style="padding:10px; border-radius:10%; background-color:lightgreen; border:0;"><a href="" style="text-decoration: none; color:black">View More</a></button> --}}
             </div>
             <div class="Items d-flex justify-content-between mt-2" style="flex-wrap: wrap">
-                @foreach($tikets as $tiket)
+                @foreach($topTickets as $tiket)
                 {{-- item.detail sesuai dengan name yang diberikan ke route di web.php --}}
                     <div onclick="redirectToDetail('{{ route('ticket.detail', ['id' => $tiket->id_tiket]) }}')" class=" mb-3 me-2" style=" ">    
                         <div class="Gambar mb-2" style="width: 250px; height:270px;">                    

@@ -85,11 +85,12 @@
                         <!-- <img class="w-100 h-100" src="/images/graybackground.png" alt=""> -->
                     </div><br>
                     @if ($ticket->start_date != null)
-                        <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;{{date('D-M-Y',strtotime($ticket->start_date) )  }} {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>                        
+                        <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;{{date('D, d-M-Y',strtotime($ticket->start_date) )  }} {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>                        
                     @else
                         <p><i class="fa-solid fa-clock fa-lg"></i>&nbsp;Jam Operasional : {{ $ticket->start_time }} - {{ $ticket->end_time }} WIB</p>  
                     @endif
-                    <form action="" style="margin-left: 25px">
+                    <form action="{{ route('checkout',['id'=>$ticket->id_tiket]) }}" style="margin-left: 25px">
+                        @csrf
                         <input type="text" name="" id="" size="50" placeholder="Dari IDR {{ formatUang($ticket->harga) }}" disabled>
                         <button class=" ms-2 btn btn-success">Beli Tiket</button>
                     </form>

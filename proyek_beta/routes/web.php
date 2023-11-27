@@ -11,6 +11,7 @@ use App\Http\Controllers\PromoController;
 use App\Http\Controllers\TiketController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PenjualController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
 
@@ -28,17 +29,21 @@ use App\Http\Controllers\WishlistController;
 
 Route::get('/', function () { 
     $tikets = Tiket::take(4)->get();
+    $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get();
     return view('home',[
         "title" => "Home",
         "tikets"=>$tikets,
+        "topTickets"=>$topTickets,
     ]);
 });
 
 Route::get('/home', function () { 
     $tikets = Tiket::take(4)->get(); //fetch first 4 tickets
+    $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get(); //take to limit the data by 4
     return view('home',[
         "title" => "Home",
         "tikets"=>$tikets,
+        "topTickets"=>$topTickets,
     ]);
 })->name("home");
 
@@ -73,7 +78,7 @@ Route::prefix('admin')->group(function(){
 Route::get('/register', [RegisterController::class,'index']);
 Route::post('/register', [RegisterController::class,'store']);
 
-Route::get('/login', [LoginController::class,'login']);
+Route::get('/login', [LoginController::class,'login'])->name('login');
 Route::post('/login', [LoginController::class,'attemptLogin']);
 
 Route::get('/logout', [LoginController::class,'logout']); 
@@ -131,8 +136,6 @@ Route::post('/report/{id}',[ReportController::class,'processReport'])->name('sub
 //Laporan Penjual
 //Laporan View Ticket
 Route::get('/viewreport',[PenjualController::class,'viewReport'])->name('view.report');
-Route::get('/exportpdf/{id}', [PenjualController::class, 'exportpdf'])->name('export.pdf');
-Route::get('/exportexcel/{id}', [PenjualController::class, 'exportexcel'])->name('export.excel');
 
 //laporan penjualan
 Route::get('/salesreport',[PenjualController::class,'salesReport'])->name('sales.report');
@@ -140,7 +143,12 @@ Route::get('/salesreport',[PenjualController::class,'salesReport'])->name('sales
 //laporan cashflow
 Route::get('/cashflowreport',[PenjualController::class,'cashflowReport'])->name('cashflow.report');
 
+//export 
+Route::get('/exportpdf/{id}', [PenjualController::class, 'exportpdf'])->name('export.pdf');
+Route::get('/exportexcel/{id}', [PenjualController::class, 'exportexcel'])->name('export.excel');
 
+//checkout
+Route::get('/checkout/{id}',[PembelianController::class,'checkout'])->name('checkout');
 
 //COBA COBA UPLOAD IMAGE EDIT PROFIL PENJUAL
 //Masih gagal, harus ubah-ubah auth web
