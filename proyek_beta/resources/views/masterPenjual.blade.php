@@ -23,6 +23,7 @@
                     <th class="px-2" style="width: 13%;">Nama</th>
                     <th class="px-2" style="width: 13%;">Kontak</th>
                     <th class="px-2" style="width: 13%;">Email</th>
+                    <th class="px-2" style="width: 13%;">Status</th>
                     <th class="px-2" style="width: 15%;">Action</th>
                 <!-- </tr> -->
             </thead>
@@ -34,6 +35,7 @@
                         <td>{{$penjual->name}}</td>
                         <td>{{$penjual->no_telp}}</td>
                         <td>{{$penjual->email}}</td>
+                        <td class="{{($penjual->status == 0) ? 'text-danger' : ''}}" >{{($penjual->status == 1) ? "Aktif" : "Banned" }}</td>
                         <td>
                             <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
                         </td>

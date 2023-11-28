@@ -22,7 +22,7 @@
                     <th class="px-2" style="width: 5%">ID</th>
                     <th class="px-2" style="width: 13%;">Penjual Terlapor</th>
                     <th class="px-2" style="width: 13%;">Pelapor</th>
-                    <th class="px-2" style="width: 8%;">Keterangan</th>
+                    <th class="px-2" style="width: 15%;">Keterangan</th>
                     <th class="px-2" style="width: 15%;">Action</th>
                 <!-- </tr> -->
             </thead>

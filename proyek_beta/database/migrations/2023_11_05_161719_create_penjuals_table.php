@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->integer('saldo')->default(0);
             $table->boolean('premium_status')->default(false);
+            $table->boolean('status')->default(true);
         });
     }
 

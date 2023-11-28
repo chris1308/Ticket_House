@@ -24,6 +24,7 @@
                     <th class="px-2" style="width: 13%;">Username</th>
                     <th class="px-2" style="width: 13%;">Kontak</th>
                     <th class="px-2" style="width: 13%;">Email</th>
+                    <th class="px-2" style="width: 13%;">Status</th>
                     <th class="px-2" style="width: 15%;">Action</th>
                 <!-- </tr> -->
             </thead>
@@ -36,6 +37,7 @@
                         <td>{{$pembeli->username}}</td>
                         <td>{{$pembeli->no_telp}}</td>
                         <td>{{$pembeli->email}}</td>
+                        <td class="{{($pembeli->status == 0) ? 'text-danger' : ''}}">{{($pembeli->status == 1 ? "Aktif" : "Banned")}}</td>
                         <td>
                             <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
                         </td>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('profile_picture')->nullable();
             $table->date('tgl_lahir');
             $table->string('refferal');
+            $table->boolean('status')->default(true);
         });
     }
 
