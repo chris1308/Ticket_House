@@ -124,6 +124,8 @@ Route::post('/addPromo', [PromoController::class,'store']);
 //Apply promo code
 Route::post('/applypromo/{id}',[PembelianController::class,'apply'])->name('apply.promo');
 Route::post('/pay/{id}',[PembelianController::class,'pay'])->name('pay'); //proceed to midtrans
+Route::get("/afterPay",[PembelianController::class,'afterpay']);
+
 
 Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
 

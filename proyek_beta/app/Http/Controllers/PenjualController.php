@@ -159,6 +159,7 @@ class PenjualController extends Controller
                         'nama'=>$ticket->nama,
                         'total'=>$p->total,
                         'tanggal_pembelian'=>$p->tanggal_pembelian,
+                        'status'=>$p->status,
                     ];                    
                     array_push($tempTickets,$tempData);
                     //cara akses elemennya di salesReport.blade tidak bisa pake $ticket->id_tiket, tapi harus $ticket['id_tiket']
@@ -171,7 +172,7 @@ class PenjualController extends Controller
     public function cashflowReport(){
         $title = "Laporan Cashflow";
         $allTickets = Tiket::where('id_penjual',session('user')->id_penjual)->get();
-        $purchases = Pembelian::all();
+        $purchases = Pembelian::where('status','berhasil')->get();
         //kelompokkan berdasarkan tanggal
         $groupedInvoices = $purchases->groupBy(function ($invoice) {
             return $invoice->tanggal_pembelian;

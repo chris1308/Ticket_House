@@ -9,14 +9,24 @@ use Illuminate\Http\Request;
 
 class PembelianController extends Controller
 {
+    public function afterpay(){
+        //update invoice status to success
+        $id_invoice = session('id_invoice');
+        Pembelian::where('id_invoice',$id_invoice)->update(['status'=>'berhasil' ]);
+        return redirect('/home')->with('message','Berhasil melakukan pembelian!');
+    }
+
     public function pay(Request $request,$id){
+
         $ticket = Tiket::where('id_tiket',$id)->first();
         $namaTiket = $ticket->nama;
         $hiddenTotal = $request->input('hiddenTotal');
         $hiddenPromo = $request->input('hiddenPromo');
+        $final = intval($hiddenTotal)-intval($hiddenPromo);
         $ctr = Pembelian::count()+1;
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $newId = 'INV'.$numberWithLeadingZeros; //buat refferal dengan format REF+numberleadingzeros
+        session(['id_invoice',$newId]); //sementara diakali pake session untuk update status
         $order = Pembelian::create([
             'id_invoice'=>$newId,
             'id_pembeli'=>session('user')->id_pembeli,
@@ -34,8 +44,8 @@ class PembelianController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => 10000,
+                'order_id' => $newId,
+                'gross_amount' => $final,
             ),
             'customer_details' => array(
                 'first_name' => session('user')->username,
@@ -85,7 +95,8 @@ class PembelianController extends Controller
                 return redirect()->back()->with('message','Kode promo berhasil digunakan')->with('potongan',$tempPromo[0]->nilai_promo)->with('kodepromo',$promoEntered);
 
             }else{ //potongan persen(belum selesai)
-
+                $newPotongan = (intval($tempPromo[0]->nilai_promo)/100) * intval($ticket->harga);
+                return redirect()->back()->with('message','Kode promo berhasil digunakan')->with('potongan',$newPotongan)->with('kodepromo',$promoEntered);
             }
         }
     }
