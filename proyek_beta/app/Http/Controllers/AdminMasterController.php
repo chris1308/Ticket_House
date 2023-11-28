@@ -59,4 +59,22 @@ class AdminMasterController extends Controller
         ]);
     }
 
+    // ================== Detail Master ================== 
+    public function showMasterDetailPenjual($id){
+        $penjual = Penjual::where('id_penjual', $id)->first();
+        return view('masterDetailPenjual',[
+            "title" => "Detail Penjual",
+            "penjual" => $penjual
+        ]);
+    }
+
+    public function showMasterDetailPembeli($id){
+        $pembeli = Pembeli::where('id_pembeli', $id)->first();
+        return view('masterDetailPembeli',[
+            "title" => "Detail Pembeli",
+            "pembeli" => $pembeli
+        ]);
+    }
+
+
 }

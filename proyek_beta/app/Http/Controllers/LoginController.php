@@ -31,13 +31,25 @@ class LoginController extends Controller
             $buyer = Pembeli::where('email', $loginField)->first();
             $seller = Penjual::where('email',$loginField)->first();
             if ($buyer && Auth::guard('buyer')->attempt(['email' => $loginField, 'password' => $password])) {
+            
+                //additional validation for banned account
+                if($buyer->status == 0){//banned buyer not allowed to login  
+                    return back()->with("loginError","Akun telah terkena ban!");
+                }
+
             // this email belongs to Buyer
             // Authentication successful
             // $request->session()->regenerate();
             session(["user"=>$buyer]);
             return redirect()->intended('/home'); //intended untuk dioper ke middleware dulu sebelum redirect
             }else if ($seller && Auth::guard('seller')->attempt(['email' => $loginField, 'password' => $password])){
-                //email belongs to Seller
+
+                //additional validation for banned account
+                if($seller->status == 0){//banned seller not allowed to login  
+                    return back()->with("loginError","Akun telah terkena ban!");
+                }
+
+            //email belongs to Seller
             // Authentication successful
             // $request->session()->regenerate();
             session(["user"=>$seller]);
@@ -48,7 +60,13 @@ class LoginController extends Controller
             $buyer = Pembeli::where('username', $loginField)->first();
             $seller = Penjual::where('username',$loginField)->first();
             if ($seller && Auth::guard('seller')->attempt(['username' => $loginField, 'password' => $password])) {
-                // this username belongs to seller
+            
+                //additional validation for banned account
+                if($seller->status == 0){//banned seller not allowed to login  
+                    return back()->with("loginError","Akun telah terkena ban!");
+                }
+            
+            // this username belongs to seller
             // Authentication successful
             // $request->session()->regenerate();
             session(["user"=>$seller]);
@@ -56,6 +74,12 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard'); //intended untuk dioper ke middleware dulu sebelum redirect
             }
             else if ($buyer && Auth::guard('buyer')->attempt(['username' => $loginField, 'password' => $password])) {
+                
+                //additional validation for banned account
+                if($buyer->status == 0){//banned buyer not allowed to login  
+                    return back()->with("loginError","Akun telah terkena ban!");
+                }
+
             // this username belongs to buyer
             // Authentication successful
             // $request->session()->regenerate();

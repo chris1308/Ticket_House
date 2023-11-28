@@ -37,7 +37,9 @@
                         <td>{{$penjual->email}}</td>
                         <td class="{{($penjual->status == 0) ? 'text-danger' : ''}}" >{{($penjual->status == 1) ? "Aktif" : "Banned" }}</td>
                         <td>
-                            <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            <a href="/admin/master/penjual/{{$penjual->id_penjual}}/detail" style="text-decoration: none;">
+                                <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

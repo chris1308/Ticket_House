@@ -39,7 +39,9 @@
                         <td>{{$pembeli->email}}</td>
                         <td class="{{($pembeli->status == 0) ? 'text-danger' : ''}}">{{($pembeli->status == 1 ? "Aktif" : "Banned")}}</td>
                         <td>
-                            <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            <a href="/admin/master/pembeli/{{$pembeli->id_pembeli}}/detail" style="text-decoration: none;">
+                                <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
