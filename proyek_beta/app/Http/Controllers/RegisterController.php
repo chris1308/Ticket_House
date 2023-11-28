@@ -63,11 +63,21 @@ class RegisterController extends Controller
         // dd('sukses'); 
         //kalau dd dijalankan, semua syntax di bawahnya tidak akan tereksekusi
         // Pembeli::create($validatedData);
+        $refferal = $request->input('refferal');
+        $poin = 0;
+        if ($refferal!=null){
+            $cek = Pembeli::where('refferal',$refferal)->first();
+            if($cek){
+                $poin = 1000;
+            }
+        }
         //buat random id dan refferal untuk create Pembeli
         if ($selectedRole === "buyer"){
             $ctr = Pembeli::count()+1; //hitung ada berapa pembeli di DB +1
             $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
             $reff = 'REF'.$numberWithLeadingZeros; //buat refferal dengan format REF+numberleadingzeros
+            //cek kalo masukin kode reff
+
             Pembeli::create([
                 'id_pembeli' => 'PB'.$numberWithLeadingZeros,
                 'username'=> $request->input('username'),
@@ -76,7 +86,7 @@ class RegisterController extends Controller
                 'no_telp' => $request->input('no_telp'),
                 'jk' => $request->input('gender'),
                 'password' => bcrypt($request->input('password')),
-                'poin' =>0,
+                'poin' =>$poin,
                 'profile_picture'=>null,
                 'tgl_lahir'=> $request->input('dob'),
                 'refferal'=> $reff,

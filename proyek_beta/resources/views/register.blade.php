@@ -75,6 +75,7 @@
             </div>
             @enderror
             <br/>
+            <input  value="{{ old('refferal') }}" type="text" class=" form-control" name="refferal" size="50" placeholder="refferal code (optional)" id=""><br>
             <button class="btn btn-success" style="width: 450px;">Register</button>
         </form>
     </div>
