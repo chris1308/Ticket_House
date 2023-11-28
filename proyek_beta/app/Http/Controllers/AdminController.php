@@ -69,5 +69,11 @@ class AdminController extends Controller
         }
         return view('adminDashboard',compact('title','totalPembeli','totalPenjual','totalTiket','totalPembelian','totalView'));
     }
+
+    public function showAddMasterPromo(){
+        return view('addMasterPromo', [
+            "title" => "Tambah Master Promo",
+        ]);
+    }
 }
 

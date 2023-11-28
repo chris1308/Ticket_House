@@ -75,6 +75,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/aktivitas', [AdminMasterController::class, 'showMasterAktivitas']);
 });
 
+Route::get('/addMasterPromo', [AdminMasterController::class, 'showAddMasterPromo'])->name('showAddMasterPromo');
 
 
 Route::get('/register', [RegisterController::class,'index']);
