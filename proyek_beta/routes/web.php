@@ -70,6 +70,7 @@ Route::get('/adminLogout', [AdminController::class,'logout']);
 //Admin Master and Report
 Route::prefix('admin')->group(function(){
     //---------------- Admin Report ----------------
+    Route::get('/report/kunjungan',[AdminController::class,'kunjunganReport'])->name('kunjungan.report');
     Route::get('/report/tiket',[AdminController::class,'ticketReport'])->name('ticket.report');
     Route::get('/report/detailtiket/{id}',[AdminController::class,'ticketReportDetail'])->name('ticketreport.detail');
     Route::get('/report/penjual',[AdminController::class,'sellerReport'])->name('seller.report');

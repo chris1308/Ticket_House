@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembeli;
 use App\Models\Penjual;
 use App\Models\Tiket;
+use App\Models\View;
 use App\Models\Pembelian;
 
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class AdminController extends Controller
 {
     use AuthenticatesUsers;
 
+    public function kunjunganReport(){
+        $kunjungans = View::all();
+        $title = "Laporan Kunjungan";
+        return view('kunjunganReport',compact('title','kunjungans'));
+    }
     public function sellerDetail($id){
         $title = "Informasi Penjual";
         $penjual = Penjual::where('id_penjual',$id)->first();

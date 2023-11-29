@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Google\Client;
 use App\Models\Promo;
 use App\Models\Tiket;
+use App\Models\View;
 use App\Models\Penjual;
 use Google\Service\Calendar;
 use Illuminate\Http\Request;
@@ -99,6 +100,17 @@ class TiketController extends Controller
         $sellerPromo = Promo::where('id_penjual', $ticket->id_penjual)->where('status', 1)->get();
         //add view count 
         Tiket::where('id_tiket',$id)->update(['jumlah_view'=>$ticket->jumlah_view+1]); 
+        //add view per day count
+        if(View::where('tanggal',Carbon::today())->exists()){
+            $viewData = View::where('tanggal',Carbon::today())->first();
+            $viewData->update(['jumlah_kunjungan'=>$viewData->jumlah_kunjungan +1]);
+        }else{
+            View::create([
+                'id'=>View::count()+1,
+                'tanggal'=>Carbon::today(),
+                'jumlah_kunjungan'=>1
+            ]);
+        }
         return view('ticketDetail', ['ticket' => $ticket, 'title'=>'Detail Ticket', 'seller'=>$seller, "id"=>$id, "promo"=>$sellerPromo]);
     }
 

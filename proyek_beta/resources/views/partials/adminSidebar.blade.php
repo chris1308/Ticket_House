@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                    <a href="{{ route('kunjungan.report') }}" class="text-decoration-none text-dark" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
                             <img src="{{ asset('images/admin/time.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Kunjungan"> Kunjungan
                         </div>    
