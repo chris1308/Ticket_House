@@ -309,4 +309,21 @@ class AdminMasterController extends Controller
         ]);
     }
 
+    public function deleteMasterDetailAktivitas($id){
+        $aktivitas = Report::where('id_aktivitas', $id)->first();
+        // Report::destroy($id); //this code can't worked
+        
+        Report::where('id_aktivitas', $id)->delete();
+
+        return redirect("/admin/master/aktivitas");
+
+        // this code can't delete
+        // if ($aktivitas) {
+        //     $aktivitas->delete();
+        //     return redirect("/admin/master/aktivitas");
+        // }else {//not found
+        //     return redirect("/admin/master/aktivitas");
+        // }
+    }
+
 }

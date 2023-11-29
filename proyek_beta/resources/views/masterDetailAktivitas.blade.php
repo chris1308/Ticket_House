@@ -48,7 +48,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#">
+                <a href="/admin/master/aktivitas/{{$aktivitas->id_aktivitas}}/delete">
                     <button class="btn btn-danger w-75">Delete</button>
                 </a>
             </div>

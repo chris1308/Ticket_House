@@ -90,6 +90,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/aktivitas/add', [AdminMasterController::class, 'showMasterAddAktivitas']);
     Route::post('/master/aktivitas/add', [AdminMasterController::class, 'saveMasterAddAktivitas']);
     Route::get('/master/aktivitas/{id}/detail', [AdminMasterController::class, 'showMasterDetailAktivitas']);
+    Route::get('/master/aktivitas/{id}/delete', [AdminMasterController::class, 'deleteMasterDetailAktivitas']);
 });
 
 Route::get('/addMasterPromo', [AdminMasterController::class, 'showAddMasterPromo'])->name('showAddMasterPromo');
