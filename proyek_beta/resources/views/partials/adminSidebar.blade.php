@@ -52,7 +52,7 @@
             <p onclick="toggleLaporan()" id="laporanMenu"  class="sidebarMainMenu ps-3" style="margin:0; padding: 5px; font-weight: bold;">Laporan</p>
             <ul id="laporanSubMenu" style="display: none" class="list-unstyled">
                 <li>
-                    <a href="#" class="text-decoration-none text-dark" style="font-weight: bold;">
+                    <a href="{{ route('seller.report') }}" class="text-decoration-none text-dark" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
                             <img src="{{ asset('images/admin/people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Penjual"> Penjual
                         </div>    

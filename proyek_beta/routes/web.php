@@ -69,6 +69,8 @@ Route::get('/adminLogout', [AdminController::class,'logout']);
 
 //Admin Master
 Route::prefix('admin')->group(function(){
+    Route::get('/report/penjual',[AdminController::class,'sellerReport'])->name('seller.report');
+    Route::get('/report/detailpenjual/{id}',[AdminController::class,'sellerDetail'])->name('seller.detail');
     Route::get('/master/penjual', [AdminMasterController::class, 'showMasterPenjual']);
     Route::get('/master/penjual/{id}/detail', [AdminMasterController::class, 'showMasterDetailPenjual']);
     Route::get('/master/penjual/{id}/change', [AdminMasterController::class, 'changeStatusPenjual']);
@@ -131,7 +133,6 @@ Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 
 
 // Penjual
-
 //Add Tiket
 Route::get('/add', [TiketController::class,'showAdd']);
 Route::post('/add', [TiketController::class,'saveAdd']);
