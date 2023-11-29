@@ -14,7 +14,7 @@
         <ul class="navbar-nav">
         @if (session()->has('user')) 
           <li class="nav-item mx-3">
-            <a class="nav-link" style="opacity: {{ request()->is('history') ? '100%' : '50%' }}" href="#">History</a>
+            <a class="nav-link" style="opacity: {{ request()->is('history') ? '100%' : '50%' }}" href="/history">History</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" style="opacity: {{ request()->is('wishlist') ? '100%' : '50%' }}" href="/wishlist">Wishlist</a>

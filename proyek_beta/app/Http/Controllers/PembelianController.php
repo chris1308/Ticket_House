@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class PembelianController extends Controller
 {
+    public function history(){
+        $title = "History";
+        //get all transaction made by this user
+        $purchases = Pembelian::where('id_pembeli',session('user')->id_pembeli)->get();
+        $tickets = Tiket::all();
+        return view('history',compact('title','purchases','tickets'));
+    }
+
     public function afterpay(){
         //update invoice status to success
         $id_invoice = session('id_invoice');
@@ -26,8 +34,9 @@ class PembelianController extends Controller
         $ctr = Pembelian::count()+1;
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $newId = 'INV'.$numberWithLeadingZeros; //buat refferal dengan format REF+numberleadingzeros
-        session(['id_invoice',$newId]); //sementara diakali pake session untuk update status
-        $order = Pembelian::create([
+        session(['id_invoice'=>$newId]); //sementara diakali pake session untuk update status
+        // dd(session('id_invoice'));
+        $order = Pembelian::create([//berhasil
             'id_invoice'=>$newId,
             'id_pembeli'=>session('user')->id_pembeli,
             'id_kodepromo'=>$request->input('promoCode'),
@@ -44,7 +53,7 @@ class PembelianController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $newId,
+                'order_id' => rand(),
                 'gross_amount' => $final,
             ),
             'customer_details' => array(
@@ -54,6 +63,7 @@ class PembelianController extends Controller
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
+    
         // dd($snapToken);
         return view('cobaCheckout',compact('snapToken','order','namaTiket'));
     }

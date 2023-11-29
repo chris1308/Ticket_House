@@ -80,7 +80,7 @@
                         </button>
                     </div>
                     <!-- map preview -->
-                    
+                    <h5 style="margin-left:25px">Peta lokasi tiket:</h5>
                     <div class="gambarMap" id="gambarMap" style="margin-left:25px ;width: 775px; height:200px">
                         <!-- <img class="w-100 h-100" src="/images/graybackground.png" alt=""> -->
                     </div><br>

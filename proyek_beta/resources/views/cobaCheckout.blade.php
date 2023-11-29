@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('font/font/css/all.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-  <script type="text/javascript"  src="https://app.sandbox.midtrans.com/snap/snap.js"
+  <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
 data-client-key="{{ config('midtrans.client_key') }}"></script>
 
     <title>Checkout</title>
@@ -26,6 +25,7 @@ data-client-key="{{ config('midtrans.client_key') }}"></script>
             <p>Total : Rp {{ formatUang($order->total) }}</p>
             <button style="width: 70%" class="btn btn-success" id="pay-button">Pay</button>
         </div>
+        
     </div>
     {{-- footer --}}
     <div class="Footer position-relative bottom-0 py-3 ps-4 container-fluid d-flex justify-content-between" style="background-color: #F1F8FF; ">
@@ -45,25 +45,31 @@ data-client-key="{{ config('midtrans.client_key') }}"></script>
       </div>
     </div>
     <script type="text/javascript">
-      let id_invoice = <?php echo $order->id_invoice; ?>;
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function () {
-          window.snap.pay('{{ $snapToken }}', {
-            onSuccess: function(result){
-              alert("payment success!"); 
-              window.location.href = '/afterPay;
-            },
-            onPending: function(result){
-              alert("wating your payment!"); console.log(result);
-            },
-            onError: function(result){
-              alert("payment failed!"); console.log(result);
-            },
-            onClose: function(){
-              alert('you closed the popup without finishing the payment');
-            }
-          })
-        });
-      </script>
+      // For example trigger on button clicked, or any time you need
+      var payButton = document.getElementById('pay-button');
+      payButton.addEventListener('click', function () {
+        // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+        window.snap.pay('{{ $snapToken }}', {
+          onSuccess: function(result){
+            /* You may add your own implementation here */
+            alert("payment success!"); window.location.href = "/afterPay";
+          },
+          onPending: function(result){
+            /* You may add your own implementation here */
+            alert("wating your payment!"); console.log(result);
+          },
+          onError: function(result){
+            /* You may add your own implementation here */
+            alert("payment failed!"); 
+            window.location.href = "/home";
+          },
+          onClose: function(){
+            /* You may add your own implementation here */
+            alert('you closed the popup without finishing the payment');
+            window.location.href = "/home";
+          }
+        })
+      });
+    </script>
 </body>
 </html>

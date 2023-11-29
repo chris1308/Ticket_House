@@ -55,9 +55,10 @@ Route::get('/sellerProfile', function() {
 });
 Route::get('/about', function () {
     $title = "About Us";
-
     return view('about', compact('title'));
 });
+
+Route::get('/history',[PembelianController::class,'history'])->name('history');
 
 //Admin
 Route::get('/adminLogin', [AdminController::class,'login'])->name('login.admin');
