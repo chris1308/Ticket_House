@@ -14,6 +14,18 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class AdminController extends Controller
 {
     use AuthenticatesUsers;
+
+    public function sellerDetail($id){
+        $title = "Informasi Penjual";
+        $penjual = Penjual::where('id_penjual',$id)->first();
+        return view('sellerDetail',compact('title','penjual'));
+    }
+
+    public function sellerReport(){
+        $title = "Laporan Penjual";
+        $penjuals = Penjual::all();
+        return view('sellerReport',compact('title','penjuals'));
+    }
     public function login(){
         return view('adminLogin',[
             "title" => "Admin Login"
