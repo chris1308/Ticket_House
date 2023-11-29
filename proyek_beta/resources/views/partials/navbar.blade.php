@@ -34,10 +34,10 @@
             <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" 
             style="opacity: {{ request()->is('about') ? '100%' : '50%' }}" href="/about">About Us</a>
           </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link" href="#" ><i class="fa-regular fa-bell fa-xl"></i></a>
+          <li  class="nav-item mx-3">
+            <a onclick="toggleNotif()" class="nav-link"  ><i class="fa-regular fa-bell fa-xl"></i></a>
           </li>
-          <li class="nav-item dropdown mx-3">
+          <li onclick="closeNotif()" class="nav-item dropdown mx-3">
             {{-- if we add class dropdown-toggle, there will be a dropdown arrow displayed next to user profile --}}
             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-regular fa-user fa-xl"></i>
@@ -68,7 +68,19 @@
         </ul>
     </div>
 </div>
-
+<div id="notif"  class="fixed-top bg-light shadow-lg" style="display:none;width:30%;margin-left:800px; margin-top:60px; border-radius:7px">
+  @if (session('tempTickets')!=null)    
+    @foreach (session('tempTickets') as $index => $s)
+      @if ($index == 0)
+        <div class="shadow-sm px-3 py-4">Tiket <span class="fw-bold">{{ $s }}</span> mungkin menarik perhatianmu!</div>
+      @elseif ($index==1)
+        <div class="shadow-sm px-3 py-4">Tiket <span class="fw-bold">{{ $s }}</span> jangan sampai kamu lewatkan!</div>
+      @else
+        <div class="shadow-sm px-3 py-4">Tiket <span class="fw-bold">{{ $s }}</span> tampaknya cocok buat kamu!</div>
+      @endif
+    @endforeach
+  @endif
+</div>
 
 <script>
     let storeLatitude = 0;
@@ -130,5 +142,13 @@
       }
 
     }
-    
+    function toggleNotif(){
+      let notifBar = document.getElementById('notif');
+      notifBar.style.display = (notifBar.style.display == "block")  ? "none" : "block";
+    }
+    function closeNotif(){
+      //function to ensure that the notification dropdown is closed whenever we click the user profile
+      let notifbar = document.getElementById('notif');
+      notifbar.style.display = "none";
+    }
 </script>

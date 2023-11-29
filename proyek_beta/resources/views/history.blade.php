@@ -25,7 +25,7 @@
                                 <td style="padding: 20px">Rp. {{ formatUang($p->total) }} </td>
                                 <td style="color:{{ $p->status == 'berhasil' ? 'green' : 'red' }}; padding: 20px">{{ $p->status }} </td>
                                 <td style="padding: 20px">{{ $p->tanggal_pembelian }} </td>
-                                <td style="padding: 20px"><button class="btn btn-primary">Lihat Invoice</button> </td>
+                                <td style="padding: 20px"><a href="{{ route('invoice',['id'=>$p->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> </td>
                             </tr>                        
                             @break
                         @endif  
