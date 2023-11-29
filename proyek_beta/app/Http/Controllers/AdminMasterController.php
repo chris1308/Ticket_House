@@ -263,4 +263,50 @@ class AdminMasterController extends Controller
         //redirect setelah berhasil add dengan pesan
         return redirect()->back()->with('message','Successfully added new ticket!');
     }
+
+
+    //AKTIVITAS
+
+    public function showMasterAddAktivitas(){
+        $daftarPembeli = Pembeli::all();
+        $daftarPenjual = Penjual::all();
+        return view("masterAddAktivitas", [
+            "title"=>"Add Aktivitas",
+            "daftarPembeli"=>$daftarPembeli,
+            "daftarPenjual"=>$daftarPenjual
+        ]);
+    }
+
+    public function saveMasterAddAktivitas(Request $request){
+        
+        $rules = [
+            'idTerlapor' => 'required|string|max:6',
+            'idPelapor' => 'required|string|max:6',
+            'deskripsi' => 'required|string',
+        ];
+
+        $request->validate($rules);
+
+        $ctr = Report::count()+1;
+        $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
+        $newActivityId = "RP".$numberWithLeadingZeros;
+        
+        Report::create([
+            'id_aktivitas'=>$newActivityId,
+            'id_penjual'=>$request->input('idTerlapor'),
+            'id_pembeli'=>$request->input('idPelapor'),
+            'keterangan'=>$request->input('deskripsi'),
+        ]);
+
+        return redirect("/admin/master/aktivitas");
+    }
+    
+    public function showMasterDetailAktivitas($id){
+        $aktivitas = Report::with(['penjual', 'pembeli'])->where('id_aktivitas', $id)->first();
+        return view("masterDetailAktivitas", [
+            "title" => "Detail Aktivitas",
+            "aktivitas" => $aktivitas
+        ]);
+    }
+
 }

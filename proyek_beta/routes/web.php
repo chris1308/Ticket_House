@@ -81,9 +81,15 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/tiket/add', [AdminMasterController::class, 'showMasterAddTiket']);
     Route::post('/master/tiket/add', [AdminMasterController::class, 'saveMasterAddTiket']);
     Route::get('/master/tiket/{id}/detail', [AdminMasterController::class, 'showMasterDetailTiket']);
+    Route::get('/master/tiket/{id}/edit', [AdminMasterController::class, 'showMasterEditTiket']);
 
     Route::get('/master/promo', [AdminMasterController::class, 'showMasterPromo']);
+
+
     Route::get('/master/aktivitas', [AdminMasterController::class, 'showMasterAktivitas']);
+    Route::get('/master/aktivitas/add', [AdminMasterController::class, 'showMasterAddAktivitas']);
+    Route::post('/master/aktivitas/add', [AdminMasterController::class, 'saveMasterAddAktivitas']);
+    Route::get('/master/aktivitas/{id}/detail', [AdminMasterController::class, 'showMasterDetailAktivitas']);
 });
 
 Route::get('/addMasterPromo', [AdminMasterController::class, 'showAddMasterPromo'])->name('showAddMasterPromo');
