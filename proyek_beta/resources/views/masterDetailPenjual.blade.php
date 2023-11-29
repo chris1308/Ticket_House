@@ -52,7 +52,7 @@
             </div>
             <div class="row d-flex justify-content-between border-bottom border-top py-2">
                 <div class="col-4 fw-bold">Status</div>
-                <div class="col-4 row d-flex justify-content-end me-2">{{($penjual->status == 1) ? "Aktif" : "Banned" }}</div>
+                <div class="col-4 row d-flex justify-content-end me-2 {{($penjual->status == 0) ? 'text-danger' : ''}}">{{($penjual->status == 1) ? "Aktif" : "Banned" }}</div>
             </div>
         </div>
         
@@ -63,7 +63,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#">
+                <a href="/admin/master/penjual/{{$penjual->id_penjual}}/change">
                     <button class="btn btn-danger w-75">{{(($penjual->status == 1) ? "Ban Penjual" : "Unban Penjual")}}</button>
                 </a>
             </div>

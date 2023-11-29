@@ -70,11 +70,15 @@ Route::get('/adminLogout', [AdminController::class,'logout']);
 Route::prefix('admin')->group(function(){
     Route::get('/master/penjual', [AdminMasterController::class, 'showMasterPenjual']);
     Route::get('/master/penjual/{id}/detail', [AdminMasterController::class, 'showMasterDetailPenjual']);
+    Route::get('/master/penjual/{id}/change', [AdminMasterController::class, 'changeStatusPenjual']);
 
     Route::get('/master/pembeli', [AdminMasterController::class, 'showMasterPembeli']);
     Route::get('/master/pembeli/{id}/detail', [AdminMasterController::class, 'showMasterDetailPembeli']);
+    Route::post('/master/pembeli/{idPembeli}/change', [AdminMasterController::class, 'changeStatusPembeli']);
 
     Route::get('/master/tiket', [AdminMasterController::class, 'showMasterTiket']);
+    Route::get('/master/tiket/{id}/detail', [AdminMasterController::class, 'showMasterDetailTiket']);
+
     Route::get('/master/promo', [AdminMasterController::class, 'showMasterPromo']);
     Route::get('/master/aktivitas', [AdminMasterController::class, 'showMasterAktivitas']);
 });

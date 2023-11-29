@@ -48,7 +48,7 @@
             </div>
             <div class="row d-flex justify-content-between border-bottom border-top py-2">
                 <div class="col-4 fw-bold">Status</div>
-                <div class="col-4 row d-flex justify-content-end me-2">{{($pembeli->status == 1) ? "Aktif" : "Banned" }}</div>
+                <div class="col-4 row d-flex justify-content-end me-2 {{($pembeli->status == 0) ? 'text-danger' : ''}}">{{($pembeli->status == 1) ? "Aktif" : "Banned" }}</div>
             </div>
         </div>
         
@@ -59,9 +59,11 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#">
+                <form action="/admin/master/pembeli/{{$pembeli->id_pembeli}}/change" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{$pembeli->id_pembeli}}">
                     <button class="btn btn-danger w-75">{{(($pembeli->status == 1) ? "Ban Pembeli" : "Unban Pembeli")}}</button>
-                </a>
+                </form>
             </div>
         </div>
         

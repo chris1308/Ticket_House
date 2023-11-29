@@ -39,7 +39,9 @@
                         <td>{{$tiket->alamat_lokasi}}</td>
                         <td>Rp {{formatUang($tiket->harga)}}</td>
                         <td>
-                            <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            <a href="/admin/master/tiket/{{$tiket->id_tiket}}/detail" style="text-decoration: none;">
+                                <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
