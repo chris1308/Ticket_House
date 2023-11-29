@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-decoration-none text-dark align" style="font-weight: bold;">
+                    <a href="{{ route('buyer.report') }}" class="text-decoration-none text-dark align" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
                             <img src="{{ asset('images/admin/2-people.png') }}" style="width: 20px; height: 20px; margin-left: 10px;" alt="Laporan-Pembeli"> Pembeli
                         </div>

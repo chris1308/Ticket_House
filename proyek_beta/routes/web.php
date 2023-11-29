@@ -71,6 +71,8 @@ Route::get('/adminLogout', [AdminController::class,'logout']);
 Route::prefix('admin')->group(function(){
     Route::get('/report/penjual',[AdminController::class,'sellerReport'])->name('seller.report');
     Route::get('/report/detailpenjual/{id}',[AdminController::class,'sellerDetail'])->name('seller.detail');
+    Route::get('/report/pembeli',[AdminController::class,'buyerReport'])->name('buyer.report');
+    Route::get('/report/detailpembeli/{id}',[AdminController::class,'buyerDetail'])->name('buyer.detail');
     Route::get('/master/penjual', [AdminMasterController::class, 'showMasterPenjual']);
     Route::get('/master/penjual/{id}/detail', [AdminMasterController::class, 'showMasterDetailPenjual']);
     Route::get('/master/penjual/{id}/change', [AdminMasterController::class, 'changeStatusPenjual']);

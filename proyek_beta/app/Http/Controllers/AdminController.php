@@ -20,11 +20,21 @@ class AdminController extends Controller
         $penjual = Penjual::where('id_penjual',$id)->first();
         return view('sellerDetail',compact('title','penjual'));
     }
-
+    
     public function sellerReport(){
         $title = "Laporan Penjual";
         $penjuals = Penjual::all();
         return view('sellerReport',compact('title','penjuals'));
+    }
+    public function buyerDetail($id){
+        $title = "Informasi Pembeli";
+        $pembeli = Pembeli::where('id_pembeli',$id)->first();
+        return view('buyerDetail',compact('title','pembeli'));
+    }
+    public function buyerReport(){
+        $title = "Laporan Pembeli";
+        $pembelis = Pembeli::all();
+        return view('buyerReport',compact('title','pembelis'));
     }
     public function login(){
         return view('adminLogin',[
