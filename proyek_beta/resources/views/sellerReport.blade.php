@@ -6,6 +6,10 @@
             <div class="row mb-3">
                 <div class="col-md-9">
                     <h1 class="">Laporan Penjual</h1>
+                    <div>
+                        <button class="btn btn-secondary">Export to Excel</button>
+                        <button class="btn btn-secondary">Export to PDF</button>
+                    </div>
                 </div>
             </div>
             <table class="table table-light table-striped" style="width:80%;">

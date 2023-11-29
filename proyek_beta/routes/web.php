@@ -69,6 +69,8 @@ Route::get('/adminLogout', [AdminController::class,'logout']);
 
 //Admin Master
 Route::prefix('admin')->group(function(){
+    Route::get('/report/tiket',[AdminController::class,'ticketReport'])->name('ticket.report');
+    Route::get('/report/detailtiket/{id}',[AdminController::class,'ticketReportDetail'])->name('ticketreport.detail');
     Route::get('/report/penjual',[AdminController::class,'sellerReport'])->name('seller.report');
     Route::get('/report/detailpenjual/{id}',[AdminController::class,'sellerDetail'])->name('seller.detail');
     Route::get('/report/pembeli',[AdminController::class,'buyerReport'])->name('buyer.report');

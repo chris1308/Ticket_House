@@ -2,10 +2,10 @@
 {{-- layout.adminMain untuk ambil komponen navbar dan sidebar admin --}}
     @extends('layouts.adminMain')
     @section('content')
-        <div class="container" style="overflow:hidden; min-height: 650px; padding-top:80px; margin-left: 280px;">
+        <div class="container" style="overflow:hidden; min-height: 650px; padding-top:80px; padding-bottom:50px; margin-left: 280px;">
             <div class="row mb-3">
                 <div class="col-md-9">
-                    <h1 class="">Laporan Pembeli</h1>
+                    <h1 class="">Laporan Tiket</h1>
                     <div>
                         <button class="btn btn-secondary">Export to Excel</button>
                         <button class="btn btn-secondary">Export to PDF</button>
@@ -16,22 +16,22 @@
                 <thead>
                     <tr>
                         <th class="px-2 text-center" style="width:5%">No</th>
-                        <th class="px-2 " style="width:7%">ID Pembeli</th>
-                        <th class="px-2 " style="width:15%">Nama Pembeli</th>
-                        <th class="px-2 " style="width:15%">Kontak</th>
-                        <th class="px-2 " style="width:15%">Email</th>
+                        <th class="px-2 " style="width:7%">ID Tiket</th>
+                        <th class="px-2 " style="width:15%">Nama Tiket</th>
+                        <th class="px-2 " style="width:15%">Harga</th>
+                        <th class="px-2 " style="width:15%">Alamat</th>
                         <th class="px-2 " style="width:5%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pembelis as $idx=>$p) 
+                    @foreach ($tickets as $idx=>$p) 
                         <tr>
                             <td class="text-center">{{ $idx+1 }}</td>
-                            <td class="">{{ $p->id_pembeli }}</td>
-                            <td class="">{{ $p->name }}</td>
-                            <td class="">{{ $p->no_telp }}</td>
-                            <td class="">{{ $p->email }}</td>
-                            <td class=""><a href="{{ route('buyer.detail',['id'=>$p->id_pembeli]) }}" class="btn btn-outline-success">View</a></td>
+                            <td class="">{{ $p->id_tiket }}</td>
+                            <td class="">{{ $p->nama }}</td>
+                            <td class="">Rp. {{ formatUang($p->harga) }}</td>
+                            <td class="">{{ $p->alamat_lokasi }}, {{ $p->kota }}</td>
+                            <td class=""><a href="{{ route('ticketreport.detail',['id'=>$p->id_tiket]) }}" class="btn btn-outline-success">View</a></td>
                         </tr>
                     @endforeach
                 </tbody>

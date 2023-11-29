@@ -26,11 +26,22 @@ class AdminController extends Controller
         $penjuals = Penjual::all();
         return view('sellerReport',compact('title','penjuals'));
     }
+    public function ticketReport(){
+        $title = "Laporan Tiket";
+        $tickets = Tiket::all();
+        return view('ticketReport',compact('title','tickets'));
+    }
+    public function ticketReportDetail($id){
+        $title = "Informasi Tiket";
+        $ticket = Tiket::where('id_tiket',$id)->first();
+        return view('ticketreportDetail',compact('title','ticket'));
+    }
     public function buyerDetail($id){
         $title = "Informasi Pembeli";
         $pembeli = Pembeli::where('id_pembeli',$id)->first();
         return view('buyerDetail',compact('title','pembeli'));
     }
+
     public function buyerReport(){
         $title = "Laporan Pembeli";
         $pembelis = Pembeli::all();
