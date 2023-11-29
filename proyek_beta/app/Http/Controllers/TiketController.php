@@ -248,10 +248,10 @@ class TiketController extends Controller
         }
         
         
-        
+     
         Tiket::create([
             'id_tiket' => $tiketID,
-            'id_penjual' => "PJ001",
+            'id_penjual' => session('user')['id_penjual'],
             'nama' => $request->input('namaTiket'),
             'harga' => $request->input('harga'),
             'quantity' => $request->input('stok'),

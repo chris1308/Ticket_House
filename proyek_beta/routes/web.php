@@ -77,6 +77,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/master/pembeli/{idPembeli}/change', [AdminMasterController::class, 'changeStatusPembeli']);
 
     Route::get('/master/tiket', [AdminMasterController::class, 'showMasterTiket']);
+    Route::get('/master/tiket/add', [AdminMasterController::class, 'showMasterAddTiket']);
+    Route::post('/master/tiket/add', [AdminMasterController::class, 'saveMasterAddTiket']);
     Route::get('/master/tiket/{id}/detail', [AdminMasterController::class, 'showMasterDetailTiket']);
 
     Route::get('/master/promo', [AdminMasterController::class, 'showMasterPromo']);

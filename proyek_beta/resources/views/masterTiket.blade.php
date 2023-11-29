@@ -10,7 +10,10 @@
                 <h1 class="" style="">Master Tiket</h1>
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center">
-                <button class="border-0 rounded-3 p-2" style="background-color: #FDE1A9; height: 70%;">Tambah Tiket</button>
+                <a href="/admin/master/tiket/add" style="text-decoration: none;">
+                    <button class="border-0 rounded-3 p-2" style="background-color: #FDE1A9; height: 70%;">Tambah Tiket</button>
+                </a>
+                
             </div>
         </div>
 
