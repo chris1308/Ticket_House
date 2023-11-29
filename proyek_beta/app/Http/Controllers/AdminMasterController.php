@@ -240,7 +240,7 @@ class AdminMasterController extends Controller
             'idPenjual' => 'required|string',
             'kodePromo' => 'required|string|max:255',
             'nilaiPromo' => 'required|integer',
-            'tipePromo' => 'required|in:persen:nonpersen',
+            'tipePromo' => 'required|in:persen,nonpersen',
             'minPurchase' => 'required|integer'
         ];
         $request->validate($rules);
