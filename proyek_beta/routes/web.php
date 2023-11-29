@@ -59,12 +59,12 @@ Route::get('/about', function () {
 });
 
 Route::get('/history',[PembelianController::class,'history'])->name('history');
+Route::get('/invoice/{id}',[PembelianController::class,'invoice'])->name('invoice');
 
 //Admin
 Route::get('/adminLogin', [AdminController::class,'login'])->name('login.admin');
 Route::post('/adminLogin', [AdminController::class,'attemptLogin']);
 Route::get('/adminDashboard',[AdminController::class,'show']);
-
 Route::get('/adminLogout', [AdminController::class,'logout']); 
 
 //Admin Master

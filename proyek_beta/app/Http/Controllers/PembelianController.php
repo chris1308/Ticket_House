@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Tiket;
+use App\Models\Pembeli;
+use App\Models\Penjual;
 use App\Models\Promo;
 use App\Models\Pembelian;
 use Illuminate\Http\Request;
 
 class PembelianController extends Controller
 {
+    public function invoice($id){
+        $title = "Lihat Invoice";
+        $invoice = Pembelian::where('id_invoice',$id)->first();
+        $ticket = Tiket::where('id_tiket',$invoice->id_tiket)->first();
+        $pembeli = Pembeli::where('id_pembeli',$invoice->id_pembeli)->first();
+        $penjual = Penjual::where('id_penjual',$ticket->id_penjual)->first();
+        return view('viewInvoice',compact('title','invoice','ticket','pembeli','penjual'));
+    }
+
     public function history(){
         $title = "History";
         //get all transaction made by this user
@@ -30,7 +41,7 @@ class PembelianController extends Controller
         $namaTiket = $ticket->nama;
         $hiddenTotal = $request->input('hiddenTotal');
         $hiddenPromo = $request->input('hiddenPromo');
-        $final = intval($hiddenTotal)-intval($hiddenPromo);
+        $final = intval($hiddenTotal)-intval($hiddenPromo); //harga setelah dipotong promo
         $ctr = Pembelian::count()+1;
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $newId = 'INV'.$numberWithLeadingZeros; //buat refferal dengan format REF+numberleadingzeros
@@ -44,7 +55,7 @@ class PembelianController extends Controller
             'tanggal_pembelian'=>Carbon::now(),
             'quantity'=>$request->input('hiddenQty'),
             'harga_beli'=>$ticket->harga,
-            'total'=>$hiddenTotal,
+            'total'=>$final,
         ]);
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
         \Midtrans\Config::$isProduction = false;
@@ -57,7 +68,7 @@ class PembelianController extends Controller
                 'gross_amount' => $final,
             ),
             'customer_details' => array(
-                'first_name' => session('user')->username,
+                'first_name' => session('user')->name,
                 'email' => session('user')->email,
             ),
         );

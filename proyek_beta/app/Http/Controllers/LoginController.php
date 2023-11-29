@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembeli;
 
 use App\Models\Penjual;
+use App\Models\Tiket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth; //we need this to be able to use Auth::
@@ -12,6 +13,28 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
     public function login(){
+                //random 3 tickets to be recommended on notification bar with the premise that there are at least 8 tickets in the database. Otherwise just fetch 3 most viewed ticket
+                $tickets = Tiket::where('status',1)->orderBy('jumlah_view','desc')->get(); 
+                $tempTickets = [];
+                if(count($tickets)>=8){
+                    $doneIndex = [];
+                    for($i = 0; $i<3; $i++){
+                        //random 3 index number
+                        $randomIdx = random_int(0,7); //random number within the range of 0-7
+                        while(in_array($randomIdx,$doneIndex)){
+                            $randomIdx = random_int(0,7);
+                        }
+                        //check that there are no duplicate tickets being pushed
+                        array_push($tempTickets,$tickets[$randomIdx]->nama);
+                        array_push($doneIndex,$randomIdx);
+                    }
+                }else{ //less than 8 tickets available
+                    for($i = 0; $i<3; $i++){
+                        array_push($tempTickets,$tickets[$i]->nama);
+                    }
+                }
+                //save into session
+                session(['tempTickets'=>$tempTickets]);
         return view('login',[
             "title" => "Login"
         ]);
@@ -24,7 +47,6 @@ class LoginController extends Controller
 
         // Check if the login input is an email address
         $isEmail = filter_var($loginField, FILTER_VALIDATE_EMAIL); 
-
         //Check if the credentials belong to buyer or seller
         if ($isEmail){
             //login with email
@@ -38,8 +60,6 @@ class LoginController extends Controller
                 }
 
             // this email belongs to Buyer
-            // Authentication successful
-            // $request->session()->regenerate();
             session(["user"=>$buyer]);
             return redirect()->intended('/home'); //intended untuk dioper ke middleware dulu sebelum redirect
             }else if ($seller && Auth::guard('seller')->attempt(['email' => $loginField, 'password' => $password])){
@@ -50,8 +70,6 @@ class LoginController extends Controller
                 }
 
             //email belongs to Seller
-            // Authentication successful
-            // $request->session()->regenerate();
             session(["user"=>$seller]);
             return redirect()->intended('/dashboard'); //intended untuk dioper ke middleware dulu sebelum redirect
             }

@@ -19,7 +19,7 @@ class TiketSeeder extends Seeder
             DB::table('tikets')->insert([
                 'id_tiket' => 'TIK00'.$i,
                 'id_penjual' => 'PJ001',
-                'nama' => 'Tiket Seminar '.$i,
+                'nama' => 'Seminar '.$i,
                 'harga' => 10000,
                 'quantity' => 1,
                 'kota' => 'Surabaya',
@@ -45,7 +45,7 @@ class TiketSeeder extends Seeder
             DB::table('tikets')->insert([
                 'id_tiket' => 'TIK00'.$i+5,
                 'id_penjual' => 'PJ001',
-                'nama' => 'Tiket Place '.$i,
+                'nama' => 'Place '.$i,
                 'harga' => 100000,
                 'quantity' => 1,
                 'kota' => 'Surabaya',
