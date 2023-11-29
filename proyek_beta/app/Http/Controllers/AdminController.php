@@ -21,6 +21,11 @@ class AdminController extends Controller
         $title = "Laporan Kunjungan";
         return view('kunjunganReport',compact('title','kunjungans'));
     }
+    public function transaksiReport(){
+        $transaksis = View::all();
+        $title = "Laporan Transaksi";
+        return view('transaksiReport',compact('title','transaksis'));
+    }
     public function sellerDetail($id){
         $title = "Informasi Penjual";
         $penjual = Penjual::where('id_penjual',$id)->first();
