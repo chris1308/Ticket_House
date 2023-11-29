@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('id_aktivitas')->primary();
             $table->string('id_penjual');
             $table->string('id_pembeli');
-            $table->string('keterangan');            
+            $table->text('keterangan');            
         });
     }
 

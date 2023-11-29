@@ -81,7 +81,7 @@
               <tr>
                 <td>Deskripsi Masalah: </td>
                 <td>
-                  <input required value="{{ old('deskripsi') }}" id="deskripsi" class=" form-control @error('deskripsi') is-invalid @enderror" type="text" name="deskripsi" size="50" placeholder="Deskripsi Masalah">
+                  <input required value="{{ old('deskripsi') }}" id="deskripsi" class=" form-control @error('deskripsi') is-invalid @enderror" type="text" name="deskripsi" size="100" placeholder="Deskripsi Masalah">
                   @error('deskripsi')
                   <div class="invalid-feedback">
                     {{ $message }}

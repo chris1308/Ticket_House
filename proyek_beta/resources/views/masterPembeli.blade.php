@@ -17,7 +17,9 @@
             </div>
              
             <div class="col-md-4 d-flex justify-content-end align-items-center">
-                <button class="border-0 rounded-3 p-2" style="background-color: #FDE1A9; height: 70%;">Tambah Pembeli Baru</button>
+                <a href="/admin/master/pembeli/add/">
+                    <button class="border-0 rounded-3 p-2" style="background-color: #FDE1A9; height: 70%;">Tambah Pembeli Baru</button>
+                </a>
             </div>
         </div>
 

@@ -67,22 +67,32 @@ Route::post('/adminLogin', [AdminController::class,'attemptLogin']);
 Route::get('/adminDashboard',[AdminController::class,'show']);
 Route::get('/adminLogout', [AdminController::class,'logout']); 
 
-//Admin Master
+//Admin Master and Report
 Route::prefix('admin')->group(function(){
+    //---------------- Admin Report ----------------
     Route::get('/report/tiket',[AdminController::class,'ticketReport'])->name('ticket.report');
     Route::get('/report/detailtiket/{id}',[AdminController::class,'ticketReportDetail'])->name('ticketreport.detail');
     Route::get('/report/penjual',[AdminController::class,'sellerReport'])->name('seller.report');
     Route::get('/report/detailpenjual/{id}',[AdminController::class,'sellerDetail'])->name('seller.detail');
     Route::get('/report/pembeli',[AdminController::class,'buyerReport'])->name('buyer.report');
     Route::get('/report/detailpembeli/{id}',[AdminController::class,'buyerDetail'])->name('buyer.detail');
+
+    //---------------- Admin Master ----------------
+    //Master Penjual Routes
     Route::get('/master/penjual', [AdminMasterController::class, 'showMasterPenjual']);
+    Route::get('/master/penjual/add', [AdminMasterController::class, 'showMasterAddPenjual']);
+    Route::post('/master/penjual/add', [AdminMasterController::class, 'saveMasterAddPenjual']);
     Route::get('/master/penjual/{id}/detail', [AdminMasterController::class, 'showMasterDetailPenjual']);
     Route::get('/master/penjual/{id}/change', [AdminMasterController::class, 'changeStatusPenjual']);
 
+    //Master Pembeli Routes
     Route::get('/master/pembeli', [AdminMasterController::class, 'showMasterPembeli']);
+    Route::get('/master/pembeli/add', [AdminMasterController::class, 'showMasterAddPembeli']);
+    Route::post('/master/pembeli/add', [AdminMasterController::class, 'saveMasterAddPembeli']);
     Route::get('/master/pembeli/{id}/detail', [AdminMasterController::class, 'showMasterDetailPembeli']);
     Route::get('/master/pembeli/{id}/change', [AdminMasterController::class, 'changeStatusPembeli']);
 
+    //Master Tiket Routes
     Route::get('/master/tiket', [AdminMasterController::class, 'showMasterTiket']);
     Route::get('/master/tiket/add', [AdminMasterController::class, 'showMasterAddTiket']);
     Route::post('/master/tiket/add', [AdminMasterController::class, 'saveMasterAddTiket']);
@@ -90,9 +100,10 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/tiket/{id}/edit', [AdminMasterController::class, 'showMasterEditTiket']);
     Route::get('/master/tiket/{id}/delete', [AdminMasterController::class, 'deleteMasterTiket']);
 
+    //Master Promo Routes
     Route::get('/master/promo', [AdminMasterController::class, 'showMasterPromo']);
 
-
+    //Master Aktivitas Routes 
     Route::get('/master/aktivitas', [AdminMasterController::class, 'showMasterAktivitas']);
     Route::get('/master/aktivitas/add', [AdminMasterController::class, 'showMasterAddAktivitas']);
     Route::post('/master/aktivitas/add', [AdminMasterController::class, 'saveMasterAddAktivitas']);

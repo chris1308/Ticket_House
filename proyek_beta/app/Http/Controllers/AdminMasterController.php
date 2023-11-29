@@ -8,6 +8,7 @@ use App\Models\Promo;
 use App\Models\Report;
 use App\Models\Tiket;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminMasterController extends Controller
 {
@@ -63,6 +64,56 @@ class AdminMasterController extends Controller
 
 
     //PENJUAL
+    public function showMasterAddPenjual(){
+        return view('masterAddPenjual',[
+            "title" => "Add Penjual",
+        ]);
+    }
+
+    public function saveMasterAddPenjual(Request $request){
+        $rules = [
+            'name' => 'required|string|max:255',
+            'telepon' => 'required|string',
+            'gender'=> 'required',
+            'password'=> 'required|string|confirmed',
+            'dob'=> 'required',
+        ];
+
+        $rules['email'] = [
+            'required',
+            'string',
+            'email:dns',
+            'max:255',
+            Rule::unique('penjuals'), // Ensure email is unique
+        ];
+        $rules['username'] = [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('penjuals'), //Ensure username is unique
+        ];
+
+        $request->validate($rules);
+
+        $ctr = Penjual::count()+1; //hitung ada berapa penjual di DB +1
+        $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT);
+        $newId = "PJ".$numberWithLeadingZeros;
+
+        Penjual::create([
+            'id_penjual' => $newId,
+            'username'=> $request->input('username'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'no_telp' => $request->input('telepon'),
+            'jk' => $request->input('gender'),
+            'password' => bcrypt($request->input('password')),
+            'profile_picture'=>null,
+            'tgl_lahir'=> $request->input('dob'),
+        ]);
+
+        return redirect('/admin/master/penjual');
+    }
+
     public function showMasterDetailPenjual($id){
         $penjual = Penjual::where('id_penjual', $id)->first();
         return view('masterDetailPenjual',[
@@ -88,6 +139,58 @@ class AdminMasterController extends Controller
     }
 
     //PEMBELI
+    public function showMasterAddPembeli(){
+        return view('masterAddPembeli',[
+            "title" => "Add Pembeli",
+        ]);
+    }
+
+    public function saveMasterAddPembeli(Request $request){
+        $rules = [
+            'name' => 'required|string|max:255',
+            'telepon' => 'required|string',
+            'gender'=> 'required',
+            'password'=> 'required|string|confirmed',
+            'dob'=> 'required',
+        ];
+
+        $rules['email'] = [
+            'required',
+            'string',
+            'email:dns',
+            'max:255',
+            Rule::unique('pembelis'), // Ensure email is unique
+        ];
+        $rules['username'] = [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('pembelis'), //Ensure username is unique
+        ];
+
+        $request->validate($rules);
+
+        $ctr = Pembeli::count()+1; //hitung ada berapa penjual di DB +1
+        $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT);
+        $newId = "PJ".$numberWithLeadingZeros;
+        $reff = 'REF'.$numberWithLeadingZeros; 
+
+        Pembeli::create([
+            'id_pembeli' => $newId,
+            'username'=> $request->input('username'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'no_telp' => $request->input('telepon'),
+            'jk' => $request->input('gender'),
+            'password' => bcrypt($request->input('password')),
+            'profile_picture' => null,
+            'tgl_lahir' => $request->input('dob'),
+            'refferal' => $reff
+        ]);
+
+        return redirect('/admin/master/pembeli');
+    }
+
     public function showMasterDetailPembeli($id){
         $pembeli = Pembeli::where('id_pembeli', $id)->first();
     
@@ -109,19 +212,7 @@ class AdminMasterController extends Controller
         }
 
         Pembeli::where('id_pembeli', $id)->update(['status' => $newStatus]);
-        //belum selesai (id masih null terus)
-        // if($pembeli){
-            
-        //     $pembeli->status = $newStatus;
-        //     $pembeli->save();
 
-    
-        // }else{
-        //     return redirect("/admin/master/pembeli")->with("message", "Pembeli not found");
-        // }
-        // $pembeli->update([
-        //     'status'=>$newStatus,
-        // ]);
         return redirect("/admin/master/pembeli")->with("message", "Pembeli status changed successfully");
     }
 

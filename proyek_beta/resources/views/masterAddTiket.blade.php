@@ -37,7 +37,7 @@
         <form action="/admin/master/tiket/add" method="post" class="mt-3 pb-3" enctype="multipart/form-data">
             @csrf
 
-            <table>
+            <table class="w-100">
               <tr>
                 <td>Nama Tiket:</td>
                 <td>
