@@ -4,18 +4,17 @@
     @extends('layouts.adminMain')
     @section('content')
     <div class="container" style="min-height: 650px; padding-top:80px; padding-left: 18%;">
+        @if(session('message')) 
+            <div style="width: 900px" class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <!-- bagian atas -->
         <div class="row d-flex justify-content-between">
             <div class="col-md-6">
                 <h1 class="" style="">Master Pembeli</h1>
             </div>
-
-            @if(session('message')) 
-            <div style="width: 900px" class="alert alert-info alert-dismissible fade show" role="alert">
-                {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
              
             <div class="col-md-4 d-flex justify-content-end align-items-center">
                 <button class="border-0 rounded-3 p-2" style="background-color: #FDE1A9; height: 70%;">Tambah Pembeli Baru</button>

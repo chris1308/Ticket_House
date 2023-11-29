@@ -28,6 +28,7 @@
                     <th class="px-2" style="width: 13%;">Kota</th>
                     <th class="px-2" style="width: 13%;">Alamat</th>
                     <th class="px-2" style="width: 13%;">Harga</th>
+                    <th class="px-2" style="width: 10%;">Status</th>
                     <th class="px-2" style="width: 15%;">Action</th>
                 <!-- </tr> -->
             </thead>
@@ -41,6 +42,7 @@
                         <td>{{$tiket->kota}}</td>
                         <td>{{$tiket->alamat_lokasi}}</td>
                         <td>Rp {{formatUang($tiket->harga)}}</td>
+                        <td style="color: {{($tiket->status == 1 ? 'black' : 'red')}};">{{($tiket->status == 1 ? "Aktif" : "Banned")}}</td>
                         <td>
                             <a href="/admin/master/tiket/{{$tiket->id_tiket}}/detail" style="text-decoration: none;">
                                 <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>

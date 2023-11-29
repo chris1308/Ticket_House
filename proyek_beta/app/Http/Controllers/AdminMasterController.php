@@ -72,7 +72,6 @@ class AdminMasterController extends Controller
     }
 
     public function changeStatusPenjual($id){
-        // $id = $request->input('id');
         $penjual = Penjual::where('id_penjual', $id)->first();
         $newStatus = 0;
 
@@ -83,18 +82,8 @@ class AdminMasterController extends Controller
             $newStatus = 0;
         }
 
-        //belum selesai (id masih null terus)
-        if($penjual){
-            
-            $penjual->status = $newStatus;
-            $penjual->save();
-    
-        }else{
-            return redirect("/admin/master/pembeli")->with("message", "Penjual not found");
-        }
-        // $pembeli->update([
-        //     'status'=>$newStatus,
-        // ]);
+        Penjual::where('id_penjual', $id)->update(['status' => $newStatus]);
+
         return redirect("/admin/master/penjual")->with("message", "Penjual status changed successfully");
     }
 
@@ -108,9 +97,8 @@ class AdminMasterController extends Controller
         ]);
     }
 
-    public function changeStatusPembeli(Request $request, $idPembeli){
-        // $id = $request->input('id');
-        $pembeli = Pembeli::where('id_pembeli', $idPembeli)->first();
+    public function changeStatusPembeli($id){
+        $pembeli = Pembeli::where('id_pembeli', $id)->first();
         $newStatus = 0;
 
         //toggle status
@@ -120,16 +108,17 @@ class AdminMasterController extends Controller
             $newStatus = 0;
         }
 
+        Pembeli::where('id_pembeli', $id)->update(['status' => $newStatus]);
         //belum selesai (id masih null terus)
-        if($pembeli){
+        // if($pembeli){
             
-            $pembeli->status = $newStatus;
-            $pembeli->save();
+        //     $pembeli->status = $newStatus;
+        //     $pembeli->save();
 
     
-        }else{
-            return redirect("/admin/master/pembeli")->with("message", "Pembeli not found");
-        }
+        // }else{
+        //     return redirect("/admin/master/pembeli")->with("message", "Pembeli not found");
+        // }
         // $pembeli->update([
         //     'status'=>$newStatus,
         // ]);
@@ -231,9 +220,7 @@ class AdminMasterController extends Controller
                 $image->move(public_path('images'), $imageName);
                 array_push($gambar, $imageName);
                 
-            }
-
-           
+            }       
         }else{
             return redirect()->back()->with('message', 'No images were selected.');
         }
@@ -264,6 +251,22 @@ class AdminMasterController extends Controller
         return redirect()->back()->with('message','Successfully added new ticket!');
     }
 
+
+    public function deleteMasterTiket($id){
+        $tiket = Tiket::where('id_tiket', $id)->first();
+        $newStatus = 0;
+
+        //toggle status
+        if($tiket->status == 0){//if old status was banned
+            $newStatus = 1;
+        }else{
+            $newStatus = 0;
+        }
+
+        Tiket::where('id_tiket', $id)->update(['status' => $newStatus]);
+
+        return redirect("/admin/master/tiket");
+    }
 
     //AKTIVITAS
 
@@ -309,7 +312,7 @@ class AdminMasterController extends Controller
         ]);
     }
 
-    public function deleteMasterDetailAktivitas($id){
+    public function deleteMasterAktivitas($id){
         $aktivitas = Report::where('id_aktivitas', $id)->first();
         // Report::destroy($id); //this code can't worked
         

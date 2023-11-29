@@ -82,7 +82,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#">
+                <a href="/admin/master/tiket/{{$tiket->id_tiket}}/delete">
                     <button class="btn btn-danger w-75">{{(($tiket->status == 1) ? "Ban Tiket" : "Unban Tiket")}}</button>
                 </a>
             </div>

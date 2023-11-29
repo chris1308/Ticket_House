@@ -59,11 +59,10 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <form action="/admin/master/pembeli/{{$pembeli->id_pembeli}}/change" method="POST">
-                    @csrf
+                <a href="/admin/master/pembeli/{{$pembeli->id_pembeli}}/change">
                     <input type="hidden" name="id" value="{{$pembeli->id_pembeli}}">
                     <button class="btn btn-danger w-75">{{(($pembeli->status == 1) ? "Ban Pembeli" : "Unban Pembeli")}}</button>
-                </form>
+                </a>
             </div>
         </div>
         

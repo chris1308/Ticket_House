@@ -75,13 +75,14 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/master/pembeli', [AdminMasterController::class, 'showMasterPembeli']);
     Route::get('/master/pembeli/{id}/detail', [AdminMasterController::class, 'showMasterDetailPembeli']);
-    Route::post('/master/pembeli/{idPembeli}/change', [AdminMasterController::class, 'changeStatusPembeli']);
+    Route::get('/master/pembeli/{id}/change', [AdminMasterController::class, 'changeStatusPembeli']);
 
     Route::get('/master/tiket', [AdminMasterController::class, 'showMasterTiket']);
     Route::get('/master/tiket/add', [AdminMasterController::class, 'showMasterAddTiket']);
     Route::post('/master/tiket/add', [AdminMasterController::class, 'saveMasterAddTiket']);
     Route::get('/master/tiket/{id}/detail', [AdminMasterController::class, 'showMasterDetailTiket']);
     Route::get('/master/tiket/{id}/edit', [AdminMasterController::class, 'showMasterEditTiket']);
+    Route::get('/master/tiket/{id}/delete', [AdminMasterController::class, 'deleteMasterTiket']);
 
     Route::get('/master/promo', [AdminMasterController::class, 'showMasterPromo']);
 
@@ -90,7 +91,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/aktivitas/add', [AdminMasterController::class, 'showMasterAddAktivitas']);
     Route::post('/master/aktivitas/add', [AdminMasterController::class, 'saveMasterAddAktivitas']);
     Route::get('/master/aktivitas/{id}/detail', [AdminMasterController::class, 'showMasterDetailAktivitas']);
-    Route::get('/master/aktivitas/{id}/delete', [AdminMasterController::class, 'deleteMasterDetailAktivitas']);
+    Route::get('/master/aktivitas/{id}/delete', [AdminMasterController::class, 'deleteMasterAktivitas']);
 });
 
 Route::get('/addMasterPromo', [AdminMasterController::class, 'showAddMasterPromo'])->name('showAddMasterPromo');
