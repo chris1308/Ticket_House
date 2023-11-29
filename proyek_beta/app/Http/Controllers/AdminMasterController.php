@@ -228,6 +228,66 @@ class AdminMasterController extends Controller
         ]);
     }
 
+    public function showMasterAddPromo(){
+        return view('masterAddPromo',[
+            "title" => "Add Promo",
+        ]);
+    }
+
+    public function saveMasterAddPromo(Request $request){
+        $limit = 5;
+        $rules = [
+            'idPenjual' => 'required|string',
+            'kodePromo' => 'required|string|max:255',
+            'nilaiPromo' => 'required|integer',
+            'tipePromo' => 'required|in:persen:nonpersen',
+            'minPurchase' => 'required|integer'
+        ];
+        $request->validate($rules);
+
+        //Cek
+        $cek = Penjual::where('id_penjual', $request->input("idPenjual"))->get();
+
+        if(count($cek) == 0){
+            return redirect()->back()->with('error', 'ID Penjual tidak valid!');
+        }
+
+        //generate new ID Promo
+        $ctr = Promo::count()+1;
+        $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT);
+        $promoID = 'PMO'.$numberWithLeadingZeros;
+
+        //-------------------------------
+
+        Promo::create([
+            'id_kodepromo' => $promoID,
+            'id_penjual' => $request->input('idPenjual'),
+            'kode_promo' => $request->input('kodePromo'),
+            'nilai_promo' => $request->input('nilaiPromo'),
+            'tipe' => $request->input('tipePromo'),
+            'min_purchase' => $request->input('minPurchase'),
+            'status' => 1
+        ]);
+        //redirect setelah berhasil add dengan pesan
+        return redirect()->back()->with('message', 'Successfully added new promo!');
+    }
+
+    public function deleteMasterPromo($id){
+        $promo = Promo::where('id_kodepromo', $id)->first();
+        $newStatus = 0;
+
+        if($promo->status == 0){
+            $newStatus = 1;
+        }
+        else{
+            $newStatus = 0;
+        }
+
+        Promo::where('id_kodepromo', $id)->update(['status' => $newStatus]);
+
+        return redirect("admin/master/promo");
+    }
+
     public function showMasterAddTiket(){
         return view('masterAddTiket',[
             "title" => "Add Tiket",

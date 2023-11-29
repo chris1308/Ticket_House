@@ -15,7 +15,7 @@
             @enderror
             <br/>
             Minimal pembelian
-            <input required value="{{ old('min-purchase') }}" type="text" class=" form-control @error('min-purchase') is-invalid @enderror" name="min-purchase" size="50" placeholder="minimal pembelian" id="">
+            <input required value="{{ old('min-purchase') }}" id="minPurchase" type="text" class=" form-control @error('min-purchase') is-invalid @enderror" name="min-purchase" size="50" placeholder="minimal pembelian" id="">
             @error('min-purchase')
             <div class="invalid-feedback">
               {{ $message }}
@@ -23,7 +23,7 @@
             @enderror            
             <br/>
             Nilai Promo
-            <input required value="{{ old('nilaiPromo') }}" type="text" class=" form-control @error('nilaiPromo') is-invalid @enderror" name="nilaiPromo" size="50" placeholder="nilai promo" id="">
+            <input required value="{{ old('nilaiPromo') }}" id="nilaiPromo" type="text" class=" form-control @error('nilaiPromo') is-invalid @enderror" name="nilaiPromo" size="50" placeholder="nilai promo" id="">
             @error('nilaiPromo')
             <div class="invalid-feedback">
               {{ $message }}
@@ -31,7 +31,7 @@
             @enderror            
             <br/>
             Tipe
-            <select value="{{ old('tipe') }}" style="width: 450px" class="form-control" name="tipe" id="tipe">
+            <select value="{{ old('tipe') }}" id="tipePromo" style="width: 450px" class="form-control" name="tipe" id="tipe">
                 <option value="persen">Persen</option>
                 <option value="non">Non-persen</option>
             </select>
