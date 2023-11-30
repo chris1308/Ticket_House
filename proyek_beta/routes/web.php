@@ -108,7 +108,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/master/promo/add', [AdminMasterController::class, 'saveMasterAddPromo']);
     Route::get('/master/promo/{id}/detail', [AdminMasterController::class, 'showMasterDetailPromo']);
     Route::get('/master/promo/{id}/edit', [AdminMasterController::class, 'showMasterEditPromo']);
-    Route::get('/master/promo/{id}/delete', [AdminMasterController::class, 'showMasterDeletePromo']);
+    Route::get('/master/promo/{id}/delete', [AdminMasterController::class, 'deleteMasterPromo']);
 
     //Master Aktivitas Routes 
     Route::get('/master/aktivitas', [AdminMasterController::class, 'showMasterAktivitas']);

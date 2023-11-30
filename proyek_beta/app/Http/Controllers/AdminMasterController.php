@@ -41,7 +41,7 @@ class AdminMasterController extends Controller
     }
 
     public function showMasterPromo(){
-        $promo = Promo::with(['penjual'])->get();
+        $promo = Promo::where('status', 1)->with(['penjual'])->get();
         // $tiket = Tiket::all();
         // $tiket->load('penjual:name');
         return view('masterPromo',[
