@@ -27,7 +27,9 @@
             justify-content: center;
             z-index: 9999; /* Ensure it appears above other elements */
         }
-
+        .notifmenu:hover{
+            background-color: lightgray;
+        }
 
     </style>
     <title>{{ $title }}</title>

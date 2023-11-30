@@ -36,7 +36,6 @@ class PembelianController extends Controller
     }
 
     public function pay(Request $request,$id){
-
         $ticket = Tiket::where('id_tiket',$id)->first();
         $namaTiket = $ticket->nama;
         $hiddenTotal = $request->input('hiddenTotal');
@@ -52,11 +51,12 @@ class PembelianController extends Controller
             'id_pembeli'=>session('user')->id_pembeli,
             'id_kodepromo'=>$request->input('promoCode'),
             'id_tiket'=>$id,
-            'tanggal_pembelian'=>Carbon::now(),
+            'tanggal_pembelian'=>Carbon::now('Asia/Jakarta'), //supaya dapat tanggal dari timezone indonesia
             'quantity'=>$request->input('hiddenQty'),
             'harga_beli'=>$ticket->harga,
             'total'=>$final,
         ]);
+        
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$isSanitized = true;

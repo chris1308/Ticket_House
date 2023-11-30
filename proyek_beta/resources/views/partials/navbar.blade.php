@@ -72,11 +72,11 @@
   @if (session('tempTickets')!=null)    
     @foreach (session('tempTickets') as $index => $s)
       @if ($index == 0)
-        <div class="shadow-sm px-3 py-4">Tiket <span class="fw-bold">{{ $s }}</span> mungkin menarik perhatianmu!</div>
+        <div class="notifmenu shadow-sm px-3 py-4"><a style="text-decoration: none; color:black" href="{{ route('ticket.detail',['id'=>$s->id_tiket]) }}">Tiket <span class="fw-bold">{{ $s->nama }}</span> mungkin menarik perhatianmu!</a></div>
       @elseif ($index==1)
-        <div class="shadow-sm px-3 py-4">Tiket <span class="fw-bold">{{ $s }}</span> jangan sampai kamu lewatkan!</div>
+        <div class="notifmenu shadow-sm px-3 py-4"><a href="{{ route('ticket.detail',['id'=>$s->id_tiket]) }}" style="text-decoration: none; color:black" href="">Tiket <span class="fw-bold">{{ $s->nama }}</span> jangan sampai kamu lewatkan!</a></div>
       @else
-        <div class="shadow-sm px-3 py-4">Tiket <span class="fw-bold">{{ $s }}</span> tampaknya cocok buat kamu!</div>
+        <div class="notifmenu shadow-sm px-3 py-4"><a style="text-decoration: none; color:black" href="{{ route('ticket.detail',['id'=>$s->id_tiket]) }}" >Tiket <span class="fw-bold">{{ $s->nama }}</span> tampaknya cocok buat kamu!</a></div>
       @endif
     @endforeach
   @endif

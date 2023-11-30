@@ -101,13 +101,13 @@ class TiketController extends Controller
         //add view count 
         Tiket::where('id_tiket',$id)->update(['jumlah_view'=>$ticket->jumlah_view+1]); 
         //add view per day count
-        if(View::where('tanggal',Carbon::today())->exists()){
-            $viewData = View::where('tanggal',Carbon::today())->first();
+        if(View::where('tanggal',Carbon::today('Asia/Jakarta'))->exists()){
+            $viewData = View::where('tanggal',Carbon::today('Asia/Jakarta'))->first();
             $viewData->update(['jumlah_kunjungan'=>$viewData->jumlah_kunjungan +1]);
         }else{
             View::create([
                 'id'=>View::count()+1,
-                'tanggal'=>Carbon::today(),
+                'tanggal'=>Carbon::today('Asia/Jakarta'),
                 'jumlah_kunjungan'=>1
             ]);
         }

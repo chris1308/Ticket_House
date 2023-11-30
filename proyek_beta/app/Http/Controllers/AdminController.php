@@ -22,9 +22,29 @@ class AdminController extends Controller
         return view('kunjunganReport',compact('title','kunjungans'));
     }
     public function transaksiReport(){
-        $transaksis = View::all();
+        $transaksis = Pembelian::where('status','berhasil')->get();
+        $sortedTrans = $transaksis->sortBy('tanggal_pembelian'); //sort tanggal ascending
+        $groupedTrans= $sortedTrans->groupBy(function($trans){
+            return $trans->tanggal_pembelian;
+        });
+        // dd($groupedTrans);
+        $tempTrans = [];
+        foreach($groupedTrans as $transDate => $transPerDate){
+            $tanggal = $transDate;
+            $jumlah_transaksi = count($transPerDate);
+            $total_nominal = 0;
+            foreach($transPerDate as $t){
+                $total_nominal+=$t->total;
+            }
+            $tempData = [
+                'tanggal'=>$tanggal,
+                'jumlah'=>$jumlah_transaksi,
+                'total'=>$total_nominal,
+            ];
+            array_push($tempTrans,$tempData);
+        }
         $title = "Laporan Transaksi";
-        return view('transaksiReport',compact('title','transaksis'));
+        return view('transaksiReport',compact('title','tempTrans'));
     }
     public function sellerDetail($id){
         $title = "Informasi Penjual";

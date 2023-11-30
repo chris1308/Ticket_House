@@ -16,6 +16,7 @@ class LoginController extends Controller
                 //random 3 tickets to be recommended on notification bar with the premise that there are at least 8 tickets in the database. Otherwise just fetch 3 most viewed ticket
                 $tickets = Tiket::where('status',1)->orderBy('jumlah_view','desc')->get(); 
                 $tempTickets = [];
+                // $tempTicketsId = [];
                 if(count($tickets)>=8){
                     $doneIndex = [];
                     for($i = 0; $i<3; $i++){
@@ -25,7 +26,7 @@ class LoginController extends Controller
                             $randomIdx = random_int(0,7);
                         }
                         //check that there are no duplicate tickets being pushed
-                        array_push($tempTickets,$tickets[$randomIdx]->nama);
+                        array_push($tempTickets,$tickets[$randomIdx]);
                         array_push($doneIndex,$randomIdx);
                     }
                 }else{ //less than 8 tickets available
@@ -35,6 +36,7 @@ class LoginController extends Controller
                 }
                 //save into session
                 session(['tempTickets'=>$tempTickets]);
+                // session(['tempTicketsId'=>$tempTicketsId]);
         return view('login',[
             "title" => "Login"
         ]);

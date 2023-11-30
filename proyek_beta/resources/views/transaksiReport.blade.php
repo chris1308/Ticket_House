@@ -18,14 +18,16 @@
                         <th class="px-2 text-center" style="width:7%">ID</th>
                         <th class="px-2 text-center" style="width:10%">Tanggal Transaksi</th>
                         <th class="px-2 text-center" style="width:10%">Jumlah Transaksi</th>
+                        <th class="px-2 text-center" style="width:10%">Total Nominal Transaksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($transaksis as $idx=>$p) 
+                    @foreach ($tempTrans as $idx=>$p) 
                         <tr>
-                            <td class="text-center">{{ $p->id }}</td>
-                            <td class="text-center">{{ $p->tanggal }}</td>
-                            <td class="text-center">{{ $p->jumlah_transaksi }}</td>
+                            <td class="text-center">{{ $idx+1 }}</td>
+                            <td class="text-center">{{ $p["tanggal"] }}</td>
+                            <td class="text-center">{{ $p["jumlah"] }}</td>
+                            <td class="text-center">Rp. {{ formatUang($p["total"]) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
