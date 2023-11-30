@@ -100,6 +100,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/master/tiket/add', [AdminMasterController::class, 'saveMasterAddTiket']);
     Route::get('/master/tiket/{id}/detail', [AdminMasterController::class, 'showMasterDetailTiket']);
     Route::get('/master/tiket/{id}/edit', [AdminMasterController::class, 'showMasterEditTiket']);
+    Route::post('/master/tiket/{id}/edit', [AdminMasterController::class, 'saveMasterEditTiket']);
     Route::get('/master/tiket/{id}/delete', [AdminMasterController::class, 'deleteMasterTiket']);
 
     //Master Promo Routes

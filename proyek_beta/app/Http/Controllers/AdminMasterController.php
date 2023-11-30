@@ -217,16 +217,7 @@ class AdminMasterController extends Controller
     }
 
 
-    //TIKET
-
-    public function showMasterDetailTiket($id){
-        $tiket = Tiket::with(['penjual'])->where('id_tiket', $id)->first();
-    
-        return view('masterDetailTiket',[
-            "title" => "Detail Tiket",
-            "tiket" => $tiket
-        ]);
-    }
+    //PROMO
 
     public function showMasterDetailPromo($id){
         $promo = Promo::with(['penjual'])->where('id_kodepromo', $id)->first();
@@ -248,9 +239,9 @@ class AdminMasterController extends Controller
         $rules = [
             'idPenjual' => 'required|string',
             'kodePromo' => 'required|string|max:255',
-            'nilaiPromo' => 'required|integer',
+            'nilaiPromo' => 'required|integer|gt:0',
             'tipePromo' => 'required|in:Persen,Non Persen',
-            'minPurchase' => 'required|integer'
+            'minPurchase' => 'required|integer|gt:0'
         ];
         $request->validate($rules);
 
@@ -297,6 +288,17 @@ class AdminMasterController extends Controller
         return redirect("admin/master/promo");
     }
 
+    //TIKET
+
+    public function showMasterDetailTiket($id){
+        $tiket = Tiket::with(['penjual'])->where('id_tiket', $id)->first();
+    
+        return view('masterDetailTiket',[
+            "title" => "Detail Tiket",
+            "tiket" => $tiket
+        ]);
+    }
+
     public function showMasterAddTiket(){
         return view('masterAddTiket',[
             "title" => "Add Tiket",
@@ -310,8 +312,8 @@ class AdminMasterController extends Controller
             'idPenjual' => 'required|string',
             'kategori' => 'required|in:place,seminar',
             'deskripsi' => 'required|string',
-            'harga'=> 'required|integer',
-            'stok'=> 'required|integer',
+            'harga'=> 'required|integer|gt:0',
+            'stok'=> 'required|integer|gt:0',
             'kota'=> 'required',
             'lokasi'=> 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -427,6 +429,124 @@ class AdminMasterController extends Controller
 
         return redirect("/admin/master/tiket");
     }
+
+    public function showMasterEditTiket($id){
+        $checkTicket = Tiket::where('id_tiket', $id)->first();
+        if($checkTicket == null){//prevent editing tickets that not exist
+            return redirect("/admin/master/tiket")->with('message','Invalid Ticket');
+        }
+
+        return view("masterEditTiket", [
+            "title" => "Edit Tiket",
+            "id" => $id,
+            "oldData" => $checkTicket
+        ]);
+    }
+
+    public function saveMasterEditTiket(Request $request, $id){
+        $limit = 5;
+        
+        $rules = [
+            'namaTiket' => 'required|string|max:255',
+            'kategori' => 'required|in:place,seminar',
+            'deskripsi' => 'required|string',
+            'harga'=> 'required|integer|gt:0',
+            'stok'=> 'required|integer|gt:0',
+            'kota'=> 'required',
+            'lokasi'=> 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images'   => 'required|array|max:'.$limit.',',
+            'startDate' => 'date|nullable',
+            'startTime' => 'required',
+            'endTime' => 'required'
+        ];
+        
+        $tambahan = [
+            'images.max' => 'You can upload a maximum of '.$limit.' images.', // Customize the error message
+        ];
+        $request->validate($rules, $tambahan);
+
+        //pengecekan jam selesai harus lebih besar (>) dari jam mulai (not done)
+        // $jamMulai = new Carbon($request->input('startTime'));
+        // $jamSelesai = new Carbon($request->input('endTime'));
+        // $selisih = $jamSelesai->diffInSeconds($jamMulai);
+        // echo("<script>`alert($selisih)`</script>");
+        // if($selisih < 0){
+        //     return redirect()->back()->with('error', 'Jam selesai harus lebih besar dari jam mulai');
+        // }
+
+        // Mencari latitude dan longitude dari api HERE maps
+        $lat = "";//jika alamat tidak ditemukan dimap isi string kosong
+        $long = "";
+        $kota = $request->input('kota');
+        $lokasi = $request->input('lokasi');
+
+        $data = [
+            'q' => $lokasi,
+            'apiKey' => '1DvppUVi__lz1FhPrVsRjXlo92_CDUDCBgPkikH4xd4'
+        ];
+        
+        $json = file_get_contents('https://geocode.search.hereapi.com/v1/geocode?' . http_build_query($data));
+     
+        $result = json_decode($json, true);//encode json jadi array assoc
+
+        //cari posisi latitude dan longitude dari lokasi tiket
+        foreach ($result['items'] as $res) {
+            if($res['address']['city'] == $kota){
+                $lat = $res['position']['lat'];
+                $long = $res['position']['lng'];
+                break;
+            }
+        }
+
+        //pengecekan jika lokasi tidak ditemukan dimap beri peringatan
+        if($lat == "" || $long == ""){
+            return redirect()->back()->with('error', 'Lokasi tidak valid!');
+        }
+
+        $gambar = [];
+        //insert multiple image
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imageName = time() . '-' . $image->getClientOriginalName();
+                $imageName = time() . '-' . uniqid() . '.' .$image->getClientOriginalExtension();
+
+                // $image->move(public_path('uploads'), $imageName);
+                $image->move(public_path('images'), $imageName);
+                array_push($gambar, $imageName);
+                
+            }
+
+        }else{
+            return redirect()->back()->with('message', 'No images were selected.');
+        }
+        
+        //Update data tiket di database
+        // $tiket = Tiket::find($id);
+        $tiket = Tiket::where('id_tiket', $id);
+
+        $tiket->update([
+            'nama' => $request->input('namaTiket'),
+            'harga' => $request->input('harga'),
+            'quantity' => $request->input('stok'),
+            'kota' => $request->input('kota'),
+            'alamat_lokasi' => $request->input('lokasi'),
+            'lokasi_lat' => $lat,
+            'lokasi_long' => $long,
+            'gambar'=>json_encode($gambar),
+            'deskripsi'=> $request->input('deskripsi'),
+            'kategori'=> $request->input('kategori'),
+            'start_date' => $request->input('startDate'),
+            'start_time' => $request->input('startTime'),
+            'end_time' => $request->input('endTime'),
+        ]);
+        
+        //redirect setelah berhasil update dengan pesan
+        return redirect('/admin/master/tiket')->with('message', 'Ticket updated successfully');
+    }
+
 
     //AKTIVITAS
 

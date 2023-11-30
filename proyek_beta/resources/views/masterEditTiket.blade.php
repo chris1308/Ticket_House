@@ -1,19 +1,26 @@
-@extends('layouts.sellerMain')
-@section('content')
-<!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime) --}} -->
-<div class="container" style="min-height: 900px; margin-left:30%;">
-    <div class="my-3 pt-5" style=" ">
-        <h1 class="mt-5">Edit Tiket</h1>
-        
+
+@if (session('admin') == "admin")
+<!-- {{-- layout.adminMain untuk ambil komponen navbar dan sidebar admin --}} -->
+    @extends('layouts.adminMain')
+    @section('content')
+    <div class="container" style="min-height: 650px; padding-top:80px; padding-left: 20%;">
+        <!-- bagian atas -->
+        <div class="row d-flex justify-content-start">
+            <div class="col-md-6">
+                <h1 class="" style="">Master Tiket</h1>
+            </div>
+        </div>
+
+        <h4 class="text-center mt-2 py-2">Edit Data</h4>
         @if(session('message'))
-          <div style="width: 500px" class="alert alert-info alert-dismissible fade show" role="alert">
+          <div style="width: 100%" class="alert alert-info alert-dismissible fade show" role="alert">
                 {{ session('message') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         @if(session('error'))
-          <div style="width: 500px" class="alert alert-danger alert-dismissible fade show" role="alert">
+          <div style="width: 100%" class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -21,17 +28,16 @@
 
         <!-- display error maximum upload image -->
         @foreach ($errors->all() as $error)
-        <div style="width: 500px" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div style="width: 100%" class="alert alert-danger alert-dismissible fade show" role="alert">
           {{$error}}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endforeach
-
-        <form action="/edit/{{$id}}" method="post" class="mt-3 pb-3" enctype="multipart/form-data">
+        
+        <form action="/admin/master/tiket/{{$id}}/edit" method="POST" class="mt-3 pb-3" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
 
-            <table>
+            <table class="w-100">
               <tr>
                 <td>Nama Tiket:</td>
                 <td>
@@ -44,11 +50,22 @@
                 </td>
               </tr>
               <tr>
+                <td>Id Penjual:</td>
+                <td>
+                  <input required value="{{ $oldData->id_penjual}}" id="idPenjual" class=" form-control @error('idPenjual') is-invalid @enderror" type="text" name="idPenjual" size="50" placeholder="ID Penjual" id="">
+                  @error('idPenjual')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                </td>
+              </tr>
+              <tr>
                 <td>Kategori:</td>
                 <td>
-                  <select value="{{ $oldData->kategori }}" style="width: 450px" class="form-control" name="kategori" id="kategori" onchange="dateFillable(this)">
-                      <option value="place" {{ $oldData->kategori === 'place' ? 'selected' : '' }}>Place</option>
-                      <option value="seminar" {{ $oldData->kategori === 'seminar' ? 'selected' : '' }}>Seminar</option>
+                  <select value="{{ $oldData->kategori }}" style="width: 100%" class="form-control" name="kategori" id="kategori" onchange="dateFillable(this);">
+                      <option value="place" {{ ($oldData->kategori == "place") ? "selected": ""}}>Place</option>
+                      <option value="seminar" {{ ($oldData->kategori == "seminar") ? "selected": ""}}>Seminar</option>
                   </select>
                   @error('kategori')
                   <div class="invalid-feedback">
@@ -97,26 +114,20 @@
                 <td>Gambar: </td>
                 <td>
                   <input type="file" name="images[]" id="images" multiple>
-                  <!-- jika basic user can only upload up to 3 images -->
-                  @if (session('user')->premium_status == 0)
-                    <span>Upload up to 3 images</span>
-                  @else
-                    <span>Upload up to 5 images</span>
-                  @endif
                 </td>
               </tr>
               <tr>
                 <td>Kota:</td>
                 <td>
-                  <select value="{{ $oldData->kota }}" style="width: 450px" class="form-control" name="kota" id="kota">
-                    <option value="Bandung" {{ $oldData->kota === 'Bandung' ? 'selected' : '' }}>Bandung</option>
-                    <option value="Denpasar" {{ $oldData->kota === 'Denpasar' ? 'selected' : '' }}>Denpasar</option>
-                    <option value="Jakarta Selatan" {{ $oldData->kota === 'Jakarta Selatan' ? 'selected' : '' }}>Jakarta Selatan</option>
-                    <option value="Malang" {{ $oldData->kota === 'Malang' ? 'selected' : '' }}>Malang</option>
-                    <option value="Medan" {{ $oldData->kota === 'Medan' ? 'selected' : '' }}>Medan</option>
-                    <option value="Solo" {{ $oldData->kota === 'Solo' ? 'selected' : '' }}>Solo</option>
-                    <option value="Surabaya" {{ $oldData->kota === 'Surabaya' ? 'selected' : '' }}>Surabaya</option>
-                    <option value="Yogyakarta" {{ $oldData->kota === 'Yogyakarta' ? 'selected' : '' }}>Yogyakarta</option>
+                  <select value="{{ $oldData->kota }}" style="width: 100%" class="form-control" name="kota" id="kota">
+                    <option value="Bandung" {{ ($oldData->kota == "Bandung") ? "selected": ""}}>Bandung</option>
+                    <option value="Denpasar" {{ ($oldData->kota == "Denpasar") ? "selected": ""}}>Denpasar</option>
+                    <option value="Jakarta Selatan" {{ ($oldData->kota == "Jakarta Selatan") ? "selected": ""}}>Jakarta Selatan</option>
+                    <option value="Malang" {{ ($oldData->kota == "Malang") ? "selected": ""}}>Malang</option>
+                    <option value="Medan" {{ ($oldData->kota == "Medan") ? "selected": ""}}>Medan</option>
+                    <option value="Solo" {{ ($oldData->kota == "Solo") ? "selected": ""}}>Solo</option>
+                    <option value="Surabaya" {{ ($oldData->kota == "Surabaya") ? "selected": ""}}>Surabaya</option>
+                    <option value="Yogyakarta" {{ ($oldData->kota == "Yogyakarta") ? "selected": ""}}>Yogyakarta</option>
                   </select>
                   @error('kota')
                   <div class="invalid-feedback">
@@ -128,19 +139,19 @@
               <tr>
                 <td>Lokasi: </td>
                 <td>
-                  <input required value="{{ $oldData->alamat_lokasi }}" type="text" class=" form-control @error('lokasi') is-invalid @enderror" name="lokasi" size="50" placeholder="Lokasi" id="">
+                  <input required value="{{ $oldData->alamat_lokasi }}" type="text" class=" form-control @error('lokasi') is-invalid @enderror" name="lokasi" size="50" placeholder="Jl. Ngagel Jaya Tengah 77" id="">
                   @error('lokasi')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
                   @enderror
-                  
+                  Kombinasi nama jalan beserta nomor jika ada, contoh: Jl. Ngagel Jaya Tengah No.77
                 </td>
               </tr>
               <tr>
                 <td>Tanggal: <br><b style="color: red;">(Hanya untuk tiket seminar)<b></td>
                 <td>
-                  <input required value="{{ $oldData->start_date}}" type="date" class=" form-control @error('startDate') is-invalid @enderror" name="startDate" size="50" id="startDate" {{ ($oldData->kategori === 'seminar' ) ? '' : 'disabled'}}>
+                  <input required value="{{ $oldData->start_date }}" type="date" class=" form-control @error('startDate') is-invalid @enderror" name="startDate" size="50" id="startDate" {{ $oldData->kategori == "seminar" ? "" : "disabled" }}>
                   @error('startDate')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -152,7 +163,7 @@
               <tr>
                 <td>Waktu Mulai: </td>
                 <td>
-                  <input required value="{{ $oldData->start_time}}" type="time" class=" form-control @error('startTime') is-invalid @enderror" name="startTime" size="50" id="startTime">
+                  <input required value="{{ $oldData->start_time }}" type="time" class=" form-control @error('startTime') is-invalid @enderror" name="startTime" size="50" id="startTime">
                   @error('startTime')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -164,7 +175,7 @@
               <tr>
                 <td>Waktu Selesai: </td>
                 <td>
-                  <input required value="{{ $oldData->end_time}}" type="time" class=" form-control @error('endTime') is-invalid @enderror" name="endTime" size="50" id="endTime">
+                  <input required value="{{ $oldData->end_time }}" type="time" class=" form-control @error('endTime') is-invalid @enderror" name="endTime" size="50" id="endTime">
                   @error('endTime')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -173,21 +184,27 @@
                   Untuk tiket tempat wisata bisa diisi jam tutup tempat wisata
                 </td>
               </tr>
-              <tr class="">
+              <tr>
                 <td colspan="2">
-                  <button class="btn btn-success ms-2" type="submit" style="width: 100px;float: right;">Update</button>
-                  <a href="/viewall"><div class="btn btn-danger" style="width: 100px; float: right;">Cancel</div></a>
+                  <button type="submit" class="btn btn-success" style="width: 100px; float:right;">Save</button>
+                  <input class="btn btn-danger me-2" type="reset" style="width: 100px; float: right;" value="Reset">
                 </td>
               </tr>
             </table>
 
+            
         </form>
+
     </div>
-</div>
-@endsection
+    
+    @endsection
+@else
+    {{-- redirect to admin login page if hasn't logged in --}}
+    <script>window.location = "{{ route('login.admin') }}";</script>
+@endif
 
 <script>
-  function dateFillable(e){
+    function dateFillable(e){
     let inputDate = document.getElementById('startDate');
     if(e.value == "seminar"){
       inputDate.removeAttribute("disabled");

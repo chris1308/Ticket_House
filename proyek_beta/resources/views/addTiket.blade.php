@@ -109,7 +109,7 @@
                   <select value="{{ old('kota') }}" style="width: 450px" class="form-control" name="kota" id="kota">
                     <option value="Bandung">Bandung</option>
                     <option value="Denpasar">Denpasar</option>
-                    <option value="Jakarta">Jakarta</option>
+                    <option value="Jakarta Selatan">Jakarta Selatan</option>
                     <option value="Malang">Malang</option>
                     <option value="Medan">Medan</option>
                     <option value="Solo">Solo</option>
