@@ -11,11 +11,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Barryvdh\DomPDF\Facade\Pdf; //untuk export pdf
+use Maatwebsite\Excel\Facades\Excel; //untuk export excel
 class AdminController extends Controller
 {
     use AuthenticatesUsers;
 
+    public function exportexcel($id){
+        if($id==1){
+            //laporan penjual
+        }
+    }
     public function kunjunganReport(){
         $kunjungans = View::all();
         $title = "Laporan Kunjungan";

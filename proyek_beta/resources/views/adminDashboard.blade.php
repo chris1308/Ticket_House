@@ -3,35 +3,34 @@
     @extends('layouts.adminMain')
     @section('content')
     <div class="container" style="overflow:hidden; height: 650px; padding-top:80px; margin-left: 280px;">
-            <div class="row">
+            <div class="row" id="statistik">
             <div class="col-md-9">
-                <h1 class="">Dashboard</h1>
-                <div class="Statistik text-center mt-3 mb-5" style="font-size: 25px; background-color: rgb(160, 251, 160); width:850px; min-height:300px;">
-                    <div class="Baris1 pt-5 d-flex justify-content-evenly" style="">
-                        <div class="Kiri ps-3">
-                            <p class="fw-bold">Jumlah Transaksi</p>
-                            <p>{{ $totalPembelian }}</p>
-                        </div>
-                        <div class="Tengah">
-                            <p class="fw-bold">Jumlah Tiket</p>
-                            <p>{{ $totalTiket }}</p>
-                        </div>
-                        <div class="Kanan pe-4">
-                            <p class="fw-bold">Total View</p>
-                            <p>{{ $totalView }}</p>
-                        </div>
+                <h1 class="mb-5">Dashboard</h1>
+                <div class="row d-flex justify-content-between mb-4" id="rowSatu">
+                    <div class="col-md-3 text-center mx-4 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
+                        <p class="fw-bold fs-5">Jumlah Transaksi</p>
+                        <p class="fs-5">{{ $totalPembelian }}</p>
                     </div>
-                    <div class="Baris2  mt-4 d-flex justify-content-evenly">
-                        <div class="Kiri ps-3">
-                            <p class="fw-bold">Jumlah Pembeli</p>
-                            <p>{{ $totalPembeli }}</p>
-                        </div>
-                        <div class="Kanan pe-3">
-                            <p class="fw-bold">Jumlah Penjual</p>
-                            <p>{{ $totalPenjual }}</p>
-                        </div>
+                    <div class="col-md-3 text-center mx-4 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
+                        <p class="fw-bold fs-5">Jumlah Tiket</p>
+                        <p class="fs-5">{{ $totalTiket }}</p>
+                    </div>
+                    <div class="col-md-3 text-center mx-4 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
+                        <p class="fw-bold fs-5">Total View</p>
+                        <p class="fs-5">{{ $totalView }}</p>
                     </div>
                 </div>
+                <div class="row d-flex justify-content-center mt-4" id="rowDua">
+                    <div class="col-md-3 text-center mx-4 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
+                        <p class="fw-bold fs-5">Jumlah Pembeli</p>
+                        <p class="fs-5">{{ $totalPembeli }}</p>
+                    </div>
+                    <div class="col-md-3 text-center mx-4 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
+                        <p class="fw-bold fs-5">Jumlah Penjual</p>
+                        <p class="fs-5">{{ $totalPenjual }}</p>
+                    </div>
+                </div>
+                
             </div>
             </div>
         </div>
