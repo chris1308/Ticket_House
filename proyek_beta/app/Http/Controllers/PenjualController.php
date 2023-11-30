@@ -154,14 +154,17 @@ class PenjualController extends Controller
             foreach ($allTickets as $ticket) {
                 if ($p->id_tiket == $ticket->id_tiket){
                     //buat object dengan attribute yang diperlukan untuk ditampilkan di report
-                    $tempData = [
-                        'id_invoice'=>$p->id_invoice,
-                        'nama'=>$ticket->nama,
-                        'total'=>$p->total,
-                        'tanggal_pembelian'=>$p->tanggal_pembelian,
-                        'status'=>$p->status,
-                    ];                    
-                    array_push($tempTickets,$tempData);
+                    if($p->status == "berhasil"){
+                        $tempData = [
+                            'id_invoice'=>$p->id_invoice,
+                            'nama'=>$ticket->nama,
+                            'total'=>$p->total,
+                            'tanggal_pembelian'=>$p->tanggal_pembelian,
+                            'status'=>$p->status,
+                        ];      
+                        array_push($tempTickets,$tempData);
+                    }
+                    // dd($tempData);              
                     //cara akses elemennya di salesReport.blade tidak bisa pake $ticket->id_tiket, tapi harus $ticket['id_tiket']
                 }                
             }

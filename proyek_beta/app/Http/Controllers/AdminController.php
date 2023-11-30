@@ -118,9 +118,8 @@ class AdminController extends Controller
         auth()->logout();
         // Auth::logout();
         // Session::flush();
-        $request->session()->invalidate(); //hapus session login
-     
-        $request->session()->regenerateToken();
+        $request->session()->forget('admin');
+        // $request->session()->regenerateToken();
      
         return redirect('/adminLogin');
     }

@@ -125,10 +125,7 @@ class LoginController extends Controller
         }
         // Auth::logout();
         // Session::flush();
-        $request->session()->invalidate(); //hapus session login
-     
-        $request->session()->regenerateToken();
-     
+        $request->session()->forget('user');     
         return redirect('/home');
     }
 }
