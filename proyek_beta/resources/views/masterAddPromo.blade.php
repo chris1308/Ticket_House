@@ -75,8 +75,8 @@
                 <td>Tipe Promo:</td>
                 <td>
                   <select value="{{ old('tipePromo') }}" style="width: 450px" class="form-control" name="tipePromo" id="tipePromo" onchange="dateFillable(this);">
-                      <option value="persen">Persen</option>
-                      <option value="nonpersen">Non Persen</option>
+                      <option value="Persen">Persen</option>
+                      <option value="Non Persen">Non Persen</option>
                   </select>
                   @error('tipePromo')
                   <div class="invalid-feedback">

@@ -228,6 +228,15 @@ class AdminMasterController extends Controller
         ]);
     }
 
+    public function showMasterDetailPromo($id){
+        $promo = Promo::with(['penjual'])->where('id_kodepromo', $id)->first();
+
+        return view('masterDetailPromo',[
+            "title" => "Detail Promo",
+            "promo" => $promo
+        ]);
+    }
+
     public function showMasterAddPromo(){
         return view('masterAddPromo',[
             "title" => "Add Promo",
@@ -240,7 +249,7 @@ class AdminMasterController extends Controller
             'idPenjual' => 'required|string',
             'kodePromo' => 'required|string|max:255',
             'nilaiPromo' => 'required|integer',
-            'tipePromo' => 'required|in:persen,nonpersen',
+            'tipePromo' => 'required|in:Persen,Non Persen',
             'minPurchase' => 'required|integer'
         ];
         $request->validate($rules);

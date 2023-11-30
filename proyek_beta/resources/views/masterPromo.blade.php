@@ -44,7 +44,9 @@
                         <td>{{$promo->status}}</td>
 
                         <td>
-                            <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            <a href="/admin/master/promo/{{$promo->id_kodepromo}}/detail" style="text-decoration: none;">
+                                <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
