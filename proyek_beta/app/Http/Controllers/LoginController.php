@@ -31,11 +31,13 @@ class LoginController extends Controller
                     }
                 }else{ //less than 8 tickets available
                     for($i = 0; $i<3; $i++){
-                        array_push($tempTickets,$tickets[$i]->nama);
+                        array_push($tempTickets,$tickets[$i]);
+                        // array_push($tempTickets,$tickets[$i]->nama);
                     }
                 }
                 //save into session
                 session(['tempTickets'=>$tempTickets]);
+                // dd(session('tempTickets'));
                 // session(['tempTicketsId'=>$tempTicketsId]);
         return view('login',[
             "title" => "Login"

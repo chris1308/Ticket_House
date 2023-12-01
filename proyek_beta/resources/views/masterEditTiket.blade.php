@@ -7,7 +7,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-start">
             <div class="col-md-6">
-                <h1 class="" style="">Master Tiket</h1>
+                <h2 class="" style="">Master Tiket</h2>
             </div>
         </div>
 
@@ -122,7 +122,11 @@
                   <select value="{{ $oldData->kota }}" style="width: 100%" class="form-control" name="kota" id="kota">
                     <option value="Bandung" {{ ($oldData->kota == "Bandung") ? "selected": ""}}>Bandung</option>
                     <option value="Denpasar" {{ ($oldData->kota == "Denpasar") ? "selected": ""}}>Denpasar</option>
+                    <option value="Jakarta Barat" {{ ($oldData->kota == "Jakarta Barat") ? "selected": ""}}>Jakarta Barat</option>
+                    <option value="Jakarta Pusat" {{ ($oldData->kota == "Jakarta Pusat") ? "selected": ""}}>Jakarta Pusat</option>
                     <option value="Jakarta Selatan" {{ ($oldData->kota == "Jakarta Selatan") ? "selected": ""}}>Jakarta Selatan</option>
+                    <option value="Jakarta Timur" {{ ($oldData->kota == "Jakarta Timur") ? "selected": ""}}>Jakarta Timur</option>
+                    <option value="Jakarta Utara" {{ ($oldData->kota == "Jakarta Utara") ? "selected": ""}}>Jakarta Utara</option>
                     <option value="Malang" {{ ($oldData->kota == "Malang") ? "selected": ""}}>Malang</option>
                     <option value="Medan" {{ ($oldData->kota == "Medan") ? "selected": ""}}>Medan</option>
                     <option value="Solo" {{ ($oldData->kota == "Solo") ? "selected": ""}}>Solo</option>
@@ -187,7 +191,7 @@
               <tr>
                 <td colspan="2">
                   <button type="submit" class="btn btn-success" style="width: 100px; float:right;">Save</button>
-                  <input class="btn btn-danger me-2" type="reset" style="width: 100px; float: right;" value="Reset">
+                  <a href="/admin/master/tiket"><div class="btn btn-danger me-2" style="width: 100px; float: right;">Cancel</div></a>
                 </td>
               </tr>
             </table>

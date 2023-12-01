@@ -69,7 +69,7 @@
     </div>
 </div>
 <div id="notif"  class="fixed-top bg-light shadow-lg" style="display:none;width:30%;margin-left:800px; margin-top:60px; border-radius:7px">
-  @if (session('tempTickets')!=null)    
+  @if (session('tempTickets')!=null && session()->has('user')) 
     @foreach (session('tempTickets') as $index => $s)
       @if ($index == 0)
         <div class="notifmenu shadow-sm px-3 py-4"><a style="text-decoration: none; color:black" href="{{ route('ticket.detail',['id'=>$s->id_tiket]) }}">Tiket <span class="fw-bold">{{ $s->nama }}</span> mungkin menarik perhatianmu!</a></div>

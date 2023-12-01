@@ -3,7 +3,7 @@
 <!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime) --}} -->
 <div class="container" style="min-height: 900px; margin-left:30%;">
     <div class="my-3 pt-5" style=" ">
-        <h1 class="mt-5">Edit Tiket</h1>
+        <h2 class="mt-5">Edit Tiket</h2>
         
         @if(session('message'))
           <div style="width: 500px" class="alert alert-info alert-dismissible fade show" role="alert">
@@ -111,7 +111,11 @@
                   <select value="{{ $oldData->kota }}" style="width: 450px" class="form-control" name="kota" id="kota">
                     <option value="Bandung" {{ $oldData->kota === 'Bandung' ? 'selected' : '' }}>Bandung</option>
                     <option value="Denpasar" {{ $oldData->kota === 'Denpasar' ? 'selected' : '' }}>Denpasar</option>
-                    <option value="Jakarta Selatan" {{ $oldData->kota === 'Jakarta Selatan' ? 'selected' : '' }}>Jakarta Selatan</option>
+                    <option value="Jakarta Barat" {{ ($oldData->kota == "Jakarta Barat") ? "selected": ""}}>Jakarta Barat</option>
+                    <option value="Jakarta Pusat" {{ ($oldData->kota == "Jakarta Pusat") ? "selected": ""}}>Jakarta Pusat</option>
+                    <option value="Jakarta Selatan" {{ ($oldData->kota == "Jakarta Selatan") ? "selected": ""}}>Jakarta Selatan</option>
+                    <option value="Jakarta Timur" {{ ($oldData->kota == "Jakarta Timur") ? "selected": ""}}>Jakarta Timur</option>
+                    <option value="Jakarta Utara" {{ ($oldData->kota == "Jakarta Utara") ? "selected": ""}}>Jakarta Utara</option>
                     <option value="Malang" {{ $oldData->kota === 'Malang' ? 'selected' : '' }}>Malang</option>
                     <option value="Medan" {{ $oldData->kota === 'Medan' ? 'selected' : '' }}>Medan</option>
                     <option value="Solo" {{ $oldData->kota === 'Solo' ? 'selected' : '' }}>Solo</option>
@@ -134,7 +138,7 @@
                     {{ $message }}
                   </div>
                   @enderror
-                  
+                  Kombinasi nama jalan beserta nomor jika ada, contoh: Jl. Ngagel Jaya Tengah No.77
                 </td>
               </tr>
               <tr>

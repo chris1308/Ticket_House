@@ -81,14 +81,14 @@ class TiketController extends Controller
     }
     public function getSeminar(){
         $category = "seminar";
-        $tickets = Tiket::where('kategori', $category)->get();
+        $tickets = Tiket::where('kategori', $category)->where('status', 1)->get();
 
         return view('seminar')->with(['seminars' => $tickets, 'title' => 'Seminar']);
     }
 
     public function getPlaces(){
         $category = "place";
-        $places = Tiket::where('kategori', $category)->get();
+        $places = Tiket::where('kategori', $category)->where('status', 1)->get();
 
         return view('places')->with(['places' => $places, 'title' => 'Places']);
     }
@@ -121,7 +121,7 @@ class TiketController extends Controller
             return redirect()->route("home");
         }
 
-        $tiket = Tiket::where('nama','LIKE', '%'.$keyword.'%')->get();
+        $tiket = Tiket::where('nama','LIKE', '%'.$keyword.'%')->where('status', 1)->get();
 
         return view('searchResult')->with(['result' => $tiket, 'title' => 'Search result']);
     }
@@ -154,7 +154,7 @@ class TiketController extends Controller
             return redirect()->route("home");
         }
 
-        $semuaTiket = Tiket::get();
+        $semuaTiket = Tiket::where('status', 1)->get();
         $tiketNearme = [];
 
         foreach($semuaTiket as $tiket){
@@ -287,7 +287,7 @@ class TiketController extends Controller
 
     public function showAll(){
         //get all tickets owned by currently logged in seller
-        $allTickets = Tiket::where('id_penjual', session('user')->id_penjual)->get();
+        $allTickets = Tiket::where('id_penjual', session('user')->id_penjual)->where('status', 1)->get();
         $title = "Lihat Semua Tiket";
         
         return view('viewAll',compact('title','allTickets'));

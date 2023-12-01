@@ -172,7 +172,7 @@ class AdminMasterController extends Controller
 
         $ctr = Pembeli::count()+1; //hitung ada berapa penjual di DB +1
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT);
-        $newId = "PJ".$numberWithLeadingZeros;
+        $newId = "PB".$numberWithLeadingZeros;
         $reff = 'REF'.$numberWithLeadingZeros; 
 
         Pembeli::create([
@@ -214,6 +214,70 @@ class AdminMasterController extends Controller
         Pembeli::where('id_pembeli', $id)->update(['status' => $newStatus]);
 
         return redirect("/admin/master/pembeli")->with("message", "Pembeli status changed successfully");
+    }
+
+    public function showMasterEditPembeli($id){
+        $checkPembeli = Pembeli::where('id_pembeli', $id)->first();
+        if($checkPembeli == null){//prevent editing tickets that not exist
+            return redirect("/admin/master/pembeli")->with('message','Pembeli not Found');
+        }
+
+        return view("masterEditPembeli", [
+            "title" => "Edit Pembeli",
+            "id" => $id,
+            "oldData" => $checkPembeli
+        ]);
+    }
+
+    public function saveMasterEditPembeli(Request $request, $id){
+        $rules = [
+            'name' => 'required|string|max:255',
+            'telepon' => 'required|string',
+            'gender'=> 'required',
+            'password'=> 'nullable|string|confirmed',
+            'dob'=> 'required',
+        ];
+
+        $cek = Pembeli::where('id_pembeli', $id)->first();
+
+        if($request->input('email') != $cek->email){//if want to change email
+            $rules['email'] = [
+                'required',
+                'string',
+                'email:dns',
+                'max:255',
+                Rule::unique('pembelis'), // Ensure email is unique
+            ];
+        }
+
+        if($request->input('username') != $cek->username){// if want to change username
+            $rules['username'] = [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pembelis'), //Ensure username is unique
+            ];
+        }
+
+
+        $request->validate($rules);
+        $pembeli = Pembeli::where('id_pembeli', $id);
+        $pembeli->update([
+            'username'=> $request->input('username'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'no_telp' => $request->input('telepon'),
+            'jk' => $request->input('gender'),
+            'tgl_lahir' => $request->input('dob'),
+        ]);
+
+        // dd($request->input('password'));
+        //if change password
+        if($request->input('password') != null){
+            $pembeli->update(['password' => bcrypt($request->input('password'))]);
+        }
+
+        return redirect('/admin/master/pembeli');
     }
 
 

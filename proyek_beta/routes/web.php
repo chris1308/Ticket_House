@@ -92,6 +92,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/pembeli/add', [AdminMasterController::class, 'showMasterAddPembeli']);
     Route::post('/master/pembeli/add', [AdminMasterController::class, 'saveMasterAddPembeli']);
     Route::get('/master/pembeli/{id}/detail', [AdminMasterController::class, 'showMasterDetailPembeli']);
+    Route::get('/master/pembeli/{id}/edit', [AdminMasterController::class, 'showMasterEditPembeli']);
+    Route::post('/master/pembeli/{id}/edit', [AdminMasterController::class, 'saveMasterEditPembeli']);
     Route::get('/master/pembeli/{id}/change', [AdminMasterController::class, 'changeStatusPembeli']);
 
     //Master Tiket Routes

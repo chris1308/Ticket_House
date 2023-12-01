@@ -3,7 +3,7 @@
 <!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime)--}} -->
 <div class="container" style="min-height: 900px; margin-left: 30%;">
     <div class="my-3 pt-5" style=" ">
-        <h1 class="mt-5">Tambah Tiket</h1>
+        <h2 class="mt-3">Tambah Tiket</h2>
         @if(session('message'))
           <div style="width: 500px" class="alert alert-info alert-dismissible fade show" role="alert">
                 {{ session('message') }}
@@ -109,7 +109,11 @@
                   <select value="{{ old('kota') }}" style="width: 450px" class="form-control" name="kota" id="kota">
                     <option value="Bandung">Bandung</option>
                     <option value="Denpasar">Denpasar</option>
+                    <option value="Jakarta Barat">Jakarta Barat</option>
+                    <option value="Jakarta Pusat">Jakarta Pusat</option>
                     <option value="Jakarta Selatan">Jakarta Selatan</option>
+                    <option value="Jakarta Timur">Jakarta Timur</option>
+                    <option value="Jakarta Utara">Jakarta Utara</option>
                     <option value="Malang">Malang</option>
                     <option value="Medan">Medan</option>
                     <option value="Solo">Solo</option>
@@ -132,7 +136,7 @@
                     {{ $message }}
                   </div>
                   @enderror
-                  
+                  Kombinasi nama jalan beserta nomor jika ada, contoh: Jl. Ngagel Jaya Tengah No.77
                 </td>
               </tr>
               <tr>

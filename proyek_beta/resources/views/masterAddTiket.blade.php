@@ -7,7 +7,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-start">
             <div class="col-md-6">
-                <h1 class="" style="">Master Tiket</h1>
+                <h2 class="" style="">Master Tiket</h2>
             </div>
         </div>
 
@@ -122,7 +122,11 @@
                   <select value="{{ old('kota') }}" style="width: 450px" class="form-control" name="kota" id="kota">
                     <option value="Bandung">Bandung</option>
                     <option value="Denpasar">Denpasar</option>
-                    <option value="Jakarta">Jakarta</option>
+                    <option value="Jakarta Barat">Jakarta Barat</option>
+                    <option value="Jakarta Pusat">Jakarta Pusat</option>
+                    <option value="Jakarta Selatan">Jakarta Selatan</option>
+                    <option value="Jakarta Timur">Jakarta Timur</option>
+                    <option value="Jakarta Utara">Jakarta Utara</option>
                     <option value="Malang">Malang</option>
                     <option value="Medan">Medan</option>
                     <option value="Solo">Solo</option>
@@ -145,7 +149,7 @@
                     {{ $message }}
                   </div>
                   @enderror
-                  
+                  Kombinasi nama jalan beserta nomor jika ada, contoh: Jl. Ngagel Jaya Tengah No.77
                 </td>
               </tr>
               <tr>

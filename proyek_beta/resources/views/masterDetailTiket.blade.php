@@ -7,7 +7,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-start">
             <div class="col-md-6">
-                <h1 class="" style="">Master Tiket</h1>
+                <h2 class="" style="">Master Tiket</h2>
             </div>
         </div>
 
