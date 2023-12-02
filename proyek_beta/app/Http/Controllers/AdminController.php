@@ -7,7 +7,9 @@ use App\Models\Tiket;
 use App\Models\View;
 use App\Models\Pembelian;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -136,7 +138,41 @@ class AdminController extends Controller
         foreach ($allTickets as $ticket) {
             $totalView+=$ticket->jumlah_view;
         }
-        return view('adminDashboard',compact('title','totalPembeli','totalPenjual','totalTiket','totalPembelian','totalView'));
+
+        //process transaction data to show in dashboard admin
+        $startDate = Carbon::now()->subDays(7);
+        // Query to get the transaction count for each day in the past 7 days
+        $transaction = Pembelian::select(DB::raw('DATE(tanggal_pembelian) as date'), DB::raw('COUNT(*) as count'))->where('tanggal_pembelian', '>=', $startDate)
+            ->groupBy('date')
+            ->get();
+
+        // Create an associative array to store counts for each date
+        $countsByDate = [];
+        foreach ($transaction as $count) {
+            $countsByDate[$count->date] = $count->count;
+        }
+        // Create an array of the past 7 dates
+        $past7Dates = [];
+        for ($i = 0; $i < 7; $i++) {
+            $date = $startDate->copy()->addDays($i)->toDateString();
+            $past7Dates[] = $date;
+        }
+
+        // Ensure each date is present in the response with a count of 0 if no transactions
+        $response = [];
+        foreach ($past7Dates as $date) {
+            $response[] = [
+                'date' => $date,
+                'count' => isset($countsByDate[$date]) ? $countsByDate[$date] : 0,
+            ];
+        }      
+        $transactionCounts = $response;
+
+        $placeCount = Tiket::select(DB::raw('COUNT(*) as count'))->where('kategori', 'place')->get();
+
+        $seminarCount = Tiket::select(DB::raw('COUNT(*) as count'))->where('kategori', 'seminar')->get();
+
+        return view('adminDashboard',compact('title','totalPembeli','totalPenjual','totalTiket','totalPembelian','totalView', 'transactionCounts', 'placeCount', 'seminarCount'));
     }
 
     public function showAddMasterPromo(){
