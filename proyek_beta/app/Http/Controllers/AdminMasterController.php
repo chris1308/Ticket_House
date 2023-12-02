@@ -138,6 +138,71 @@ class AdminMasterController extends Controller
         return redirect("/admin/master/penjual")->with("message", "Penjual status changed successfully");
     }
 
+    public function showMasterEditPenjual($id){
+        $checkPenjual = Penjual::where('id_penjual', $id)->first();
+        if($checkPenjual == null){//prevent editing penjual that not exist
+            return redirect("/admin/master/penjual")->with('message','Penjual not Found');
+        }
+
+        return view("masterEditPenjual", [
+            "title" => "Edit Penjual",
+            "id" => $id,
+            "oldData" => $checkPenjual
+        ]);
+    }
+
+    public function saveMasterEditPenjual(Request $request, $id){
+        $rules = [
+            'name' => 'required|string|max:255',
+            'telepon' => 'required|string',
+            'gender'=> 'required',
+            'password'=> 'nullable|string|confirmed',
+            'dob'=> 'required',
+        ];
+
+        $cek = Penjual::where('id_penjual', $id)->first();
+
+        if($request->input('email') != $cek->email){//if want to change email
+            $rules['email'] = [
+                'required',
+                'string',
+                'email:dns',
+                'max:255',
+                Rule::unique('pembelis'), // Ensure email is unique
+            ];
+        }
+
+        if($request->input('username') != $cek->username){// if want to change username
+            $rules['username'] = [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pembelis'), //Ensure username is unique
+            ];
+        }
+
+
+        $request->validate($rules);
+        $penjual = Penjual::where('id_penjual', $id);
+        $penjual->update([
+            'username'=> $request->input('username'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'no_telp' => $request->input('telepon'),
+            'jk' => $request->input('gender'),
+            'tgl_lahir' => $request->input('dob'),
+        ]);
+
+        // dd($request->input('password'));
+        //if change password
+        if($request->input('password') != null){
+            $penjual->update(['password' => bcrypt($request->input('password'))]);
+        }
+
+        return redirect('/admin/master/penjual')->with('message', 'Penjual Edited Successfully');
+    }
+
+
     //PEMBELI
     public function showMasterAddPembeli(){
         return view('masterAddPembeli',[
@@ -188,7 +253,7 @@ class AdminMasterController extends Controller
             'refferal' => $reff
         ]);
 
-        return redirect('/admin/master/pembeli');
+        return redirect('/admin/master/pembeli')->with('message', 'Pembeli Added Successfully');;
     }
 
     public function showMasterDetailPembeli($id){
@@ -277,7 +342,7 @@ class AdminMasterController extends Controller
             $pembeli->update(['password' => bcrypt($request->input('password'))]);
         }
 
-        return redirect('/admin/master/pembeli');
+        return redirect('/admin/master/pembeli')->with('message', 'Pembeli edited successfully');
     }
 
 
@@ -333,7 +398,7 @@ class AdminMasterController extends Controller
             'status' => 1
         ]);
         //redirect setelah berhasil add dengan pesan
-        return redirect()->back()->with('message', 'Successfully added new promo!');
+        return redirect("/admin/master/promo")->with('message', 'Successfully added new promo!');
     }
 
     public function deleteMasterPromo($id){
@@ -352,11 +417,15 @@ class AdminMasterController extends Controller
         return redirect("admin/master/promo");
     }
 
+
+    
     //TIKET
 
     public function showMasterDetailTiket($id){
         $tiket = Tiket::with(['penjual'])->where('id_tiket', $id)->first();
-    
+        if($tiket == null){//prevent editing tickets that not exist
+            return redirect("/admin/master/tiket")->with('message','Ticket not found');
+        }
         return view('masterDetailTiket',[
             "title" => "Detail Tiket",
             "tiket" => $tiket
@@ -474,7 +543,7 @@ class AdminMasterController extends Controller
 
         ]);
         //redirect setelah berhasil add dengan pesan
-        return redirect()->back()->with('message','Successfully added new ticket!');
+        return redirect()->back()->with('message','New ticket added successfuly!');
     }
 
 
@@ -491,7 +560,7 @@ class AdminMasterController extends Controller
 
         Tiket::where('id_tiket', $id)->update(['status' => $newStatus]);
 
-        return redirect("/admin/master/tiket");
+        return redirect("/admin/master/tiket")->with('message','Ticket status changed successfully');
     }
 
     public function showMasterEditTiket($id){
@@ -634,7 +703,7 @@ class AdminMasterController extends Controller
 
         $request->validate($rules);
 
-        $ctr = Report::count()+1;
+        $ctr = Report::withTrashed()->count()+1;
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $newActivityId = "RP".$numberWithLeadingZeros;
         
@@ -645,11 +714,14 @@ class AdminMasterController extends Controller
             'keterangan'=>$request->input('deskripsi'),
         ]);
 
-        return redirect("/admin/master/aktivitas");
+        return redirect("/admin/master/aktivitas")->with('message', 'Report added successfully');
     }
     
     public function showMasterDetailAktivitas($id){
         $aktivitas = Report::with(['penjual', 'pembeli'])->where('id_aktivitas', $id)->first();
+        if($aktivitas == null){//prevent editing tickets that not exist
+            return redirect("/admin/master/aktivitas")->with('message','Aktivitas not found');
+        }
         return view("masterDetailAktivitas", [
             "title" => "Detail Aktivitas",
             "aktivitas" => $aktivitas
@@ -662,15 +734,43 @@ class AdminMasterController extends Controller
         
         Report::where('id_aktivitas', $id)->delete();
 
-        return redirect("/admin/master/aktivitas");
+        return redirect("/admin/master/aktivitas")->with('message', 'Report deleted successfully');
+    }
 
-        // this code can't delete
-        // if ($aktivitas) {
-        //     $aktivitas->delete();
-        //     return redirect("/admin/master/aktivitas");
-        // }else {//not found
-        //     return redirect("/admin/master/aktivitas");
-        // }
+    public function showMasterEditAktivitas($id){
+        $checkAktivitas = Report::where('id_aktivitas', $id)->first();
+        $daftarPembeli = Pembeli::all();
+        $daftarPenjual = Penjual::all();
+
+        if($checkAktivitas == null){//prevent editing aktivitas that not exist
+            return redirect("/admin/master/aktivitas")->with('message','Activity not Found');
+        }
+
+        return view("masterEditAktivitas", [
+            "title" => "Edit Aktivitas",
+            "id" => $id,
+            "oldData" => $checkAktivitas,
+            "daftarPembeli"=>$daftarPembeli,
+            "daftarPenjual"=>$daftarPenjual,
+        ]);
+    }
+
+    public function saveMasterEditAktivitas(Request $request, $id){
+        $rules = [
+            'idTerlapor' => 'required|string|max:6',
+            'idPelapor' => 'required|string|max:6',
+            'deskripsi' => 'required|string',
+        ];
+
+        $request->validate($rules);
+        $aktivitas = Report::where('id_aktivitas', $id);
+        $aktivitas->update([
+            'id_penjual'=>$request->input('idTerlapor'),
+            'id_pembeli'=>$request->input('idPelapor'),
+            'keterangan'=>$request->input('deskripsi'),
+        ]);
+
+        return redirect('/admin/master/aktivitas')->with('message', 'Aktivitas edited successfully');
     }
 
 }

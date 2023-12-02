@@ -58,7 +58,7 @@
         
         <div class="row d-flex justify-content-center mb-5">
             <div class="col-md-3">
-                <a href="#" style="text-decoration: none;">
+                <a href="/admin/master/penjual/{{$penjual->id_penjual}}/edit" style="text-decoration: none;">
                     <button class="btn w-75 text-dark" style="background-color: #FDE1A9">Edit</button>
                 </a>
             </div>

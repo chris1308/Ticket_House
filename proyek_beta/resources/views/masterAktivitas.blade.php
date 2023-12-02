@@ -4,6 +4,12 @@
     @extends('layouts.adminMain')
     @section('content')
     <div class="container" style="min-height: 650px; padding-top:80px; padding-left: 18%;">
+        @if(session('message')) 
+            <div style="width: 900px" class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <!-- bagian atas -->
         <div class="row d-flex justify-content-between">
             <div class="col-md-6">

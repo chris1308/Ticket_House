@@ -85,6 +85,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/penjual/add', [AdminMasterController::class, 'showMasterAddPenjual']);
     Route::post('/master/penjual/add', [AdminMasterController::class, 'saveMasterAddPenjual']);
     Route::get('/master/penjual/{id}/detail', [AdminMasterController::class, 'showMasterDetailPenjual']);
+    Route::get('/master/penjual/{id}/edit', [AdminMasterController::class, 'showMasterEditPenjual']);
+    Route::post('/master/penjual/{id}/edit', [AdminMasterController::class, 'saveMasterEditPenjual']);
     Route::get('/master/penjual/{id}/change', [AdminMasterController::class, 'changeStatusPenjual']);
 
     //Master Pembeli Routes
@@ -118,6 +120,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/master/aktivitas/add', [AdminMasterController::class, 'showMasterAddAktivitas']);
     Route::post('/master/aktivitas/add', [AdminMasterController::class, 'saveMasterAddAktivitas']);
     Route::get('/master/aktivitas/{id}/detail', [AdminMasterController::class, 'showMasterDetailAktivitas']);
+    Route::get('/master/aktivitas/{id}/edit', [AdminMasterController::class, 'showMasterEditAktivitas']);
+    Route::post('/master/aktivitas/{id}/edit', [AdminMasterController::class, 'saveMasterEditAktivitas']);
     Route::get('/master/aktivitas/{id}/delete', [AdminMasterController::class, 'deleteMasterAktivitas']);
 });
 

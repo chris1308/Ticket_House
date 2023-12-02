@@ -6,7 +6,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-start">
             <div class="col-md-6">
-                <h2 class="" style="">Master Pembeli - Edit Data</h2>
+                <h2 class="" style="">Master Penjual - Edit Data</h2>
             </div>
         </div>
 
@@ -26,7 +26,7 @@
         @endif
 
         
-        <form action="/admin/master/pembeli/{{$oldData->id_pembeli}}/edit" method="post" class="mt-3 pb-3">
+        <form action="/admin/master/penjual/{{$oldData->id_penjual}}/edit" method="post" class="mt-3 pb-3">
             @csrf
 
             <table class="w-100">
@@ -132,7 +132,7 @@
               <tr>
                 <td colspan="2">
                   <button class="btn btn-success" style="width: 100px; float:right;">Save</button>
-                  <a href="/admin/master/pembeli"><div class="btn btn-danger me-2" style="width: 100px; float: right;">Cancel</div></a>
+                  <a href="/admin/master/penjual"><div class="btn btn-danger me-2" style="width: 100px; float: right;">Cancel</div></a>
                 </td>
               </tr>
             </table>
