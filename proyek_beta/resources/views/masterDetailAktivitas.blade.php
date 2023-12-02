@@ -7,13 +7,13 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-start">
             <div class="col-md-6">
-                <h1 class="" style="">Master Aktivitas</h1>
+                <h4 class="" style="">Master Aktivitas</h4>
             </div>
         </div>
 
         <h4 class="text-center mt-2 py-2">Detail Data</h4>
         
-        <div class="fs-5 mb-5">
+        <div style="font-size: 16px" class="mb-5">
             <div class="row d-flex justify-content-between border-bottom border-top py-2">
                 <div class="col-4 fw-bold">ID Laporan</div>
                 <div class="col-4 row d-flex justify-content-end me-2">{{$aktivitas->id_aktivitas}}</div>

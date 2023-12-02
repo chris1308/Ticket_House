@@ -13,7 +13,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-between">
             <div class="col-md-6">
-                <h1 class="" style="">Master Promo</h1>
+                <h3 class="" style="">Master Promo</h3>
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center">
                 <a href="/admin/master/promo/add">
@@ -23,16 +23,16 @@
         </div>
 
         <!-- table -->
-        <table class="table table-striped mt-4" style="width: 100%">
+        <table id="myTable2" class="table table-striped mt-4" style="width: 100%">
             <thead>
                 <!-- <tr> -->
-                    <th class="px-2 text-center" style="width: 5%">No</th>
+                    <th class="px-2 text-center" style="width: 8%">No</th>
                     <th class="px-2" style="width: 5%">ID</th>
                     <th class="px-2" style="width: 13%;">Penjual</th>
                     <th class="px-2" style="width: 13%;">Kode</th>
-                    <th class="px-2" style="width: 8%;">Nilai</th>
+                    <th class="px-2" style="width: 13%;">Nilai</th>
                     <th class="px-2" style="width: 8%;">Tipe</th>
-                    <th class="px-2" style="width: 15%;">Min. Pembelian</th>
+                    <th class="px-2" style="width: 17%;">Min. Pembelian</th>
                     <th class="px-2" style="width: 8%;">Status</th>
                     <th class="px-2" style="width: 15%;">Action</th>
                 <!-- </tr> -->
@@ -44,12 +44,12 @@
                         <td>{{$promo->id_kodepromo}}</td>
                         <td>{{$promo->penjual->name}}</td>
                         <td>{{$promo->kode_promo}}</td>
-                        <td>{{$promo->nilai_promo}}</td>
+                        <td>Rp. {{ formatUang($promo->nilai_promo)}}</td>
                         <td>{{$promo->tipe}}</td>
                         <td>Rp {{formatUang($promo->min_purchase)}}</td>
                         <td>{{$promo->status}}</td>
 
-                        <td>
+                        <td class="">
                             <a href="/admin/master/promo/{{$promo->id_kodepromo}}/detail" style="text-decoration: none;">
                                 <button class="btn btn-info d-flex align-items-center" style="height: 30px;">Lihat Detail</button>
                             </a>

@@ -13,7 +13,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-between">
             <div class="col-md-6">
-                <h1 class="" style="">Master Tiket</h1>
+                <h3 class="" style="">Master Tiket</h3>
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center">
                 <a href="/admin/master/tiket/add" style="text-decoration: none;">
@@ -24,14 +24,13 @@
         </div>
 
         <!-- table -->
-        <table class="table table-striped mt-4" style="width: 100%">
+        <table id="myTable2" class="table table-striped mt-4" style="width: 100%">
             <thead>
                 <!-- <tr> -->
-                    <th class="px-2 text-center" style="width: 5%">No</th>
+                    <th class="px-2 text-center" style="width: 8%">No</th>
                     <th class="px-2" style="width: 5%">ID</th>
                     <th class="px-2" style="width: 13%;">Nama</th>
                     <th class="px-2" style="width: 13%;">Penjual</th>
-                    <th class="px-2" style="width: 13%;">Kota</th>
                     <th class="px-2" style="width: 13%;">Alamat</th>
                     <th class="px-2" style="width: 13%;">Harga</th>
                     <th class="px-2" style="width: 10%;">Status</th>
@@ -45,8 +44,7 @@
                         <td>{{$tiket->id_tiket}}</td>
                         <td>{{$tiket->nama}}</td>
                         <td>{{$tiket->penjual->name}}</td>
-                        <td>{{$tiket->kota}}</td>
-                        <td>{{$tiket->alamat_lokasi}}</td>
+                        <td>{{$tiket->alamat_lokasi}}, {{$tiket->kota}}</td>
                         <td>Rp {{formatUang($tiket->harga)}}</td>
                         <td style="color: {{($tiket->status == 1 ? 'black' : 'red')}};">{{($tiket->status == 1 ? "Aktif" : "Banned")}}</td>
                         <td>

@@ -13,7 +13,7 @@
         <!-- bagian atas -->
         <div class="row d-flex justify-content-between">
             <div class="col-md-6">
-                <h1 class="" style="">Master Aktivitas</h1>
+                <h3 class="" style="">Master Aktivitas</h3>
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center">
                 <a href="/admin/master/aktivitas/add" style="text-decoration: none;">
@@ -23,15 +23,15 @@
         </div>
 
         <!-- table -->
-        <table class="table table-striped mt-4" style="width: 100%">
+        <table id="myTable2" class="table table-striped mt-4" style="width: 100%">
             <thead>
                 <!-- <tr> -->
-                    <th class="px-2 text-center" style="width: 5%">No</th>
+                    <th class="px-2 text-center" style="width: 8%">No</th>
                     <th class="px-2" style="width: 5%">ID</th>
                     <th class="px-2" style="width: 13%;">Penjual Terlapor</th>
                     <th class="px-2" style="width: 13%;">Pelapor</th>
                     <th class="px-2" style="width: 15%;">Keterangan</th>
-                    <th class="px-2" style="width: 15%;">Action</th>
+                    <th class="px-2" style="width: 12%;">Action</th>
                 <!-- </tr> -->
             </thead>
             <tbody>

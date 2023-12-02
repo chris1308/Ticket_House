@@ -18,13 +18,25 @@
   }
   #myTable_wrapper{
             width: 82%;
-        }
+  }
   #myTable_filter, #myTable_length{
       margin-bottom: 2%;
       margin-top: 2%;
   }
   #myTable_paginate, .dt-buttons{
       margin-top: 2%;
+  }
+  /* tabel untuk master admin agak berbeda (tidak pake tombol export) */
+  #myTable2_wrapper{
+      width: 100%;
+  }
+  #myTable2_filter, #myTable2_length{
+      margin-bottom: 2%;
+      margin-top: 2%;
+  }
+  #myTable2_paginate, .dataTables_info{
+      margin-top: 1%;
+      margin-bottom: 2%;
   }
 .content h1 {
   font-size: 24px;
@@ -61,6 +73,8 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script>
         $(document).ready( function () {
+            $('#myTable2').DataTable({
+            });
             $('#myTable').DataTable({
                 dom:  '<"top"lf>rt<"bottom"Bpi>',
                 buttons: [

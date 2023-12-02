@@ -10,7 +10,7 @@
         <li class="pt-1">
             {{-- margin p tag harus di 0 kan spy ga makan tempat. secara default p tag ada margin dan paddingnya --}}
             <p onclick="toggleMaster()" class="sidebarMainMenu ps-3" id="masterMenu" style="margin:0; padding: 5px; font-weight: bold;">Masters</p>
-            <ul id="masterSubMenu" class="list-unstyled" style="display: none">
+            <ul id="masterSubMenu" class="list-unstyled" style="display: block">
                 <li>
                     <a href="/admin/master/penjual" class="text-decoration-none text-dark" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">
@@ -50,7 +50,7 @@
         </li>
         <li class="">
             <p onclick="toggleLaporan()" id="laporanMenu"  class="sidebarMainMenu ps-3" style="margin:0; padding: 5px; font-weight: bold;">Laporan</p>
-            <ul id="laporanSubMenu" style="display: none" class="list-unstyled">
+            <ul id="laporanSubMenu" style="display: block" class="list-unstyled">
                 <li>
                     <a href="{{ route('seller.report') }}" class="text-decoration-none text-dark" style="font-weight: bold;">
                         <div class="sidebarMenu" style="padding-bottom: 5px; padding-top: 5px;">

@@ -8,7 +8,7 @@
         <div class="container" style="overflow:hidden; min-height: 650px; padding-top:80px; margin-left: 260px;">
             <div class="row mb-3">
                 <div class="col-md-9">
-                    <h1 class="">Laporan Penjual</h1>
+                    <h4 class="">Laporan Penjual</h1>
                 </div>
             </div>
             <table id="myTable" class="table table-light table-striped" style="width:82%;">

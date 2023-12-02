@@ -17,7 +17,7 @@
                 <h4 class="text-center">Detail Data</h4>
             </div>
             <div class="Content">
-                <div style="font-size: 17px" class="border-bottom border-top row d-flex justify-content-between py-2">
+                <div style="font-size: 16px" class="border-bottom border-top row d-flex justify-content-between py-2">
                     <div class="col-4 fw-bold">Nama Tiket</div>
                     <div class="d-flex justify-content-end col-4">{{ $ticket->nama }}</div>
                 </div>
