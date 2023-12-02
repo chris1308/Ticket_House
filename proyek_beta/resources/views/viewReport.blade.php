@@ -1,6 +1,6 @@
 @extends('layouts.sellerMain')
 @section('content')
-    <div class="container" style="min-height: 650px; padding-bottom:50px;padding-top:120px; margin-left: 250px;">
+    <div class="container" style="min-height: 650px; padding-bottom:50px;padding-top:100px; margin-left: 250px;">
         @if(session('message')) 
             <div style="width: 900px" class="alert alert-info alert-dismissible fade show" role="alert">
                 {{ session('message') }}

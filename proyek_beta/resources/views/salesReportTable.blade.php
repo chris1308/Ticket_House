@@ -1,4 +1,7 @@
 <table style="width: 82%">
+    <tr class="d-none">
+        <th>Laporan Penjualan</th>
+    </tr>
     <tr class="" style=" background-color: #3aaaff; color:white">
         <th class="py-2" style="width:10%; padding-left:10px">ID</th>
         <th style="width:30%;padding-left:10px">Nama</th>

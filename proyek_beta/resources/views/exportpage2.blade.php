@@ -10,6 +10,9 @@
 <body>
     <div class="container-fluid d-flex justify-content-center">
         <table>
+            <tr>
+                <th>Laporan Penjualan</th>
+            </tr>
             <tr class="" style=" background-color: #3aaaff; color:white">
                 <th class="py-2" style=" width:100px; padding-left:10px">ID</th>
                 <th style="width:250px;padding-left:10px">Nama</th>

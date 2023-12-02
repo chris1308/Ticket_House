@@ -8,20 +8,42 @@
 {{-- layout.adminMain untuk ambil komponen navbar dan sidebar admin --}}
     @extends('layouts.adminMain')
     @section('content')
-        <div class="container" style="overflow:hidden; min-height: 650px; padding-top:80px; margin-left: 280px;">
+        <div class="container" style="min-height: 550px; padding-top:80px; padding-left:20%">
             <div class="row mb-3">
                 <div class="col-md-9">
-                    <h1 class="">Informasi Penjual</h1>
+                    <h4 class="">Informasi Penjual</h4>
                 </div>
+                <h4 class="text-center">Detail Data</h4>
             </div>
-            <div class="shadow bg-light" style="width:45% ;border-radius: 10px; padding:35px 30px;">
-                <p class=""><span class="fw-bold">Nama Penjual : </span>{{ $penjual->name }}</p>
-                <p class=""><span class="fw-bold">Jenis Kelamin : </span>{{ $penjual->jk == "L" ? "Laki-laki" : "Perempuan" }}</p>
-                <p class=""><span class="fw-bold">Tanggal Lahir : </span>{{ $formattedDate }}</p>
-                <p class=""><span class="fw-bold">Umur : </span>{{ $age }}</p>
-                <p class=""><span class="fw-bold">Email : </span>{{ $penjual->email }}</p>
-                <p class=""><span class="fw-bold">Nomor Telepon : </span>{{ $penjual->no_telp }}</p>
-                <p class=""><span class="fw-bold">Status Membership : </span>{{ $penjual->premium_status == 0 ? 'Basic' : 'Premium' }}</p>
+            <div class="Content">
+                <div style="font-size: 17px" class="border-bottom border-top row d-flex justify-content-between py-2">
+                    <div class="col-4 fw-bold">Nama Penjual</div>
+                    <div class="d-flex justify-content-end col-4">{{ $penjual->name }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Jenis Kelamin</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $penjual->jk == "L" ? "Laki-laki" : "Perempuan" }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Tanggal Lahir</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $formattedDate }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Umur</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $age }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Email</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $penjual->email }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Nomor Telepon</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $penjual->no_telp }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Status Membership</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $penjual->premium_status == 0 ? 'Basic' : 'Premium' }}</div>
+                </div>
             </div>
         </div>
     @endsection

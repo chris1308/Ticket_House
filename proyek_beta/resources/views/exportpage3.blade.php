@@ -10,6 +10,9 @@
 <body>
     <div class="container-fluid d-flex justify-content-center">
         <table>
+            <tr>
+                <th>Laporan Cashflow</th>
+            </tr>
             <tr class="" style=" background-color: #3aaaff; color:white">
                 <th class="py-2" style="  width:50px; padding-left:10px">No</th>
                 <th style="width:200px;padding-left:10px">Tanggal</th>

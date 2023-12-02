@@ -11,8 +11,8 @@
                     <th style=" padding: 10px 35px; ">Product Name</th>
                     <th style="padding:10px 30px">Quantity</th>
                     <th style=" padding:10px 70px; " >Total</th>
-                    <th style=" padding:10px 40px;">Status</th>
                     <th style=" padding:10px 60px;">Date</th>
+                    <th style=" padding:10px 40px;">Status</th>
                     <th style=" padding:10px 70px; ">Action</th>
                 </tr>
                 @foreach ($purchases as $p)
@@ -23,8 +23,8 @@
                                 <td style="padding: 20px">{{ $t->nama }} </td>
                                 <td style="padding: 10px">{{ $p->quantity }} </td>
                                 <td style="padding: 20px">Rp. {{ formatUang($p->total) }} </td>
-                                <td style="color:{{ $p->status == 'berhasil' ? 'green' : 'red' }}; padding: 20px">{{ $p->status }} </td>
                                 <td style="padding: 20px">{{ $p->tanggal_pembelian }} </td>
+                                <td style="color:{{ $p->status == 'berhasil' ? 'green' : 'red' }}; padding: 20px">{{ $p->status }} </td>
                                 <td style="padding: 20px"><a href="{{ route('invoice',['id'=>$p->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> </td>
                             </tr>                        
                             @break

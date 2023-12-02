@@ -8,20 +8,42 @@
 {{-- layout.adminMain untuk ambil komponen navbar dan sidebar admin --}}
     @extends('layouts.adminMain')
     @section('content')
-        <div class="container" style="overflow:hidden; min-height: 650px; padding-top:80px; margin-left: 280px;">
+        <div class="container" style="min-height: 550px; padding-top:80px; padding-left: 20%;">
             <div class="row mb-3">
                 <div class="col-md-9">
-                    <h1 class="">Informasi Pembeli</h1>
+                    <h4 class="">Informasi Pembeli</h4>
                 </div>
+                <h4 class="text-center">Detail Data</h4>
             </div>
-            <div class="shadow bg-light" style="width:45% ;border-radius: 10px; padding:35px 30px;">
-                <p class=""><span class="fw-bold">Nama Pembeli : </span>{{ $pembeli->name }}</p>
-                <p class=""><span class="fw-bold">Jenis Kelamin : </span>{{ $pembeli->jk == "L" ? "Laki-laki" : "Perempuan" }}</p>
-                <p class=""><span class="fw-bold">Tanggal Lahir : </span>{{ $formattedDate }}</p>
-                <p class=""><span class="fw-bold">Umur : </span>{{ $age }}</p>
-                <p class=""><span class="fw-bold">Email : </span>{{ $pembeli->email }}</p>
-                <p class=""><span class="fw-bold">Kode Refferal : </span>{{ $pembeli->refferal }}</p>
-                <p class=""><span class="fw-bold">Nomor Telepon : </span>{{ $pembeli->no_telp }}</p>
+            <div class="Content">
+                <div style="font-size: 17px" class="border-bottom border-top row d-flex justify-content-between py-2">
+                    <div class="col-4 fw-bold">Nama Pembeli</div>
+                    <div class="d-flex justify-content-end col-4">{{ $pembeli->name }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Jenis Kelamin</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $pembeli->jk == "L" ? "Laki-laki" : "Perempuan" }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Tanggal Lahir</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $formattedDate }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Umur</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $age }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Email</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $pembeli->email }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Kode Refferal</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $pembeli->refferal }}</div>
+                </div>
+                <div style="font-size: 17px" class="row d-flex border-bottom border-top justify-content-between py-2">
+                    <div class="col-4 fw-bold">Nomor Telepon</div>
+                    <div class="col-4 d-flex justify-content-end">{{ $pembeli->no_telp }}</div>
+                </div>
             </div>
         </div>
     @endsection

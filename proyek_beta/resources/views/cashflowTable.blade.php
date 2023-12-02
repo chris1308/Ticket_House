@@ -1,4 +1,8 @@
 <table class="" style="width: 82%">
+    {{-- untuk header saat export excel --}}
+    <tr class="d-none">
+        <th>Laporan Cashflow</th>
+    </tr>
     <tr class="" style=" background-color: #3aaaff; color:white">
         <th class="py-2" style="  width:10%; padding-left:10px">No</th>
         <th style="width:20%;padding-left:10px">Tanggal</th>

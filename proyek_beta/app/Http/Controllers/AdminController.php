@@ -120,7 +120,7 @@ class AdminController extends Controller
         // Session::flush();
         $request->session()->forget('admin');
         // $request->session()->regenerateToken();
-     
+        
         return redirect('/adminLogin');
     }
 

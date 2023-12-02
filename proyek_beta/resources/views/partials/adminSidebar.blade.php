@@ -1,8 +1,8 @@
 <div style=" width: 250px; height: 100%; margin-top: 70px; " class="position-fixed">
-    <button style="  margin-left: 10px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style="height: 30px" alt="toogle-menu"></button> 
+    <button style="  margin-left: 10px; background-color: transparent; border: none;" onclick="toggleSidebar()"><i class="fa-solid fa-greater-than fa-xl"></i></button> 
 </div>
 <div id="sidebar" style="width: 250px; height: 100%; background-color: #F1F8FF; margin-top: 60px;" class="sidebar position-fixed ">
-    <button style="margin-top: 10px; margin-left: 200px; background-color: transparent; border: none;" onclick="toggleSidebar()"><img id="toggleImage" src="{{ asset('images/admin/menu.png') }}" style=" height: 30px" alt="toogle-menu"></button>
+    <button style="margin-top: 10px; margin-left: 200px; background-color: transparent; border: none;" onclick="toggleSidebar()"><i class="fa-solid fa-less-than fa-xl"></i></button>
     <ul class="list-unstyled">
         <li class="pt-2 active">
             <a href="/adminDashboard" class="text-decoration-none text-dark fw-bold" ><img src="{{ asset('images/admin/home.png') }}" style="width: 30px; height: 30px; margin-left: 10px;" alt="Home"> Home</a>

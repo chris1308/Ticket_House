@@ -1,8 +1,8 @@
 @extends('layouts.sellerMain')
 @section('content')
 <!-- {{-- Desain interface masih belum perfect sesuai figma, masih ada field yang kurang (ex. startdate, starttime, endtime)--}} -->
-<div class="container" style="min-height: 900px; margin-left: 30%;">
-    <div class="my-3 pt-5" style=" ">
+<div class="container" style="min-height: 900px; margin-left: 30%; padding-top:100px">
+    <div class="my-3 " style=" ">
         <h2 class="mt-3">Tambah Tiket</h2>
         @if(session('message'))
           <div style="width: 500px" class="alert alert-info alert-dismissible fade show" role="alert">

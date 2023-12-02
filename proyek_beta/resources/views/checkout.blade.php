@@ -11,8 +11,13 @@
                 <p class="fs-5">Tanggal : &nbsp;{{ $ticket->start_date }}</p>
                 @endif
                 <p class="fs-5">Jam : &nbsp;{{ $ticket->start_time }} - {{ $ticket->end_time }}</p>
-                <div class="d-flex">
-                    <p class="form-label mt-2">Promo Code (optional)</p>
+                @if (session()->has('message'))        
+                <p style="margin:0; color:green">{{ session('message') }}</p>
+                @elseif (session()->has('error'))
+                    <p style="margin:0; color:red">{{ session('error') }}</p>
+                @endif 
+                <div style="" class="d-flex">
+                    <p style="margin:0" class="form-label mt-2">Promo Code (optional)</p>
 
                     <form action="{{ route('apply.promo',['id'=>$ticket->id_tiket]) }}" method="post">
                         @csrf
@@ -23,11 +28,6 @@
                     </form>
                     
                 </div><br>
-                @if (session()->has('message'))        
-                    <p style="color:green">{{ session('message') }}</p>
-                @elseif (session()->has('error'))
-                    <p style="color:red">{{ session('error') }}</p>
-                @endif 
                 <div class="d-flex" style="">
                     <p class=" me-3 mb-4">Jumlah :</p><br>
                     <input type="hidden" id="satuan" name="satuan" value="{{ $ticket->harga }}">
@@ -39,11 +39,11 @@
                 </label>
                 <br><br>
                 @if (session()->has('potongan'))     
-                    <p>Potongan Promo : <span id="deduction">{{ intval(session('potongan')) }}</span></p>               
+                    <p>Potongan Promo : Rp. <span id="deduction">{{ formatUang(intval(session('potongan'))) }}</span></p>               
                 @else
                     <p>Potongan Promo : <span id="deduction">0</span></p>
                 @endif
-                    <p  class="fs-5 fw-bold">Total (belum termasuk promo) : Rp. <span class="fs-5" id="total">{{ $ticket->harga }}</span></p>
+                    <p  class="fs-5 fw-bold">Total (belum termasuk promo) : Rp. <span class="fs-5" id="total">{{ formatUang($ticket->harga) }}</span></p>
                 {{-- redirect to midtrans after checkout button pressed --}}
                 <form action="{{ route('pay',['id'=>$ticket->id_tiket]) }}" method="post">
                     @csrf
@@ -51,7 +51,8 @@
                     <input id="hiddenTotal" type="hidden" name="hiddenTotal" value="{{ $ticket->harga }}">
                     <input id="promoCode" type="hidden" name="promoCode" value="{{ session()->has('kodepromo') ? session('kodepromo') : null }}">
                     <input id="hiddenQty" type="hidden" name="hiddenQty" value="1">
-                    <button type="submit" class="btn btn-success">Checkout</button>
+                    {{-- btn col-12 supaya bisa full width --}}
+                    <button type="submit" class="btn col-12 btn-success">Checkout</button>
                 </form>
             </div>
         </div>

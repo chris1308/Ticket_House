@@ -1,4 +1,7 @@
 <table class="me-3" style="width:82%">
+    <tr class="d-none">
+        <th>Laporan View</th>
+    </tr>
     <tr class="" style=" background-color: #3aaaff; color:white">
         <th class="py-2" style="  width:10%; padding-left:10px">ID</th>
         <th class="" style="width:20%;padding-left:10px">Nama</th>
