@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Carbon;
 use App\Models\Pembeli;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class PembeliSeeder extends Seeder
                 'profile_picture' =>null,
                 'tgl_lahir' => '2003/01/01',
                 'refferal' => 'REF00'.$i,
+                'joined_at'=> Carbon::today('Asia/Jakarta'),
             ]);
         }
     }

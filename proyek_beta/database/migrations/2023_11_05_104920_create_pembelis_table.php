@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->string('refferal');
             $table->boolean('status')->default(true);
+            $table->date('joined_at');
         });
     }
 

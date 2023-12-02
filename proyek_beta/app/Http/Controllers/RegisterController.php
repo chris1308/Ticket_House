@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Pembeli;
 use App\Models\Penjual;
@@ -90,6 +91,7 @@ class RegisterController extends Controller
                 'profile_picture'=>null,
                 'tgl_lahir'=> $request->input('dob'),
                 'refferal'=> $reff,
+                'joined_at'=> Carbon::today('Asia/Jakarta')
             ]);
         }else{
             $ctr = Penjual::count()+1; //hitung ada berapa penjual di DB +1
@@ -105,6 +107,7 @@ class RegisterController extends Controller
                 'password' => bcrypt($request->input('password')),
                 'profile_picture'=>null,
                 'tgl_lahir'=> $request->input('dob'),
+                'joined_at'=> Carbon::today('Asia/Jakarta')
             ]);
         }
         return redirect('/login')->with('success','Berhasil register! Silahkan login');

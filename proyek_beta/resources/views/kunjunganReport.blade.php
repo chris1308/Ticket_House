@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon; //supaya bisa format date
+@endphp
 @if (session('admin') == "admin")
 {{-- layout.adminMain untuk ambil komponen navbar dan sidebar admin --}}
     @extends('layouts.adminMain')
@@ -6,13 +9,9 @@
             <div class="row mb-3">
                 <div class="col-md-9">
                     <h1 class="">Laporan Kunjungan</h1>
-                    <div>
-                        <button class="btn btn-secondary">Export to Excel</button>
-                        <button class="btn btn-secondary">Export to PDF</button>
-                    </div>
                 </div>
             </div>
-            <table class="table table-light table-striped" style="width:80%;">
+            <table id="myTable" class="table table-light table-striped" style="width:82%;">
                 <thead>
                     <tr>
                         <th class="px-2 text-center" style="width:7%">ID</th>
@@ -24,7 +23,7 @@
                     @foreach ($kunjungans as $idx=>$p) 
                         <tr>
                             <td class="text-center">{{ $p->id }}</td>
-                            <td class="text-center">{{ $p->tanggal }}</td>
+                            <td class="text-center">{{ Carbon::createFromFormat('Y-m-d', $p['tanggal'])->format('d-F-Y');  }}</td>
                             <td class="text-center">{{ $p->jumlah_kunjungan }}</td>
                         </tr>
                     @endforeach

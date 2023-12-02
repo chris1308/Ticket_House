@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-
+// use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use App\Models\Penjual;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class PenjualSeeder extends Seeder
                 'tgl_lahir' => '2003/01/01',
                 'saldo' => 0,
                 'premium_status' => false,
+                'joined_at'=>Carbon::today('Asia/Jakarta'),
             ]);
         }
 

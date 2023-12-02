@@ -6,13 +6,9 @@
             <div class="row mb-3">
                 <div class="col-md-9">
                     <h1 class="">Laporan Tiket</h1>
-                    <div>
-                        <button class="btn btn-secondary">Export to Excel</button>
-                        <button class="btn btn-secondary">Export to PDF</button>
-                    </div>
                 </div>
             </div>
-            <table class="table table-light table-striped" style="width:80%;">
+            <table id="myTable" class="table table-light table-striped" style="width:82%;">
                 <thead>
                     <tr>
                         <th class="px-2 text-center" style="width:5%">No</th>

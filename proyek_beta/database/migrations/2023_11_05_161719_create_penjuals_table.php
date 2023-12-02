@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('saldo')->default(0);
             $table->boolean('premium_status')->default(false);
             $table->boolean('status')->default(true);
+            $table->date('joined_at');
         });
     }
 
