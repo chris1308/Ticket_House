@@ -32,7 +32,6 @@
             </div>
             <div class="row mt-2 ps-1" id="statistikBawah">
                 <div class="col-md-8">
-                    <!-- <canvas id="transactionChart" width="400" height="200"></canvas> -->
                     <canvas id="transactionChart"></canvas>
                 </div>
                 <div class="col-md-4">
@@ -41,7 +40,7 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
         <script>
             //pembelian chart
             let transactionChart = document.getElementById('transactionChart').getContext('2d');
@@ -88,14 +87,23 @@
             
             const seminar = @json($seminarCount);//receive data
             const place = @json($placeCount);//receive data
-            console.log(seminar);
+            let jumSeminar = 0;
+            let jumPlace = 0;
+        
+            if(seminar.length != 0){
+                jumSeminar = seminar[0].count;
+            }
+            if(place.length != 0){
+                jumPlace = place[0].count; 
+            }
+            // console.log(seminar);
             let secondChart = new Chart(ticketChart, {
                 type: 'doughnut',
                 data: {
                     labels: ["Place", "Seminar"],
                     datasets: [{
                         label: "Jumlah Tiket",
-                        data: [place[0].count, seminar[0].count],//insert data to display
+                        data: [jumPlace, jumSeminar],//insert data to display
                         backgroundColor: ['rgb(245, 97, 17)', 'rgb(3, 188, 255)'],
                     }]
                 },

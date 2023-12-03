@@ -142,7 +142,7 @@ class AdminController extends Controller
         //process transaction data to show in dashboard admin
         $startDate = Carbon::now()->subDays(7);
         // Query to get the transaction count for each day in the past 7 days
-        $transaction = Pembelian::select(DB::raw('DATE(tanggal_pembelian) as date'), DB::raw('COUNT(*) as count'))->where('tanggal_pembelian', '>=', $startDate)
+        $transaction = Pembelian::select(DB::raw('DATE(tanggal_pembelian) as date'), DB::raw('COUNT(*) as count'))->where('tanggal_pembelian', '>=', $startDate)->where('status', 'berhasil')
             ->groupBy('date')
             ->get();
 

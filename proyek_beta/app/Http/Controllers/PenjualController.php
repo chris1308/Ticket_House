@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Exports\ExportViewReport;
 use App\Exports\ExportSalesReport;
 use App\Exports\ExportCashflowReport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Penjual;
 use App\Models\Pembelian;
 use App\Models\Tiket;
 use Barryvdh\DomPDF\Facade\Pdf; //untuk export pdf
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel; //untuk export excel
 class PenjualController extends Controller
 {
@@ -42,7 +44,64 @@ class PenjualController extends Controller
                 }
             }
         }
-        return view('sellerDashboard',compact('title', 'totalView','totalRevenue','ticketSold'));
+
+        //process transaction data to show in dashboard 
+        $startDate = Carbon::now()->subDays(7);
+        // Query to get the total income for each day in the past 7 days
+        $totalIncome = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')
+        ->select(DB::raw('DATE(tanggal_pembelian) as date'), DB::raw('SUM(total) as total'))
+        ->where('tikets.id_penjual', session('user')->id_penjual)
+        ->where('pembelians.status', 'berhasil')
+        ->where('tanggal_pembelian', '>=', $startDate)
+        ->groupBy('date')
+        ->get();
+
+        // Create an associative array to store counts for each date
+        $countsByDate = [];
+        foreach ($totalIncome as $count) {
+            $countsByDate[$count->date] = $count->total;
+        }
+        // Create an array of the past 7 dates
+        $past7Dates = [];
+        for ($i = 0; $i < 7; $i++) {
+            $date = $startDate->copy()->addDays($i)->toDateString();
+            $past7Dates[] = $date;
+        }
+
+        // Ensure each date is present in the response with a count of 0 if no income
+        $response = [];
+        foreach ($past7Dates as $date) {
+            $response[] = [
+                'date' => $date,
+                'count' => isset($countsByDate[$date]) ? $countsByDate[$date] : 0,
+            ];
+        }      
+        $pastIncome = $response;
+
+        // Query to get the total qty of seminar and place tickets that have been sold by seller
+        $soldSeminarTiket = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')
+        ->select(DB::raw('SUM(pembelians.quantity) as total'))
+        ->where('tikets.id_penjual', session('user')->id_penjual)
+        ->where('pembelians.status', 'berhasil')
+        ->where('tikets.kategori', 'seminar')
+        ->groupBy('tikets.kategori')
+        ->get();
+
+        $soldPlaceTiket = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')
+        ->select(DB::raw('SUM(pembelians.quantity) as total'))
+        ->where('tikets.id_penjual', session('user')->id_penjual)
+        ->where('pembelians.status', 'berhasil')
+        ->where('tikets.kategori', 'place')
+        ->groupBy('tikets.kategori')
+        ->get();
+
+        $mostViewedTicket = Tiket::select(DB::raw('nama as namaTiket'), DB::raw('jumlah_view as totalView'))->where('id_penjual', session('user')->id_penjual)
+        ->orderBy('totalView', 'desc')
+        ->limit(5)
+        ->get();
+
+
+        return view('sellerDashboard',compact('title', 'totalView','totalRevenue','ticketSold', 'pastIncome', 'soldSeminarTiket', 'soldPlaceTiket', 'mostViewedTicket'));
     }
 
     public function viewReport(){
