@@ -5,6 +5,7 @@ use App\Models\Tiket;
 use Jorenvh\Share\Share;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UnfinishedController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PromoController;
@@ -174,7 +175,7 @@ Route::get('/addPromo', [PromoController::class,'showAddPromo']);
 Route::post('/addPromo', [PromoController::class,'store']);
 //Apply promo code
 Route::post('/applypromo/{id}',[PembelianController::class,'apply'])->name('apply.promo');
-Route::post('/pay/{id}',[PembelianController::class,'pay'])->name('pay'); //proceed to midtrans
+
 Route::get("/afterPay",[PembelianController::class,'afterpay']);
 
 
@@ -209,7 +210,9 @@ Route::get('/exportexcel/{id}', [PenjualController::class, 'exportexcel'])->name
 
 //checkout
 Route::get('/checkout/{id}',[PembelianController::class,'checkout'])->name('checkout');
-
+Route::post('/pay/{id}',[PembelianController::class,'pay'])->name('pay'); //proceed to midtrans
+Route::get('/unfinished',[UnfinishedController::class,'unfinished'])->name('unfinished');
+Route::get('/resumePayment/{id}',[UnfinishedController::class,'resume'])->name('resume.payment');
 //COBA COBA UPLOAD IMAGE EDIT PROFIL PENJUAL
 //Masih gagal, harus ubah-ubah auth web
 //Route::post('/upload/image', [ImageController::class, 'upload'])->name('upload.image');

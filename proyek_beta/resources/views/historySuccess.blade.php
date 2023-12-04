@@ -2,7 +2,7 @@
 @section('content')
     <div class="container" style="min-height: 550px; padding-bottom:100px; padding-top:100px;">
         <h1 class="mb-4" style="text-align: center;">My Transaction History</h1>
-        
+        <a href="/unfinished" class="btn btn-secondary mb-2">Pending transactions</a>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/history/success">Transaksi Berhasil</a>
@@ -11,7 +11,7 @@
                 <a class="nav-link text-danger" href="/history/fail">Transaksi Gagal</a>
             </li>
         </ul>
-
+       
         @if (count($purchases)==0)
             <h2 style="text-align: center; color:red;">Belum ada transaksi</h2>
         @else            

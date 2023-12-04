@@ -1,8 +1,11 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @extends('layouts.main')
 @section('content')
     <div class="container" style="min-height: 550px; padding-bottom:100px; padding-top:100px;">
         <h1 class="mb-4" style="text-align: center;">My Transaction History</h1>
-        
+        <a href="/unfinished" class="btn btn-secondary mb-2">Pending transactions</a>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link text-success" aria-current="page" href="/history/success">Transaksi Berhasil</a>
@@ -26,19 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- transaksi dianggap gagal bila tanggal pembelian bukan di hari ini. Kalo masih di hari ini, akan masuk di waiting payment --}}
                     @foreach ($purchases as $p)
-                        @foreach ($tickets as $t)
-                            @if ($t->id_tiket == $p->id_tiket)
-                            <tr style="border-bottom:1px solid black; ">
-                                    <td style="" class="text-center">{{ $p->tanggal_pembelian }} </td>
-                                    <td style="" class="text-center ">{{ $t->nama }}</td>
-                                    <td style="" class="text-center">Rp. {{ formatUang($p->total) }} </td>
-                                    <td class="text-center" style="color:{{ $p->status == 'berhasil' ? 'green' : 'red' }}; ">{{ $p->status }} </td>
-                                    <td class="text-center" style="" ><a href="{{ route('invoice',['id'=>$p->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> </td>
-                                </tr>                        
-                                @break
-                            @endif  
-                        @endforeach
+                        @if ($p->tanggal_pembelian != Carbon::today('Asia/Jakarta')->format('Y-m-d'))                            
+                            @foreach ($tickets as $t)
+                                @if ($t->id_tiket == $p->id_tiket)
+                                <tr style="border-bottom:1px solid black; ">
+                                        <td style="" class="text-center">{{ $p->tanggal_pembelian }} </td>
+                                        <td style="" class="text-center ">{{ $t->nama }}</td>
+                                        <td style="" class="text-center">Rp. {{ formatUang($p->total) }} </td>
+                                        <td class="text-center" style="color:{{ $p->status == 'berhasil' ? 'green' : 'red' }}; ">{{ $p->status }} </td>
+                                        <td class="text-center" style="" ><a href="{{ route('invoice',['id'=>$p->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> </td>
+                                    </tr>                        
+                                    @break
+                                @endif  
+                            @endforeach
+                        @endif
                     @endforeach
                 </tbody>
             </table>

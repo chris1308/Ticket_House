@@ -77,7 +77,7 @@
         <div class="notifmenu shadow-sm px-3 py-4"><a href="{{ route('ticket.detail',['id'=>$s->id_tiket]) }}" style="text-decoration: none; color:black" href="">Tiket <span class="fw-bold">{{ $s->nama }}</span> jangan sampai kamu lewatkan!</a></div>
       @else
         <div class="notifmenu shadow-sm px-3 py-4"><a style="text-decoration: none; color:black" href="{{ route('ticket.detail',['id'=>$s->id_tiket]) }}" >Tiket <span class="fw-bold">{{ $s->nama }}</span> tampaknya cocok buat kamu!</a></div>
-      @endif
+      @endif 
     @endforeach
   @endif
 </div>

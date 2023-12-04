@@ -5,10 +5,10 @@ use Carbon\Carbon;
 use App\Models\Tiket;
 use App\Models\Pembeli;
 use App\Models\Penjual;
+use App\Models\Unfinished;
 use App\Models\Promo;
 use App\Models\Pembelian;
 use Illuminate\Http\Request;
-
 class PembelianController extends Controller
 {
     public function invoice($id){
@@ -53,6 +53,20 @@ class PembelianController extends Controller
         //update invoice status to success
         $id_invoice = session('id_invoice');
         Pembelian::where('id_invoice',$id_invoice)->update(['status'=>'berhasil' ]);
+        $all = Unfinished::all();
+        $idx=-1;
+        foreach($all as $a){
+            //cari index
+            $arr = json_decode($a->order);
+            if($arr->id_invoice == $id_invoice){
+                $idx = $a->id;
+                break;
+            }
+        }
+        //update di unfinisheds
+        if($idx!=-1){
+            Unfinished::where('id',$idx)->update(['status'=>'paid']);
+        }
         return redirect('/home')->with('message','Berhasil melakukan pembelian!');
     }
 
@@ -66,7 +80,6 @@ class PembelianController extends Controller
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $newId = 'INV'.$numberWithLeadingZeros; //buat refferal dengan format REF+numberleadingzeros
         session(['id_invoice'=>$newId]); //sementara diakali pake session untuk update status
-        // dd(session('id_invoice'));
         $order = Pembelian::create([//berhasil
             'id_invoice'=>$newId,
             'id_pembeli'=>session('user')->id_pembeli,
@@ -95,7 +108,38 @@ class PembelianController extends Controller
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-    
+        //simpan unfinished transaction ke DB
+        Unfinished::create([
+            'tanggal_transaksi'=>Carbon::today('Asia/Jakarta'),
+            'snap_token'=>json_encode($snapToken),
+            'nama_tiket'=>$namaTiket,
+            'order'=>json_encode($order),
+        ]);
+
+        // if(session()->has('tempOrders')){
+        //     //ambil isi yang lama dulu baru ditambah isi baru
+        //     $allOrders = [];
+        //     foreach(session('tempOrders') as $or){
+        //         array_push($allOrders,$or);
+        //     }
+        //     $tempData = [
+        //         'snapToken'=>$snapToken,
+        //         'order'=>$order,
+        //         'namaTiket'=>$namaTiket
+        //     ];
+        //     array_push($allOrders,$tempData);
+        //     session(['tempOrders'=>$allOrders]);
+        // }else{
+        //     //belum ada, buat baru
+        //     $temp = [];
+        //     $tempData = [
+        //         'snapToken'=>$snapToken,
+        //         'order'=>$order,
+        //         'namaTiket'=>$namaTiket
+        //     ];
+        //     array_push($temp, $tempData);
+        //     session(['tempOrders'=>$temp]);
+        // }
         // dd($snapToken);
         return view('cobaCheckout',compact('snapToken','order','namaTiket'));
     }
