@@ -18,37 +18,52 @@
         @if (count($purchases)==0)
             <h2 style="text-align: center; color:red;">Belum ada transaksi</h2>
         @else            
-            <table id="myTable3" class="mt-4">
-                <thead>
-                    <tr class="" style="text-align:center;border-bottom:1px solid black">
-                        <th class="text-center" style="width:10%; padding:10px 0px;">Date</th>
-                        <th class="text-center" style="width:20%; padding:10px 0px; ">Product</th>
-                        <th class="text-center" style="width:20%;padding:10px 0px; " >Total</th>
-                        <th class="text-center px-5" style="width:10%; padding:10px 0px;">Status</th>
-                        <th class="text-center" style="width:13%">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- transaksi dianggap gagal bila tanggal pembelian bukan di hari ini. Kalo masih di hari ini, akan masuk di waiting payment --}}
-                    @foreach ($purchases as $p)
-                        @if ($p->tanggal_pembelian != Carbon::today('Asia/Jakarta')->format('Y-m-d'))                            
-                            @foreach ($tickets as $t)
-                                @if ($t->id_tiket == $p->id_tiket)
-                                <tr style="border-bottom:1px solid black; ">
-                                        <td style="" class="text-center">{{ $p->tanggal_pembelian }} </td>
-                                        <td style="" class="text-center ">{{ $t->nama }}</td>
-                                        <td style="" class="text-center">Rp. {{ formatUang($p->total) }} </td>
-                                        <td class="text-center" style="color:{{ $p->status == 'berhasil' ? 'green' : 'red' }}; ">{{ $p->status }} </td>
-                                        <td class="text-center" style="" ><a href="{{ route('invoice',['id'=>$p->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> </td>
-                                    </tr>                        
-                                    @break
-                                @endif  
-                            @endforeach
-                        @endif
+            @foreach($purchases->groupBy(function($purchase) {
+                return $purchase->tanggal_pembelian;
+            }) as $date => $groupedTransactions)
+                <div class="row d-flex justify-content-center mt-3 mb-1">
+                    <div class="col-md-2 text-center fs-5 rounded-4 border" style="background-color: lightgreen;" id="dateGroup">
+                        {{ $date }}
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    
+                    @foreach($groupedTransactions as $transaction)
+                    <div class="col-11 rounded-3 border mb-2">
+                        <div class="row py-3">
+                            <div class="col-md-2 d-flex align-items-center">
+                                <img style="width: 100px; object-fit:cover;" src="../../images/{{json_decode($transaction->tiket->gambar)[0]}}" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-1">{{ $transaction->tiket->nama }}</div>
+                                <div>Rp {{ formatUang($transaction->total) }}</div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-1">{{Carbon::createFromFormat('Y-m-d', $transaction->tanggal_pembelian)->format('d F Y')}}</div>
+                                <div style="color: {{ ($transaction->status == 'berhasil' ? 'Green' : 'Red') }}">{{ ($transaction->status == "berhasil" ? "Berhasil" : "Gagal") }}</div>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="{{ route('invoice',['id'=>$transaction->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> 
+                            </div>
+                        </div>
+                        
+                         
+                        
+                        
+                    </div>
                     @endforeach
-                </tbody>
-            </table>
+                    
+                </div>
+                
+            @endforeach
+            <div class="col mt-3">
+                {{ $purchases->links() }}    
+            </div>
+            
+
+
         @endif
+
     </div>
 
 @endsection
