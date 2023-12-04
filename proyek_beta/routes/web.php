@@ -58,7 +58,9 @@ Route::get('/about', function () {
     return view('about', compact('title'));
 });
 
-Route::get('/history',[PembelianController::class,'history'])->name('history');
+// Route::get('/history',[PembelianController::class,'history'])->name('history');
+Route::get('/history/success',[PembelianController::class,'historySuccess'])->name('historyFail');
+Route::get('/history/fail',[PembelianController::class,'historyFail'])->name('historySuccess');
 Route::get('/invoice/{id}',[PembelianController::class,'invoice'])->name('invoice');
 
 //Admin

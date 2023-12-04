@@ -27,6 +27,26 @@ class PembelianController extends Controller
         // $purchases = $raw->sortByDesc('tanggal_pembelian');
         $tickets = Tiket::all();
         return view('history',compact('title','purchases','tickets'));
+
+    }
+
+    public function historySuccess(){
+        $title = "History Transaksi Sukses";
+        //get all transaction made by this user
+        $purchases = Pembelian::where('id_pembeli', session('user')->id_pembeli)->where('status', 'berhasil')->get();
+        // $purchases = $raw->sortByDesc('tanggal_pembelian');
+        $tickets = Tiket::all();
+
+        return view('historySuccess',compact('title','tickets','purchases'));
+    }
+
+    public function historyFail(){
+        $title = "History Transaksi Gagal";
+        //get all transaction made by this user
+        $purchases = Pembelian::where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->get();
+        // $purchases = $raw->sortByDesc('tanggal_pembelian');
+        $tickets = Tiket::all();
+        return view('historyFail',compact('title','purchases','tickets'));
     }
 
     public function afterpay(){

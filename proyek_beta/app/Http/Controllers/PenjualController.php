@@ -37,7 +37,7 @@ class PenjualController extends Controller
         $allPurchase = Pembelian::all();
         foreach ($allPurchase as $purchase) {
             foreach ($allTickets as $ticket){
-                if ($purchase->id_tiket == $ticket->id_tiket){
+                if ($purchase->id_tiket == $ticket->id_tiket && $purchase->status == "berhasil"){
                     $totalRevenue  += $purchase->total;
                     $ticketSold += $purchase->quantity;
                     break;
