@@ -24,6 +24,7 @@ class PembelianController extends Controller
         $title = "History";
         //get all transaction made by this user
         $purchases = Pembelian::where('id_pembeli',session('user')->id_pembeli)->get();
+        // $purchases = $raw->sortByDesc('tanggal_pembelian');
         $tickets = Tiket::all();
         return view('history',compact('title','purchases','tickets'));
     }

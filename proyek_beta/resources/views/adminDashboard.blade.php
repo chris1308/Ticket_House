@@ -8,23 +8,23 @@
                     <h2 class="mb-3">Dashboard</h2>
                     <div class="row d-flex justify-content-between mb-4" id="rowSatu">
                         <div class="col-md-2 text-center mx-1 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
-                            <p class="fw-bold">Jumlah Transaksi</p>
+                            <p class="fw-bold">Jumlah Transaksi (all time)</p>
                             <p class="fs-5">{{ $totalPembelian }}</p>
                         </div>
                         <div class="col-md-2 text-center mx-2 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
-                            <p class="fw-bold">Jumlah Tiket</p>
+                            <p class="fw-bold">Jumlah Tiket <br> (all time)</p>
                             <p class="fs-5">{{ $totalTiket }}</p>
                         </div>
                         <div class="col-md-2 text-center mx-2 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
-                            <p class="fw-bold">Total View</p>
+                            <p class="fw-bold">Total View <br> (all time)</p>
                             <p class="fs-5">{{ $totalView }}</p>
                         </div>
                         <div class="col-md-2 text-center mx-2 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
-                            <p class="fw-bold">Jumlah Pembeli</p>
+                            <p class="fw-bold">Jumlah Pembeli <br>(all time)</p>
                             <p class="fs-5">{{ $totalPembeli }}</p>
                         </div>
                         <div class="col-md-2 text-center mx-2 p-2 rounded-4 shadow" style="background-color: rgb(160, 251, 160);">
-                            <p class="fw-bold">Jumlah Penjual</p>
+                            <p class="fw-bold">Jumlah Penjual <br>(all time)</p>
                             <p class="fs-5">{{ $totalPenjual }}</p>
                         </div>
                     </div>

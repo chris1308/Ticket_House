@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('content')
     <style>
-        body {
+        /* body {
         font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
         background-color: #f8f8f8;
         color: #333;
-        }
+        } */
 
         header {
         background-color: #333;
@@ -35,10 +35,11 @@
 
         p {
         line-height: 1.6;
-        font-size: 20px;
+        font-size: 16px;
         }
 
-        ul {
+        /* ul li dicomment, kalo ngga navbar ancur wkwk */
+        /* ul {
         list-style-type: none;
         padding: 0;
         font-size: 20px;
@@ -47,7 +48,7 @@
         li {
         margin-bottom: 10px;
         font-size: 20px;
-        }
+        } */
 
         img {
         max-width: 100%;

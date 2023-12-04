@@ -3,7 +3,7 @@
     @extends('layouts.main')
     @section('content')
         <div class="container d-flex pb-4 justify-content-center" style="min-height: 750px; padding-top:100px">
-            <div class="shadow-lg mt-3" style=" border-radius:10px;width:650px ;height:600px; padding: 15px 20px">
+            <div class="shadow-lg mt-3" style=" border-radius:10px;width:650px ;min-height:400px; padding: 15px 20px">
                 <h2 class="mb-4 text-center">Checkout</h2>
                 <p class="fs-5">Nama Tiket : &nbsp;{{ $ticket->nama }}</p>
                 <p class="fs-5">Lokasi : &nbsp;{{ $ticket->alamat_lokasi }}, {{ $ticket->kota }}</p>
@@ -52,7 +52,7 @@
                     <input id="promoCode" type="hidden" name="promoCode" value="{{ session()->has('kodepromo') ? session('kodepromo') : null }}">
                     <input id="hiddenQty" type="hidden" name="hiddenQty" value="1">
                     {{-- btn col-12 supaya bisa full width --}}
-                    <button type="submit" class="btn col-12 btn-success">Checkout</button>
+                    <button type="submit" class="mt-5 btn col-12 btn-success">Checkout</button>
                 </form>
             </div>
         </div>

@@ -14,17 +14,17 @@
                 <div class="col-md-7">
                     <div class="row kecil-atas">
                         <div style="border-radius:10px;background-color: rgb(160, 251, 160);" class="col-md-5 me-2 shadow pt-3 h-75 Kiri">
-                            <p class="fw-bold">Jumlah Tiket Terjual</p>
+                            <p class="fw-bold">Jumlah Tiket Terjual (all time)</p>
                             <p>{{ $ticketSold }}</p>
                         </div>
                         <div style="background-color: rgb(160, 251, 160); border-radius:10px;" class="col-md-5 me-2 shadow pt-3 h-75 Kanan">
-                            <p class="fw-bold">Total View Tiket</p>
+                            <p class="fw-bold">Total View Tiket (all time)</p>
                             <p>{{ $totalView }}</p>
                         </div>
                     </div>
                     <div class="row mt-4 kecil-bawah">
                         <div class="col-md-10 me-2 shadow pt-3 h-75" style="border-radius:10px;background-color: rgb(160, 251, 160);">
-                            <p class="fw-bold" style="">Total Penghasilan</p>
+                            <p class="fw-bold" style="">Total Penghasilan (all time)</p>
                             <p>Rp. {{ formatUang($totalRevenue) }}</p>
                         </div>
                     </div>
