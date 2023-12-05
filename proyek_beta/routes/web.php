@@ -30,20 +30,24 @@ use App\Http\Controllers\WishlistController;
 
 Route::get('/', function () { 
     $tikets = Tiket::take(4)->get();
+    $latestTickets = Tiket::orderBy('created_at','desc')->take(4)->get();
     $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get();
     return view('home',[
         "title" => "Home",
         "tikets"=>$tikets,
+        "latestTickets"=>$latestTickets,
         "topTickets"=>$topTickets,
     ]);
 });
 
 Route::get('/home', function () { 
     $tikets = Tiket::take(4)->get(); //fetch first 4 tickets
+    $latestTickets = Tiket::orderBy('created_at','desc')->take(4)->get();
     $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get(); //take to limit the data by 4
     return view('home',[
         "title" => "Home",
         "tikets"=>$tikets,
+        "latestTickets"=>$latestTickets,
         "topTickets"=>$topTickets,
     ]);
 })->name("home");
@@ -164,6 +168,8 @@ Route::get('/nearme', [TiketController::class,'nearMe'])->name("nearMe");
 Route::get('/set-reminder/{id}', [TiketController::class,'setReminderToCalendar'])->name('tickets.reminder');
 Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 
+Route::get('/editprofile',[ImageController::class,'show'])->name('show.profile');
+Route::post('/editprofile',[ImageController::class,'update'])->name('update.profile');
 
 // Penjual
 //Add Tiket
@@ -178,10 +184,9 @@ Route::post('/addPromo', [PromoController::class,'store']);
 Route::post('/applypromo/{id}',[PembelianController::class,'apply'])->name('apply.promo');
 
 Route::get("/afterPay",[PembelianController::class,'afterpay']);
-
-
 Route::get('/upgrade/{id}',[PenjualController::class,'upgrade'])->name('upgrade.status');
 
+//Tiket
 //View All Ticket
 Route::get('/viewall',[TiketController::class,'showAll'])->name('view.all');
 

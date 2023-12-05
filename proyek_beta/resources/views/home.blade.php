@@ -17,13 +17,19 @@
         <div id="carouselExample" style="height: 400px" class="bg-primary carousel slide">
             <div class="carousel-inner" style="height: 400px">
               <div class="carousel-item active w-100 h-100">
-                <img src="/images/concert1.jpg" style="object-fit: cover; " class="d-block w-100 h-100" alt="...">
+                <a href="/ticket/TIK008">
+                    <img src="/images/place1.jpg" style="object-fit: cover; " class="d-block w-100 h-100" alt="...">
+                </a>
               </div>
               <div class="carousel-item">
-                <img src="/images/seminar1.jpg" style="object-fit: cover; " class="d-block w-100 h-100" alt="...">
+                <a href="/ticket/TIK001">
+                    <img src="/images/seminar1.jpg" style="object-fit: cover; " class="d-block w-100 h-100" alt="...">
+                </a>
               </div>
               <div class="carousel-item">
-                <img src="/images/seminar2.jpg" style="object-fit: cover; " class="d-block w-100 h-100" alt="...">
+                <a href="/ticket/TIK002">
+                    <img src="/images/seminar2.jpg" style="object-fit: cover; " class="d-block w-100 h-100" alt="...">
+                </a>
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -61,7 +67,7 @@
                 <h3>Latest On Ticket House</h3>
             </div>
             <div class="Items d-flex justify-content-between mt-2" style="flex-wrap: wrap">
-                @foreach($tikets as $tiket)
+                @foreach($latestTickets as $tiket)
                     <div onclick="redirectToDetail('{{ route('ticket.detail', ['id' => $tiket->id_tiket]) }}')" class="mb-3 me-2" style=" ">    
                         <div class="Gambar mb-2" style="width: 250px; height:270px;">                    
                             <img style="object-fit: cover; border-radius:5%;" class="w-100 h-100" src="/images/{{ json_decode($tiket->gambar)[0] }}" alt="">          

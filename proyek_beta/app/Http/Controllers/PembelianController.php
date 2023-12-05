@@ -112,31 +112,6 @@ class PembelianController extends Controller
             'order'=>json_encode($order),
         ]);
 
-        // if(session()->has('tempOrders')){
-        //     //ambil isi yang lama dulu baru ditambah isi baru
-        //     $allOrders = [];
-        //     foreach(session('tempOrders') as $or){
-        //         array_push($allOrders,$or);
-        //     }
-        //     $tempData = [
-        //         'snapToken'=>$snapToken,
-        //         'order'=>$order,
-        //         'namaTiket'=>$namaTiket
-        //     ];
-        //     array_push($allOrders,$tempData);
-        //     session(['tempOrders'=>$allOrders]);
-        // }else{
-        //     //belum ada, buat baru
-        //     $temp = [];
-        //     $tempData = [
-        //         'snapToken'=>$snapToken,
-        //         'order'=>$order,
-        //         'namaTiket'=>$namaTiket
-        //     ];
-        //     array_push($temp, $tempData);
-        //     session(['tempOrders'=>$temp]);
-        // }
-        // dd($snapToken);
         return view('cobaCheckout',compact('snapToken','order','namaTiket'));
     }
 
