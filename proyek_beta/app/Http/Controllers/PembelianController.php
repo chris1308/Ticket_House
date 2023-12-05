@@ -38,10 +38,27 @@ class PembelianController extends Controller
         return view('historySuccess',compact('title','purchases'));
     }
 
+    public function historySuccessSearch(Request $request){
+        $title = "History Transaksi Sukses";
+        $keyword = $request->input('keyword');
+        //get all transaction made by this user
+        $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'berhasil')->where('tanggal_pembelian', 'like', '%'.$keyword.'%')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+
+        return view('historySuccess',compact('title','purchases'));
+    }
+
     public function historyFail(){
         $title = "History Transaksi Gagal";
         //get all transaction made by this user
         $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+        return view('historyFail',compact('title','purchases'));
+    }
+
+    public function historyFailSearch(Request $request){
+        $title = "History Transaksi Gagal";
+        $keyword = $request->input('keyword');
+        //get all transaction made by this user
+        $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->where('tanggal_pembelian', 'like', '%'.$keyword.'%')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
         return view('historyFail',compact('title','purchases'));
     }
 

@@ -64,8 +64,10 @@ Route::get('/about', function () {
 });
 
 // Route::get('/history',[PembelianController::class,'history'])->name('history');
-Route::get('/history/success',[PembelianController::class,'historySuccess'])->name('historyFail');
-Route::get('/history/fail',[PembelianController::class,'historyFail'])->name('historySuccess');
+Route::get('/history/success',[PembelianController::class,'historySuccess'])->name('historySuccess');
+Route::get('/history/success/search',[PembelianController::class,'historySuccessSearch']);
+Route::get('/history/fail',[PembelianController::class,'historyFail'])->name('historyFail');
+Route::get('/history/fail/search',[PembelianController::class,'historyFailSearch']);
 Route::get('/invoice/{id}',[PembelianController::class,'invoice'])->name('invoice');
 
 //Admin

@@ -5,7 +5,17 @@
 @section('content')
     <div class="container" style="min-height: 550px; padding-bottom:100px; padding-top:100px;">
         <h1 class="mb-4" style="text-align: center;">My Transaction History</h1>
-        <a href="/unfinished" class="btn btn-secondary mb-2">Pending transactions</a>
+        <div class="row d-flex justify-content-between">
+            <div class="col-md-3">
+                <a href="/unfinished" class="btn btn-secondary mb-2">Pending transactions</a>
+            </div>
+            <div class="col-md-5">
+                <form class="d-flex" method="GET" action="/history/fail/search">
+                    <input class="form-control me-1" size="25" name="keyword" type="search" placeholder="Cth: 2023-11-20" value="{{ request()->input('keyword') }}" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+        </div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link text-success" aria-current="page" href="/history/success">Transaksi Berhasil</a>
