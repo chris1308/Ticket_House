@@ -50,7 +50,7 @@
         font-size: 20px;
         } */
 
-        img {
+        #about {
         max-width: 100%;
         height: auto;
         border-radius: 8px;
@@ -59,7 +59,7 @@
     </style>
     <div class="container" style="min-height: 650px; padding-top:100px;">
         <h1>About Us</h1><hr>
-        <img src="{{ asset('images/aboutUs/ecommerce.svg') }}" alt="ilustrasi misi" style="width: 500px; float: right; margin: 30px">
+        <img id="about" src="{{ asset('images/aboutUs/ecommerce.svg') }}" alt="ilustrasi misi" style="width: 500px; float: right; margin: 30px">
         <br><h3>Selamat Datang di Ticket House!</h3>
         <p>Destinasi terbaik Anda untuk menemukan dan mendapatkan tiket untuk berbagai acara mulai dari seminar, konser, pariwisata, lokakarya, hingga tempat-tempat menarik lainnya. Kami bangga menyajikan platform yang memungkinkan Anda merasakan momen-momen istimewa tanpa ribet.</p><br>
 

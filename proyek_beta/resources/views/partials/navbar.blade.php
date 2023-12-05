@@ -1,3 +1,10 @@
+@php
+  use App\Models\Pembeli;
+  $currentUser = null;
+  if(session()->has('user')){
+    $currentUser = Pembeli::where('id_pembeli',session('user')->id_pembeli)->first();
+  }
+@endphp
 <div style="" class="fixed-top Navbar d-flex justify-content-between bg-light container-fluid pt-3 shadow p-3 mb-4 navbar-expand-lg">
     <div class="WebLogo">
         <span class="fw-bold" style="font-size:23px; cursor:pointer;"><a href="/home" class="nav-link">🎟️Ticket House</a></span>
@@ -40,11 +47,15 @@
           <li onclick="closeNotif()" class="nav-item dropdown mx-3">
             {{-- if we add class dropdown-toggle, there will be a dropdown arrow displayed next to user profile --}}
             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-regular fa-user fa-xl"></i>
+              @if ($currentUser->profile_picture != null)
+                <img src="/images/{{ $currentUser->profile_picture }}" width="33px" height="33px" style="border-radius:50%; object-fit: cover;" alt="">
+              @else
+                <i class="fa-regular fa-user fa-xl"></i>
+              @endif
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#"><i class="fa-solid fa-dollar-sign fa-lg"></i>&nbsp; {{ session('user')->poin }} Points</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square fa-lg"></i> Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{{ route('show.profile') }}"><i class="fa-solid fa-pen-to-square fa-lg"></i> Edit Profile</a></li>
               <li><a class="dropdown-item" style="cursor: pointer">Refferal Code : {{ session('user')->refferal }}</a></li>
               <li><hr class="dropdown-divider"></li>
               {{-- dropdown divider is a separator line, like <hr> tag --}}
