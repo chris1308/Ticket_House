@@ -32,8 +32,8 @@
             <br/>
             Tipe
             <select value="{{ old('tipe') }}" id="tipePromo" style="width: 450px" class="form-control" name="tipe" id="tipe">
-                <option value="persen">Persen</option>
-                <option value="non">Non-persen</option>
+                <option value="Persen">Persen</option>
+                <option value="Non Persen">Non Persen</option>
             </select>
             @error('tipe')
             <div class="invalid-feedback">

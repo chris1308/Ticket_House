@@ -22,7 +22,7 @@ class PromoController extends Controller
             ],
             'min-purchase' => 'required|integer',
             'nilaiPromo' => 'required|integer',
-            'tipe'=> 'required|in:persen,non',
+            'tipe'=> 'required|in:Persen,Non Persen',
         ];
         $request->validate($rules);
         //generate new ID
