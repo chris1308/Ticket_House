@@ -1,10 +1,21 @@
+@php
+  use App\Models\Penjual;
+  $currentUser = null;
+  if(session()->has('user')){
+    $currentUser = Penjual::where('id_penjual',session('user')->id_penjual)->first();
+  }
+@endphp
 <div style=" width: 250px; height: 100%; margin-top: 90px; " class="position-fixed">
     <button style="  margin-left: 10px; background-color: transparent; border: none;" onclick="toggleSidebar()"><i class="fa-solid fa-greater-than fa-xl"></i></button> 
 </div>
 <div id="sidebar" style="display:none; width: 250px; height: 100%; margin-top: 35px; background-color: #F1F8FF;" class="sidebar position-fixed">
     <button style="margin-top: 55px; margin-left: 200px; background-color: transparent; border: none;" onclick="toggleSidebar()"><i class="fa-solid fa-less-than fa-xl"></i></button>
     <div class="text-center ">
-        <img src="{{ asset('images/user/profile.png') }}" style="width: 50px; height: 50px;" alt="Profile Icon">
+        @if ($currentUser->profile_picture != null)
+            <img src="/images/{{ $currentUser->profile_picture }}" width="33px" height="33px" style="border-radius:50%; object-fit: cover;" alt="">
+        @else
+            <img src="{{ asset('images/user/profile.png') }}" style="width: 50px; height: 50px;" alt="Profile Icon">
+        @endif
         <p class="mb-0 mt-2" style="font-weight: bold;">
             @if (session()->has('user'))
                 {{ session('user')->name }}

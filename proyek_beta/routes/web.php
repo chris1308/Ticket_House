@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminMasterController;
+use App\Http\Controllers\SellerImageController;
 use App\Models\Tiket;
 use Jorenvh\Share\Share;
 use Illuminate\Support\Facades\Route;
@@ -172,6 +173,9 @@ Route::get('/auth/google/callback', [TiketController::class,'handleCallback']);
 
 Route::get('/editprofile',[ImageController::class,'show'])->name('show.profile');
 Route::post('/editprofile',[ImageController::class,'update'])->name('update.profile');
+
+Route::get('/editprofile',[SellerImageController::class, 'show'])->name('show.profile');
+Route::post('/editprofile',[SellerImageController::class, 'update'])->name('update.profile');
 
 // Penjual
 //Add Tiket

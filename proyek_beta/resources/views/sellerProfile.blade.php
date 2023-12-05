@@ -1,48 +1,48 @@
+@php
+    use App\Models\Penjual;
+    $title = "Edit Profile Penjual";
+    // harus diambil currentUser, krn kalo pake session(user) data belum terupdate
+    $currentUser = Penjual::where('id_penjual',session('user')->id_penjual)->first();
+@endphp
 @extends('layouts.sellerMain')
-@section('profile')
-    <div class="container" style="height: 650px; padding-top:100px; margin-left: 300px;">
-        <h3 class="fw-bold" style="margin-left: 20px;">PROFILE</h3>
-        <p style="margin-left: 20px;">CHANGE PROFILE FOR:</p>
-        <p class="fw-bold" style="margin-left: 20px;">
-            @if (session()->has('user'))
-                {{ session('user')->email }}
-            @endif 
-        </p>
-        <div class="row">
-            <div class="col-md-4">
-                <p style="margin-left: 20px;">PROFILE PICTURE</p>
-                <div class="d-flex flex-row align-items-center justify-content-between">
-                    <img src="{{ asset('images/user/profile.png') }}" alt="Profile Picture" class="rounded-circle" style="width: 100px; height: 100px; margin-left: 20px;">
-                    <button type="button" class="btn" style="width: 130px; height: 42px; font-size: 13px; background-color: #B9FEB7; color: #1CB80E; margin-right: 150px">UPLOAD IMAGE</button>
+@section('content')
+    <div class="" style="min-height: 500px; padding-top:100px; padding-bottom:70px">
+        {{-- kalo ngga ada enctype, input file tidak bisa diambil valuenya --}}
+        <h3 class="" style="margin-left: 350px">Edit Profile</h3>
+        <div class="d-flex justify-content-center">
+            <form enctype="multipart/form-data" style="width:500px; height:350px;" method="post" action="{{ route('update.profile') }}">
+                @csrf
+                @if ($currentUser->profile_picture!=null)
+                    <img src="/images/{{ $currentUser->profile_picture }}" style="width:50px; height:50px; border-radius:50%"  alt="">
+                @else
+                    <img src="/images/graybackground.png" style="width: 100px; height:100px;border-radius:50%" alt="">
+                @endif
+                <input class="" style="margin-left:60px" type="file" name="profile_picture" id="profile_picture"><br>
+                <div class="mt-3 d-flex justify-content-between px-3">
+                    <label for="">Nama</label>
+                    <input size="45" type="text" name="nama" value="{{ $currentUser->name }}" id="">
                 </div>
-            </div>
-        </div>
-        <!-- Form Inputs -->
-        <div class="mt-3" style="margin-left: 20px;">
-            <form>
-                <div class="mb-3 d-flex">
-                    <div class="me-2" style="flex: 1;">
-                        <label for="firstname" class="form-label">Firstname</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" style="width: 180px; height: 30px;">
-                    </div>
-
-                    <div style="flex: 1;">
-                        <label for="lastname" class="form-label">Lastname</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" style="width: 180px; height: 30px;">
-                    </div>
+                <div class="mt-3 d-flex justify-content-between px-3">
+                    <label for="">Nomor Telepon</label>
+                    <input size="40" type="text" name="no_telp" value="{{ $currentUser->no_telp }}" id="">
                 </div>
-
-                <div class="mb-3">
-                    <label for="country_code" class="form-label">Country Code</label>
-                    <input type="number" class="form-control" id="country_code" name="country_code" style="width: 80px; height: 30px;">
+                <div class="mt-3 d-flex  px-3">
+                    <label class="me-5" for="">Gender:</label>
+                    @if ($currentUser->jk == "L")
+                        <input class="form-check-input me-2" type="radio" name="gender" id="" value="L" checked>Laki-laki 
+                        <input class="ms-3 form-check-input me-2" type="radio" name="gender" id="" value="P">Perempuan                        
+                    @else
+                        <input class="form-check-input me-2" type="radio" name="gender" id="" value="L" checked>Laki-laki 
+                        <input class="ms-3 form-check-input me-2" type="radio" name="gender" id="" value="P" checked>Perempuan                        
+                    @endif
                 </div>
-
-                <div class="mb-3">
-                    <label for="phone_number" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phone_number" name="phone_number" style="width: 250px; height: 30px;">
+                <div class="mt-3 d-flex justify-content-between px-3">
+                    <label for="">Tanggal Lahir</label>
+                    <input type="date" name="dob" value="{{ $currentUser->tgl_lahir }}" id="">
                 </div>
-
-                <button type="submit" class="btn btn-primary">SAVE</button>
+                <div class="px-3 mt-4">
+                    <button class="btn btn-outline-primary col-12" type="submit">Save</button>
+                </div>
             </form>
         </div>
     </div>

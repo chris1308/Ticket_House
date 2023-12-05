@@ -47,7 +47,7 @@
           <li onclick="closeNotif()" class="nav-item dropdown mx-3">
             {{-- if we add class dropdown-toggle, there will be a dropdown arrow displayed next to user profile --}}
             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              @if ($currentUser->profile_picture != null)
+              @if ($currentUser && $currentUser->profile_picture != null)
                 <img src="/images/{{ $currentUser->profile_picture }}" width="33px" height="33px" style="border-radius:50%; object-fit: cover;" alt="">
               @else
                 <i class="fa-regular fa-user fa-xl"></i>
