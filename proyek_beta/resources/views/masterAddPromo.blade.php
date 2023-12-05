@@ -92,7 +92,7 @@
                 <td>
                   <div class="d-flex">
                     <div class="me-2 mt-1">Rp</div> 
-                    <input required value="{{ old('minPurchase') }}" type="text" class=" form-control @error('minPurchase') is-invalid @enderror" name="minPurchase" size="40" placeholder="minPurchase" id="" style="width: 50%"></div> 
+                    <input required value="{{ old('minPurchase') }}" type="text" class=" form-control @error('minPurchase') is-invalid @enderror" name="minPurchase" size="40" placeholder="Minimal Pembelian" id="" style="width: 50%"></div> 
                   @error('minPurchase')
                   <div class="invalid-feedback">
                     {{ $message }}

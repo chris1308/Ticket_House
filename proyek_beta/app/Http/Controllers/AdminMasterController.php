@@ -403,6 +403,42 @@ class AdminMasterController extends Controller
         return redirect("/admin/master/promo")->with('message', 'Successfully added new promo!');
     }
 
+    public function showMasterEditPromo($id){
+        $checkPromo = Promo::where('id_kodepromo', $id)->first();
+        if($checkPromo == null){
+            return redirect("admin/master/promo")->with('message', 'Invalid Promo');
+        }
+
+        return view("masterEditPromo", [
+            "title" => "Edit Promo",
+            "id" => $id,
+            "oldData" => $checkPromo
+        ]);
+    }
+
+    public function saveMasterEditPromo(Request $request, $id){
+        $limit = 5;
+
+        $rules = [
+            'kodePromo' => 'required|string|max:255',
+            'nilaiPromo' => 'required|integer|gt:0',
+            'tipePromo' => 'required|in:Persen, Non Persen',
+            'minPurchase' => 'required|integer|gt:0'
+        ];
+        $request->validate($rules);
+
+        $promo = Promo::where('id_kodepromo', $id);
+
+        $promo->update([
+            'kode_promo' => $request->input('kodePromo'),
+            'nilai_promo' => $request->input('nilaiPromo'),
+            'tipe' => $request->input('tipePromo'),
+            'min_purchase' => $request->input('minPurchase')
+        ]);
+
+        return redirect('/admin/master/promo')->with('message', 'Promo updated successfully');
+    }
+
     public function deleteMasterPromo($id){
         $promo = Promo::where('id_kodepromo', $id)->first();
         $newStatus = 0;
