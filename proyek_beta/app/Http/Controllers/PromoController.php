@@ -18,15 +18,31 @@ class PromoController extends Controller
     public function store(Request $request){
         $rules = [
             'kodePromo' => [
-                'required','string','max:255',Rule::unique('promos','kode_promo'),
+                'required','string','max:255',Rule::unique('promos','kode_promo')->whereNull('deleted_at'),
             ],
-            'min-purchase' => 'required|integer',
-            'nilaiPromo' => 'required|integer',
+            'min-purchase' => 'required|integer|gte:0',
+            'nilaiPromo' => 'required|integer|gt:0',
             'tipe'=> 'required|in:Persen,Non Persen',
         ];
+        //Additional validation for promo in percent
+        if($request->input('tipe') == "Persen"){
+            $rules['nilaiPromo'] = [
+                'required',
+                'integer',
+                'gt:0',
+                'lte: 100',
+            ];
+        }else{
+            $rules['nilaiPromo'] = [
+                'required',
+                'integer',
+                'gt:0'
+            ];
+        }
         $request->validate($rules);
+
         //generate new ID
-        $ctr = Promo::count()+1; //hitung ada berapa tiket di DB +1
+        $ctr = Promo::withTrashed()->count()+1; //hitung ada berapa tiket di DB +1
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT); //beri leading zero sebanyak 3. misal 1 jadi 001
         $promoId = 'PR'.$numberWithLeadingZeros;
         $getPenjual = Penjual::where('username', session('user')->username)->first();

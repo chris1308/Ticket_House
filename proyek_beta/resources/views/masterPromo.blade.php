@@ -44,7 +44,7 @@
                         <td>{{$promo->id_kodepromo}}</td>
                         <td>{{$promo->penjual->name}}</td>
                         <td>{{$promo->kode_promo}}</td>
-                        <td>Rp. {{ formatUang($promo->nilai_promo)}}</td>
+                        <td>{{ ($promo->tipe == 'Persen') ? $promo->nilai_promo . "%" : "Rp." . formatUang($promo->nilai_promo) }}</td>
                         <td>{{$promo->tipe}}</td>
                         <td>Rp {{formatUang($promo->min_purchase)}}</td>
                         <td>{{$promo->status == "1" ? "Aktif" : "Tidak Aktif"}}</td>

@@ -369,11 +369,30 @@ class AdminMasterController extends Controller
         $limit = 5;
         $rules = [
             'idPenjual' => 'required|string',
-            'kodePromo' => 'required|string|max:255',
-            'nilaiPromo' => 'required|integer|gt:0',
             'tipePromo' => 'required|in:Persen,Non Persen',
-            'minPurchase' => 'required|integer|gt:0'
+            'minPurchase' => 'required|integer|gte:0'
         ];
+        $rules['kode_promo'] = [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('promos')->whereNull('deleted_at'), //kode unik dari tabel promo
+        ];
+        //Additional validation for promo in percent
+        if($request->input('tipePromo') == "Persen"){
+            $rules['nilaiPromo'] = [
+                'required',
+                'integer',
+                'gt:0',
+                'lte: 100',
+            ];
+        }else{
+            $rules['nilaiPromo'] = [
+                'required',
+                'integer',
+                'gt:0'
+            ];
+        }
         $request->validate($rules);
 
         //Cek
@@ -384,16 +403,16 @@ class AdminMasterController extends Controller
         }
 
         //generate new ID Promo
-        $ctr = Promo::count()+1;
+        $ctr = Promo::withTrashed()->count()+1;
         $numberWithLeadingZeros = str_pad($ctr, 3, '0', STR_PAD_LEFT);
-        $promoID = 'PMO'.$numberWithLeadingZeros;
+        $promoID = 'PR'.$numberWithLeadingZeros;
 
         //-------------------------------
 
         Promo::create([
             'id_kodepromo' => $promoID,
             'id_penjual' => $request->input('idPenjual'),
-            'kode_promo' => $request->input('kodePromo'),
+            'kode_promo' => $request->input('kode_promo'),
             'nilai_promo' => $request->input('nilaiPromo'),
             'tipe' => $request->input('tipePromo'),
             'min_purchase' => $request->input('minPurchase'),
@@ -420,17 +439,36 @@ class AdminMasterController extends Controller
         $limit = 5;
 
         $rules = [
-            'kodePromo' => 'required|string|max:255',
-            'nilaiPromo' => 'required|integer|gt:0',
-            'tipePromo' => 'required|in:Persen, Non Persen',
-            'minPurchase' => 'required|integer|gt:0'
+            'tipePromo' => 'required|in:Persen,Non Persen',
+            'minPurchase' => 'required|integer|gte:0'
         ];
+        $rules['kode_promo'] = [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('promos')->whereNull('deleted_at'), //kode unik dari tabel promo
+        ];
+        //Additional validation for promo in percent
+        if($request->input('tipePromo') == "Persen"){
+            $rules['nilaiPromo'] = [
+                'required',
+                'integer',
+                'gt:0',
+                'lte: 100',
+            ];
+        }else{
+            $rules['nilaiPromo'] = [
+                'required',
+                'integer',
+                'gt:0'
+            ];
+        }
         $request->validate($rules);
 
         $promo = Promo::where('id_kodepromo', $id);
 
         $promo->update([
-            'kode_promo' => $request->input('kodePromo'),
+            'kode_promo' => $request->input('kode_promo'),
             'nilai_promo' => $request->input('nilaiPromo'),
             'tipe' => $request->input('tipePromo'),
             'min_purchase' => $request->input('minPurchase')
@@ -441,16 +479,19 @@ class AdminMasterController extends Controller
 
     public function deleteMasterPromo($id){
         $promo = Promo::where('id_kodepromo', $id)->first();
-        $newStatus = 0;
+        // $newStatus = 0;
 
-        if($promo->status == 0){
-            $newStatus = 1;
-        }
-        else{
-            $newStatus = 0;
-        }
+        // if($promo->status == 0){
+        //     $newStatus = 1;
+        // }
+        // else{
+        //     $newStatus = 0;
+        // }
 
-        Promo::where('id_kodepromo', $id)->update(['status' => $newStatus]);
+        // Promo::where('id_kodepromo', $id)->update(['status' => $newStatus]);
+
+        //simplify with eloquent soft delete
+        Promo::where('id_kodepromo', $id)->delete();
 
         return redirect("admin/master/promo");
     }

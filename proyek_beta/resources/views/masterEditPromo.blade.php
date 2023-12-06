@@ -52,7 +52,7 @@
               <tr>
                 <td>Kode Promo:</td>
                 <td>
-                  <input required value="{{ $oldData->kode_promo}}" id="kodePromo" class=" form-control @error('kodePromo') is-invalid @enderror" type="text" name="kodePromo" size="50" placeholder="Kode Promo" id="">
+                  <input required value="{{ $oldData->kode_promo}}" id="kode_promo" class=" form-control @error('kode_promo') is-invalid @enderror" type="text" name="kode_promo" size="50" placeholder="Kode Promo" id="">
                   @error('kodePromo')
                   <div class="invalid-feedback">
                     {{ $message }}
