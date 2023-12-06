@@ -58,21 +58,15 @@
                                 <a href="{{ route('invoice',['id'=>$transaction->id_invoice]) }}" class="btn btn-primary">Lihat Invoice</a> 
                             </div>
                         </div>
-                        
-                         
-                        
-                        
                     </div>
                     @endforeach
                     
                 </div>
                 
             @endforeach
-            <div class="col mt-3">
+            <div class="col mt-3 d-flex justify-content-center">
                 {{ $purchases->links() }}    
             </div>
-            
-
 
         @endif
     </div>

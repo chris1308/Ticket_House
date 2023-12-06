@@ -47,7 +47,7 @@
                         <td>Rp. {{ formatUang($promo->nilai_promo)}}</td>
                         <td>{{$promo->tipe}}</td>
                         <td>Rp {{formatUang($promo->min_purchase)}}</td>
-                        <td>{{$promo->status}}</td>
+                        <td>{{$promo->status == "1" ? "Aktif" : "Tidak Aktif"}}</td>
 
                         <td class="">
                             <a href="/admin/master/promo/{{$promo->id_kodepromo}}/detail" style="text-decoration: none;">

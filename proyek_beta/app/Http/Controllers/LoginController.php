@@ -12,6 +12,34 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers; //help us to authenticate
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
+
+    public function home(){
+        $tikets = Tiket::take(4)->get();
+        $latestTickets = Tiket::orderBy('created_at','desc')->take(4)->get();
+        $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get();
+        try {
+            if(session('user')->id_penjual != null){ //kalo penjual belum logout dan coba akses home pembeli
+                session()->forget('user');
+                return redirect('/login');
+            }else{
+                return view('home',[
+                    "title" => "Home",
+                    "tikets"=>$tikets,
+                    "latestTickets"=>$latestTickets,
+                    "topTickets"=>$topTickets,
+                ]);
+            }
+        } catch (\Exception $th) {
+            //logout kan dulu baru arahkan ke home sebagai guest
+            session()->forget('user');
+            return view('home',[
+                "title" => "Home",
+                "tikets"=>$tikets,
+                "latestTickets"=>$latestTickets,
+                "topTickets"=>$topTickets,
+            ]);
+        }
+    }
     public function login(){
                 //random 3 tickets to be recommended on notification bar with the premise that there are at least 8 tickets in the database. Otherwise just fetch 3 most viewed ticket
                 $tickets = Tiket::where('status',1)->orderBy('jumlah_view','desc')->get(); 

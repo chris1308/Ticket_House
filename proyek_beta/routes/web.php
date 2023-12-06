@@ -29,29 +29,9 @@ use App\Http\Controllers\WishlistController;
 |
 */
 
-Route::get('/', function () { 
-    $tikets = Tiket::take(4)->get();
-    $latestTickets = Tiket::orderBy('created_at','desc')->take(4)->get();
-    $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get();
-    return view('home',[
-        "title" => "Home",
-        "tikets"=>$tikets,
-        "latestTickets"=>$latestTickets,
-        "topTickets"=>$topTickets,
-    ]);
-});
+Route::get('/',[LoginController::class,'home']);
 
-Route::get('/home', function () { 
-    $tikets = Tiket::take(4)->get(); //fetch first 4 tickets
-    $latestTickets = Tiket::orderBy('created_at','desc')->take(4)->get();
-    $topTickets = Tiket::orderBy('jumlah_view','desc')->take(4)->get(); //take to limit the data by 4
-    return view('home',[
-        "title" => "Home",
-        "tikets"=>$tikets,
-        "latestTickets"=>$latestTickets,
-        "topTickets"=>$topTickets,
-    ]);
-})->name("home");
+Route::get('/home', [LoginController::class,'home'])->name("home");
 
 Route::get('/dashboard', [PenjualController::class,'show']);
 Route::get('/sellerProfile', function() {
