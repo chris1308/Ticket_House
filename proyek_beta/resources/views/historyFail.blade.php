@@ -11,7 +11,8 @@
             </div>
             <div class="col-md-5">
                 <form class="d-flex" method="GET" action="/history/fail/search">
-                    <input class="form-control me-1" size="25" name="keyword" type="search" placeholder="Cth: 2023-11-20" value="{{ request()->input('keyword') }}" aria-label="Search">
+                    <input class="form-control me-1" size="25" name="keyword" type="search" placeholder="Cari nama tiket" value="{{ request()->input('keyword') }}" aria-label="Search">
+                    <input class="form-control me-1" type="date" name="date" id="date" value="{{ request()->input('date') }}">
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
@@ -32,8 +33,8 @@
                 return $purchase->tanggal_pembelian;
             }) as $date => $groupedTransactions)
                 <div class="row d-flex justify-content-center mt-3 mb-1">
-                    <div class="col-md-2 text-center fs-5 rounded-4 border" style="background-color: lightgreen;" id="dateGroup">
-                        {{ $date }}
+                    <div class="col-md-3 text-center fs-5 rounded-4 border" style="background-color: lightgreen;" id="dateGroup">
+                        {{ Carbon::createFromFormat('Y-m-d', $date)->format('d F Y') }}
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
@@ -42,10 +43,10 @@
                     <div class="col-11 rounded-3 border mb-2">
                         <div class="row py-3">
                             <div class="col-md-2 d-flex align-items-center">
-                                <img style="width: 100px; object-fit:cover;" src="../../images/{{json_decode($transaction->tiket->gambar)[0]}}" alt="">
+                                <img style="width: 100px; object-fit:cover;" src="../../images/{{json_decode($transaction->gambar_tiket)[0]}}" alt="">
                             </div>
                             <div class="col-md-6">
-                                <div class="mb-1">{{ $transaction->tiket->nama }}</div>
+                                <div class="mb-1">{{ $transaction->nama_tiket }}</div>
                                 <div>Rp {{ formatUang($transaction->total) }}</div>
                             </div>
                             <div class="col-md-2">

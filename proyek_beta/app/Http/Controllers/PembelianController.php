@@ -9,6 +9,7 @@ use App\Models\Unfinished;
 use App\Models\Promo;
 use App\Models\Pembelian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class PembelianController extends Controller
 {
     public function invoice($id){
@@ -33,7 +34,9 @@ class PembelianController extends Controller
     public function historySuccess(){
         $title = "History Transaksi Sukses";
         //get all transaction made by this user
-        $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'berhasil')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+        $purchases = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')->select(DB::raw('pembelians.id_invoice as id_invoice'), DB::raw('pembelians.tanggal_pembelian as tanggal_pembelian'), DB::raw('pembelians.total as total'), DB::raw('pembelians.status as status'), DB::raw('tikets.gambar as gambar_tiket'), DB::raw('tikets.nama as nama_tiket'))->with(['tiket'])->where('pembelians.id_pembeli', session('user')->id_pembeli)->where('pembelians.status', 'berhasil')->orderBy('pembelians.tanggal_pembelian', 'desc')->paginate(10);
+        
+        // $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'berhasil')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
 
         return view('historySuccess',compact('title','purchases'));
     }
@@ -41,24 +44,34 @@ class PembelianController extends Controller
     public function historySuccessSearch(Request $request){
         $title = "History Transaksi Sukses";
         $keyword = $request->input('keyword');
+        $dateFilter = $request->input('date');//get date from filter
         //get all transaction made by this user
-        $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'berhasil')->where('tanggal_pembelian', 'like', '%'.$keyword.'%')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
-
+        $purchases = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')->select(DB::raw('pembelians.id_invoice as id_invoice'), DB::raw('pembelians.tanggal_pembelian as tanggal_pembelian'), DB::raw('pembelians.total as total'), DB::raw('pembelians.status as status'), DB::raw('tikets.gambar as gambar_tiket'), DB::raw('tikets.nama as nama_tiket'))->with(['tiket'])->where('pembelians.id_pembeli', session('user')->id_pembeli)->where('pembelians.status', 'berhasil')->where('pembelians.tanggal_pembelian', 'like', '%'.$dateFilter.'%')->where('tikets.nama', 'like', '%'.$keyword.'%')->orderBy('pembelians.tanggal_pembelian', 'desc')->paginate(10);
+        
+        // $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'berhasil')->where('tanggal_pembelian', 'like', '%'.$dateFilter.'%')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+        // dd($purchases);
         return view('historySuccess',compact('title','purchases'));
     }
 
     public function historyFail(){
         $title = "History Transaksi Gagal";
         //get all transaction made by this user
-        $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+        $purchases = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')->select(DB::raw('pembelians.id_invoice as id_invoice'), DB::raw('pembelians.tanggal_pembelian as tanggal_pembelian'), DB::raw('pembelians.total as total'), DB::raw('pembelians.status as status'), DB::raw('tikets.gambar as gambar_tiket'), DB::raw('tikets.nama as nama_tiket'))->with(['tiket'])->where('pembelians.id_pembeli', session('user')->id_pembeli)->where('pembelians.status', 'gagal')->orderBy('pembelians.tanggal_pembelian', 'desc')->paginate(10);
+
+        // $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+
         return view('historyFail',compact('title','purchases'));
     }
 
     public function historyFailSearch(Request $request){
         $title = "History Transaksi Gagal";
         $keyword = $request->input('keyword');
+        $dateFilter = $request->input('date');//get date from filter
         //get all transaction made by this user
-        $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->where('tanggal_pembelian', 'like', '%'.$keyword.'%')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
+
+        $purchases = Pembelian::join('tikets', 'pembelians.id_tiket', '=', 'tikets.id_tiket')->select(DB::raw('pembelians.id_invoice as id_invoice'), DB::raw('pembelians.tanggal_pembelian as tanggal_pembelian'), DB::raw('pembelians.total as total'), DB::raw('pembelians.status as status'), DB::raw('tikets.gambar as gambar_tiket'), DB::raw('tikets.nama as nama_tiket'))->with(['tiket'])->where('pembelians.id_pembeli', session('user')->id_pembeli)->where('pembelians.status', 'gagal')->where('pembelians.tanggal_pembelian', 'like', '%'.$dateFilter.'%')->where('tikets.nama', 'like', '%'.$keyword.'%')->orderBy('pembelians.tanggal_pembelian', 'desc')->paginate(10);
+
+        // $purchases = Pembelian::with(['tiket'])->where('id_pembeli', session('user')->id_pembeli)->where('status', 'gagal')->where('tanggal_pembelian', 'like', '%'.$keyword.'%')->orderBy('tanggal_pembelian', 'desc')->paginate(10);
         return view('historyFail',compact('title','purchases'));
     }
 

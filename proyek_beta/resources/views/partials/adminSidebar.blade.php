@@ -9,7 +9,7 @@
         </li>
         <li class="pt-1">
             {{-- margin p tag harus di 0 kan spy ga makan tempat. secara default p tag ada margin dan paddingnya --}}
-            <p onclick="toggleMaster()" class="sidebarMainMenu ps-3" id="masterMenu" style="margin:0; padding: 5px; font-weight: bold;">Masters</p>
+            <p onclick="toggleMaster()" class="sidebarMainMenu ps-3" id="masterMenu" style="margin:0; padding: 5px; font-weight: bold; background-color: #FD9191;">Masters</p>
             <ul id="masterSubMenu" class="list-unstyled" style="display: block">
                 <li>
                     <a href="/admin/master/penjual" class="text-decoration-none text-dark" style="font-weight: bold;">
@@ -49,7 +49,7 @@
             </ul>
         </li>
         <li class="">
-            <p onclick="toggleLaporan()" id="laporanMenu"  class="sidebarMainMenu ps-3" style="margin:0; padding: 5px; font-weight: bold;">Laporan</p>
+            <p onclick="toggleLaporan()" id="laporanMenu"  class="sidebarMainMenu ps-3" style="margin:0; padding: 5px; font-weight: bold; background-color: #FD9191;">Laporan</p>
             <ul id="laporanSubMenu" style="display: block" class="list-unstyled">
                 <li>
                     <a href="{{ route('seller.report') }}" class="text-decoration-none text-dark" style="font-weight: bold;">
@@ -93,13 +93,13 @@
         function toggleLaporan() {
             var laporanSubMenu = document.getElementById('laporanSubMenu');
             var laporanMenu = document.getElementById('laporanMenu');
-            laporanMenu.style.backgroundColor = (laporanMenu.style.backgroundColor === 'lightblue') ? "" : 'lightblue';
+            laporanMenu.style.backgroundColor = (laporanMenu.style.backgroundColor === 'lightblue') ? "#FD9191" : 'lightblue';
             laporanSubMenu.style.display = (laporanSubMenu.style.display === 'none') ? 'block' : 'none';
         }
         function toggleMaster() {
             var masterSubMenu = document.getElementById('masterSubMenu');
             var masterMenu = document.getElementById('masterMenu');
-            masterMenu.style.backgroundColor = (masterMenu.style.backgroundColor === 'lightblue') ? "" : 'lightblue';
+            masterMenu.style.backgroundColor = (masterMenu.style.backgroundColor === 'lightblue') ? '#FD9191' : "lightblue";
             masterSubMenu.style.display = (masterSubMenu.style.display === 'none') ? 'block' : 'none';
         }
         function toggleSidebar() {
