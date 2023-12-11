@@ -72,9 +72,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script>
+        function formatCurrencyIDR(number) {
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+            });
+
+            return formatter.format(number);
+        }
         $(document).ready( function () {
             $('#myTable2').DataTable({
             });
+            $('#myTable').css("width","100%");
             $('#myTable').DataTable({
                 dom:  '<"top"Bf>rt<"bottom"lpi>',
                 footerCallback : function (row, data, start, end, display){
@@ -96,14 +106,13 @@
                         .data()
                         .reduce((a, b) => ubah(a) + ubah(b), 0);
 
-                    $('#nilaiTotal').html('Rp. ' + pageTotal);
+                    $('#nilaiTotal').html(formatCurrencyIDR(pageTotal));
                 },
                 buttons: [
                     { extend: 'pdfHtml5', footer: true },
                     { extend: 'excelHtml5', footer: true }                    
                 ],         
             });
-            $('#myTable').css("width","100%");
         } );
     </script>
 </body>

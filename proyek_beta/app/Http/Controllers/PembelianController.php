@@ -92,6 +92,12 @@ class PembelianController extends Controller
         //update di unfinisheds
         if($idx!=-1){
             Unfinished::where('id',$idx)->update(['status'=>'paid']);
+            //tambah saldo penjual
+            $tempData = Unfinished::where('id',$idx)->first();
+            $tempTiket = Tiket::where('nama',$tempData->nama_tiket)->first();
+            $tempPenjual = Penjual::where('id_penjual',$tempTiket->id_penjual)->first();
+            $newBalance = intVal($tempPenjual->saldo)+ intVal(json_decode($tempData->order)->total);
+            Penjual::where('id_penjual',$tempTiket->id_penjual)->update(['saldo'=>$newBalance]);
         }
         return redirect('/home')->with('message','Berhasil melakukan pembelian!');
     }

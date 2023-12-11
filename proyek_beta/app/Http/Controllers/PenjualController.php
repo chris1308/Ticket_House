@@ -16,12 +16,20 @@ use Maatwebsite\Excel\Facades\Excel; //untuk export excel
 class PenjualController extends Controller
 {
     public function upgrade($id){ 
-        Penjual::where('id_penjual',$id)->update(["premium_status"=>1]);
-        $penjual = Penjual::where('id_penjual',$id)->first();
-        //update session so that the membership status on the sidebar will be updated
-        session(['user'=>$penjual]);
-        
-        return redirect('/dashboard');
+        //before upgrade, check if seller's balance sufficient or not (at least IDR 10k)
+        $getPenjual = Penjual::where('id_penjual',$id)->first();
+        if($getPenjual->saldo >= 10000){            
+            $penjual = Penjual::where('id_penjual',$id)->first();
+            //update session so that the membership status on the sidebar will be updated
+            session(['user'=>$penjual]);
+            //deduct seller's balance
+            $newBalance = $penjual->saldo - 10000;
+            Penjual::where('id_penjual',$id)->update(["premium_status"=>1, 'saldo'=>$newBalance]);
+            
+            return redirect('/dashboard')->with('message','Berhasil upgrade');
+        }else{
+            return redirect('/dashboard')->with('message','Saldo tidak mencukupi');
+        }
     }
 
     public function show(){
