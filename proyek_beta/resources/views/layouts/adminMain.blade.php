@@ -72,47 +72,102 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script>
-        function formatCurrencyIDR(number) {
-            const formatter = new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0,
-            });
+            function formatCurrencyIDR(number) {
+                const formatter = new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0,
+                });
 
-            return formatter.format(number);
+                return formatter.format(number);
+            }
+            function convertImageToDataURL(url, callback) {
+                let img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function () {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    canvas.height = img.height;
+                    canvas.width = img.width;
+                    ctx.drawImage(img, 0, 0);
+                    let dataURL = canvas.toDataURL('image/png');
+                    callback(dataURL);
+                };
+                img.src = url;
         }
+
         $(document).ready( function () {
             $('#myTable2').DataTable({
             });
-            $('#myTable').css("width","100%");
-            $('#myTable').DataTable({
-                dom:  '<"top"Bf>rt<"bottom"lpi>',
-                footerCallback : function (row, data, start, end, display){
-                    let api = this.api();
-                    //convert formatted string (Rp. 100000 etc) to integer
-                    let ubah = function(i){
-                        return typeof i === 'string'
-                        ? i.replace(/[\$Rp.,]/g, '') * 1
-                        : i;
-                    }   
-                              
-                    // Total over all pages
-                    let total = api
-                        .column(3)
-                        .data()
-                        .reduce((a, b) => ubah(a) + ubah(b), 0);
-                    let pageTotal = api
-                        .column(3, { page: 'current' })
-                        .data()
-                        .reduce((a, b) => ubah(a) + ubah(b), 0);
+            
+            convertImageToDataURL('../../images/logo/ticketHouse.png', function (dataURL) {
+                $('#myTable').DataTable({
+                    dom:  '<"top"Bf>rt<"bottom"lpi>',
+                    footerCallback : function (row, data, start, end, display){
+                        let api = this.api();
+                        //convert formatted string (Rp. 100000 etc) to integer
+                        let ubah = function(i){
+                            return typeof i === 'string'
+                            ? i.replace(/[\$Rp.,]/g, '') * 1
+                            : i;
+                        }   
+                                
+                        // Total over all pages
+                        let total = api
+                            .column(3)
+                            .data()
+                            .reduce((a, b) => ubah(a) + ubah(b), 0);
+                        let pageTotal = api
+                            .column(3, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => ubah(a) + ubah(b), 0);
 
-                    $('#nilaiTotal').html(formatCurrencyIDR(pageTotal));
-                },
-                buttons: [
-                    { extend: 'pdfHtml5', footer: true },
-                    { extend: 'excelHtml5', footer: true }                    
-                ],         
+                        $('#nilaiTotal').html(formatCurrencyIDR(pageTotal));
+                    },
+                    buttons: [
+                        { 
+                            extend: 'pdfHtml5', 
+                            footer: true,
+                            customize: function(doc) {
+                                // Add company information to the PDF header
+                                doc.header = function () {
+                                    return {
+                                        columns: [
+                                            {
+                                                image: dataURL,  // Adjust the path to your logo
+                                                width: 150,
+                                                alignment: 'left',
+                                                margin: [0, 0]
+                                            },
+                                            // {
+                                            //     text: 'Ticket House',
+                                            //     alignment: 'left',
+                                            //     margin: [150, 30],
+                                            // }
+                                        ],
+                                        margin: [10, 0],
+                                        fontSize: 12
+                                    };
+                                };
+
+                            }
+                        },
+                        { 
+                            extend: 'excelHtml5',
+                            footer: true,
+                            // customizeData: function (excelData) { //not work
+                            //     // Add logo to the Excel header using data URL
+                            //     excelData.header.unshift([{
+                            //         image: dataURL,
+                            //         width: 50, // adjust width as needed
+                            //         alignment: 'left'
+                            //     }]);
+                            // }
+                        }                    
+                    ],         
+                });
             });
+            $('#myTable').css("width","100%");
         } );
     </script>
 </body>
