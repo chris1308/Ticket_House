@@ -76,10 +76,31 @@
             $('#myTable2').DataTable({
             });
             $('#myTable').DataTable({
-                dom:  '<"top"lf>rt<"bottom"Bpi>',
+                dom:  '<"top"Bf>rt<"bottom"lpi>',
+                footerCallback : function (row, data, start, end, display){
+                    let api = this.api();
+                    //convert formatted string (Rp. 100000 etc) to integer
+                    let ubah = function(i){
+                        return typeof i === 'string'
+                        ? i.replace(/[\$Rp.,]/g, '') * 1
+                        : i;
+                    }   
+                              
+                    // Total over all pages
+                    let total = api
+                        .column(3)
+                        .data()
+                        .reduce((a, b) => ubah(a) + ubah(b), 0);
+                    let pageTotal = api
+                        .column(3, { page: 'current' })
+                        .data()
+                        .reduce((a, b) => ubah(a) + ubah(b), 0);
+
+                    $('#nilaiTotal').html('Rp. ' + pageTotal);
+                },
                 buttons: [
-                    'excelHtml5',
-                    'pdfHtml5'
+                    { extend: 'pdfHtml5', footer: true },
+                    { extend: 'excelHtml5', footer: true }                    
                 ],         
             });
             $('#myTable').css("width","100%");

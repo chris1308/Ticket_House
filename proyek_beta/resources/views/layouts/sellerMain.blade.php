@@ -47,14 +47,36 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script>
         $(document).ready( function () {
-            $('#myTable').DataTable({
-                dom:  '<"top"lf>rt<"bottom"Bpi>',
-                buttons: [
-                    'excelHtml5',
-                    'pdfHtml5'
-                ],         
-            });
             $('#myTable').css("width","100%");
+            $('#myTable').DataTable({
+                dom:  '<"top"Bf>rt<"bottom"lpi>',
+                footerCallback : function (row, data, start, end, display){
+                    let api = this.api();
+                    //convert formatted string (Rp. 100000 etc) to integer
+                    let ubah = function(i){
+                        return typeof i === 'string'
+                        ? i.replace(/[\$Rp.,]/g, '') * 1
+                        : i;
+                    }   
+                              
+                    // Total over all pages
+                    let total = api
+                        .column(2)
+                        .data()
+                        .reduce((a, b) => ubah(a) + ubah(b), 0);
+                    let pageTotal = api
+                        .column(2, { page: 'current' })
+                        .data()
+                        .reduce((a, b) => ubah(a) + ubah(b), 0);
+
+                    $('#nilaiTotal').html('Rp. ' + pageTotal);
+                },
+                buttons: [
+                    { extend: 'pdfHtml5', footer: true },
+                    { extend: 'excelHtml5', footer: true }                    
+                ],     
+            });
+            
         } );
     </script>
 </body>

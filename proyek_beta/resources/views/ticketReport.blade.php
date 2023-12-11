@@ -31,6 +31,16 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="text-center">Total</th>
+                        <th></th>
+                        <th></th>
+                        <th class="" id="nilaiTotal">Rp. 0</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     @endsection

@@ -20,4 +20,12 @@
             </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="">Total:</th>
+            <th></th>
+            <th class="text-center" id="nilaiTotal">Rp. 0</th>
+            <th></th>
+        </tr>
+    </tfoot>
 </table>
