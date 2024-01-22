@@ -1,3 +1,3 @@
-# proyek_sdp
+# Ticket House
 
-Proyek Website Jual Beli Tiket dengan menggunakan framework laravel
+A website that facilitates people who want to buy or sell tickets. 
